@@ -20,6 +20,7 @@
     "dayjs": "^1.11.10",
     "formik": "^2.2.9",
     "framer-motion": "^11.0.25",
+    "google-map-react": "^2.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-chartjs-2": "^5.2.0",

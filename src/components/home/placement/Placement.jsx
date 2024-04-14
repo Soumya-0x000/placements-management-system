@@ -44,7 +44,7 @@ const Placement = () => {
 
             {/* bar chart */}
             <div className='mt-14 px-6'>
-                <div className=' capitalize font-lato text-2xl md:text-4xl text-blue-950 text-center mb-6'>
+                <div className='mt-10 mb-6 font-bold text-[2.3rem] md:text-[3rem] font-jaldi text-blue-900 text-center capitalize'>
                     get a view of our placement history
                 </div>
 

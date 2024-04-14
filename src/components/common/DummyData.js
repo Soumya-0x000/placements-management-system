@@ -473,10 +473,10 @@ export const teamMember = [
 ];
 
 export const barChartData = {
-    labels: ['Google', 'Microsoft', 'Apple', 'Amazon', 'Facebook', 'Tesla', 'Netflix', 'Uber', 'TCS'],
+    labels: ['Google', 'Microsoft', 'Apple', 'Amazon', 'Meta', 'Tesla', 'Netflix', 'Uber', 'TCS', 'Zomato'],
     datasets: [{
         label: 'Hiring Numbers',
-        data: [150, 112, 90, 130, 120, 80, 100, 110, 190],
+        data: [150, 112, 90, 130, 120, 146, 100, 110, 160, 175],
         backgroundColor: [
             'rgba(255, 99, 132, 0.4)',
             'rgba(255, 159, 64, 0.4)',
@@ -487,6 +487,7 @@ export const barChartData = {
             'rgba(255, 159, 64, 0.4)',
             'rgba(255, 99, 132, 0.4)',
             'rgba(75, 192, 192, 0.4)',
+            'rgba(54, 162, 235, 0.4)',
         ],
         borderColor: [
             'rgb(255, 99, 132)',
@@ -498,11 +499,11 @@ export const barChartData = {
             'rgb(255, 159, 64)',
             'rgb(255, 99, 132)',
             'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
         ],
         borderWidth: 1
     }]
 };
-
 
 export const faq = [
     {
