@@ -7,7 +7,7 @@ import { FaBuildingUser } from "react-icons/fa6";
 import banner from '../../../images/courses/coursesBanner.jpg';
 import { footerLists, tabs } from '../../common/DummyData';
 import { FaGithub, FaInstagram, FaLinkedin, FaMeta, FaXTwitter } from 'react-icons/fa6';
-import './contact.css';
+import './contactUs.css';
 import { Form, Row, Col } from 'react-bootstrap';
 
 const ContactUs = () => {
@@ -73,13 +73,15 @@ const ContactUs = () => {
                 We are located here!
             </div>
 
-            <div className=' flex items-center justify-center w-full gap-y-5'>
-                <div className='shadow flex justify-center'>
-                    <div className='row'>
-                        <iframe src={map} className=' w-[40rem]'></iframe>
+            <div className=' flex items-center justify-center w-full px-3'>
+                <div className='shadow contentContainer'>
+                    {/* map */}
+                    <div className='row mapContainer'>
+                        <iframe src={map} className='map'></iframe>
                     </div>
 
-                    <div className='flex flex-col pl-3 gap-y-4 w-1/2'>
+                    {/* form */}
+                    <div className='formContainer space-y-16'>
                         <div className=' space-y-2 pl-3'>
                             <div className='text-3xl font-mavenPro font-bold text-blue-900'>
                             Contact us
@@ -141,7 +143,7 @@ const ContactUs = () => {
                             </Row>
 
                             {/* submit button */}
-                            <div className="flex flex-col items-center justify-between mt-8 sm:flex-row gap-y-4 w-full">
+                            <div className="flex flex-col items-center justify-between mt-3 sm:flex-row gap-y-4 w-full">
                                 <button 
                                 className=" text-md font-bold bg-slate-800 text-cyan-300 hover:text-indigo-300 font-robotoMono ring-2 ring-violet-400 w-full sm:w-[7rem] h-9 sm:h-8 rounded-md active:ring-green-300 active:text-green-300 transition-all" 
                                 type="submit">

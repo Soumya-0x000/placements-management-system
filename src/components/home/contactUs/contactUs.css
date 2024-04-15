@@ -1,0 +1,38 @@
+.contentContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  row-gap: 1.4rem;
+  padding: 4px 4px;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  row-gap: 3rem;
+  /* padding: .3rem 13px; */
+}
+
+.mapContainer {
+  width: 43rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+
+  .mapContainer {
+    width: 100%;
+    height: 23rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .mapContainer {
+    width: 30rem; 
+    height: auto; 
+  }
+}
