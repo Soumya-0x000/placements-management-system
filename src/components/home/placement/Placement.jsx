@@ -12,6 +12,7 @@ import { faq, footerLists, tabs } from '../../common/DummyData';
 import { FaGithub, FaInstagram, FaLinkedin, FaMeta, FaXTwitter } from 'react-icons/fa6';
 import { MdExpandMore } from "react-icons/md";
 import BarChart from './Barchart';
+import './placement.css'
 
 const Placement = () => {
     return (
@@ -43,8 +44,8 @@ const Placement = () => {
             </div>
 
             {/* bar chart */}
-            <div className='mt-14 px-6'>
-                <div className='mt-10 mb-6 font-bold text-[2.3rem] md:text-[3rem] font-jaldi text-blue-900 text-center capitalize'>
+            <div className='mt-14 barChart'>
+                <div className='mt-10 mb-6 font-bold font-jaldi text-blue-900 text-center capitalize chartHeading'>
                     get a view of our placement history
                 </div>
 
@@ -57,7 +58,7 @@ const Placement = () => {
                     most asked questions
                 </div>
 
-                <div className=' max-h-[20rem] overflow-y-auto px-3 mt-6 space-y-2'>
+                <div className='faq max-h-[20rem] overflow-y-auto mt-6 space-y-2'>
                     {faq.map((faq, i) => (
                         <Accordion 
                         key={i}>

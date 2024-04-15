@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
-import BgColorAnimation from '../animations/BgColorAnimation';
+import BgColorAnimation from '../../animations/BgColorAnimation';
 
 const StudentRegister = () => {
     const navigate=useNavigate()

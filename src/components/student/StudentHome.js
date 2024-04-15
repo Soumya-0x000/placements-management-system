@@ -1,58 +1,79 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
+import { useNavigate } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../animations/BgColorAnimation';
+import { buttonsData } from '../common/DummyData';
 
-const StudentSchedule = () => {
+const ButtonWithCard = ({ imgSrc, alt, text, bgColor, textColor, titleColor, link }) => {
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate(link);
+    };
+
     return (
-        <BgColorAnimation
-            child={
-                <div className='h-screen overflow-y-auto '>
-                    <div className='absolute top-0 w-full '>
-                        <NavBar/>
+        <div 
+        className={` cursor-pointer max-w-[38rem] md:h-[14.5rem] xl:h-[14rem] ${bgColor} px-4 py-3 rounded-lg overflow-hidden group/bento hover:shadow-xl transition duration-200 shadow-input `}
+        onClick={handleRedirect}>
+            <div className='flex flex-col items-start justify-between transition duration-200 gap-y-6 group-hover/bento:translate-x-2'>
+                <div className='space-y-2 '>
+                    <div className=' w-16 h-16 rounded-lg p-[.3rem] overflow-hidden bg-slate-'>
+                        <img 
+                            src={imgSrc} 
+                            alt={alt} 
+                            className={` w-full h-full`}
+                        />
                     </div>
-                    
-                    <div className=" h-full grid place-items-center grid-cols-1 Lmd:grid-cols-2 gap-16 Lmd:gap-0 my-[10rem] Lmd:my-0">
-                        <AnimatedGradientBorderTW>
-                            <a href='/StudentSlotSelection' className=' no-underline bg-[#7730fc58] rounded-lg '>
-                                <div className="rounded-lg w-[20rem] overflow-hidden shadow-lg">
-                                    <img className="w-full" src="https://files.jotform.com/jotformapps/a0b5d7e5e5cce2962a6c722e8a0d4e78.png" alt="Slot Selection" />
-                                    <div className="">
-                                        <div className="px-3 py-4 text-xl font-bold font-montserrat text-violet-400">
-                                            Slot Selection
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </AnimatedGradientBorderTW>
-
-                        <AnimatedGradientBorderTW>
-                            <a href='/StudentScheduled' className=' no-underline bg-[#7730fc58] rounded-lg '>
-                                <div className="rounded-lg w-[20rem] overflow-hidden shadow-lg">
-                                    <img className="w-full" src="https://thumbs.dreamstime.com/b/remainder-icon-alarm-259563488.jpg" alt="Scheduled Slot" />
-                                    <div className="">
-                                        <div className="px-3 py-4 text-xl font-bold font-montserrat text-violet-400">
-                                            Scheduled slot
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </AnimatedGradientBorderTW>
-                    </div>
+                    <p className={`${titleColor} text-lg font-robotoMono font-bold`}>{alt}</p>
                 </div>
-            }
-        />
+
+                <p className={`${textColor} font-bold md:text-justify sm:text-[1rem] lg:text-[1.1rem] font-lato tracking-wide`}>{text}</p>
+            </div>
+        </div>
+    );
+};
+
+const StudentHome = () => {
+    return (
+        <div>
+            <NavBar/>
+
+            <div className=' max-h-[50rem] object-contain overflow-hidden'>
+                <img 
+                    src="https://wallpaperaccess.com/full/6810534.jpg" 
+                    className='w-full h-full '
+                    alt="welcome image" 
+                />
+            </div>
+
+            <div className="w-full px-3 pb-5 mt-5">
+                <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3 place-items-center">
+                    {buttonsData.map((button, index) => (
+                        <ButtonWithCard 
+                            key={index} 
+                            imgSrc={button.imgSrc} 
+                            alt={button.alt} 
+                            text={button.text} 
+                            bgColor={button.bgColor}
+                            textColor={button.textColor}
+                            titleColor= {button.titleColor}
+                            className={(index === 3 || index === 6) ? 'lg:col-span-2' : ''}
+                            link={button.link}
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }
 
-export default StudentSchedule;
+export default StudentHome;
 
 
 
@@ -64,11 +85,12 @@ const tabs = [
 ];
 
 const NavBar = () => {
-    const [selected, setSelected] = useState(tabs[1].text);
+    const [selected, setSelected] = useState(tabs[0].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSearchBarHanging, setIsSearchBarHanging] = useState(false);
+    const navigate = useNavigate();
 
     const loginOptions = [
         { href: '/', text: 'LogOut', icon: <CiLogout/> },
@@ -331,39 +353,6 @@ const userActions = ({selectedArray}) => {
                     </span>
                 </a>
             ))}
-        </div>
-    );
-};
-
-
-
-const AnimatedGradientBorderTW = ({ children }) => {
-    const boxRef = useRef(null);
-  
-    useEffect(() => {
-        const boxElement = boxRef.current;
-    
-        if (!boxElement) return;
-    
-        const updateAnimation = () => {
-            const angle = (parseFloat(boxElement.style.getPropertyValue("--angle")) + 0.5) % 360;
-            boxElement.style.setProperty("--angle", `${angle}deg`);
-            requestAnimationFrame(updateAnimation);
-        };
-    
-        requestAnimationFrame(updateAnimation);
-    }, []);
-  
-    return (
-        <div
-        style={{
-            "--angle": "0deg",
-            "--border-color": "linear-gradient(var(--angle), #070707, #687aff)",
-            "--bg-color": "linear-gradient(#131219, #131219)",
-        }}
-        className="flex items-center justify-center rounded-lg border-2 border-[#0000] p-3 [background:padding-box_var(--bg-color),border-box_var(--border-color)]"
-        ref={boxRef}>
-            {children}
         </div>
     );
 };

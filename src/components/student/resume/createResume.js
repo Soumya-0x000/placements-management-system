@@ -9,7 +9,7 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../animations/BgColorAnimation';
+import BgColorAnimation from '../../../animations/BgColorAnimation';
 import { Modal } from 'react-bootstrap';
 import { RxCross2 } from 'react-icons/rx';
 
@@ -38,7 +38,7 @@ const StudentResume = () => {
             console.log('USN and PDF data uploaded successfully');
             navigate('/StudentHome', { replace: true });
         } catch (error) {
-        console.error('Error uploading USN and PDF data:', error);
+            console.error('Error uploading USN and PDF data:', error);
         }
     };
 
@@ -117,7 +117,7 @@ const StudentResume = () => {
                                 <button 
 								className=" text-md font-bold bg-blue-100 hover:bg-[#EBE7FF] text-blue-600 hover:text-indigo-600 font-robotoMono ring-2 ring-blue-400 w-full sm:w-[7rem] py-2 rounded-full active:ring-green-600 active:text-green-600 transition-all" 
 								type="submit" >
-									Register
+									Upload
 								</button>
                             </form>
                         </Modal.Body>

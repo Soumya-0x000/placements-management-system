@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../animations/BgColorAnimation';
+import BgColorAnimation from '../../animations/BgColorAnimation';
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { CiLogin } from "react-icons/ci";
 

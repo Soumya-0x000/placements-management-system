@@ -3,31 +3,49 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import React from "react";
 import Home from './components/home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import StudentLogIn from './components/StudentLogIn';
-import StudentRegister from './components/StudentRegister';
-import CompanyLogin from './components/CompanyLogIn';
-import CompanyRegister from './components/CompanyRegister'
-import AdminLogin from './components/AdminLogIn';
-import AdminRegister from './components/AdminRegister';
-import CompanyHome from './components/CompanyHome';
-import StudentProfile from './components/StudentProfile';
-import EditStudentProfile from './components/EditStudentProfile';
-import ChatPage from './components/chat';
-import CompanyJobPosting from './components/CompanyJobPosting';
-import HiringCompanies from './components/HiringCompanies';
-import StudentHiringView from './components/StudentHiringView';
-import AllJobPosted from './components/AllJobPosted';
-import LOSA from './components/ListOfStudentApplied'
-import InterviewForm from './components/InterviewForm';
-import Createresume from './components/createResume';
-// import UploadResume from './components/uploadResume';
+
+import CompanyLogin from './components/login/CompanyLogIn';
+import CompanyRegister from './components/register/CompanyRegister'
+import CompanyHome from './components/company/CompanyHome';
+import CompanyJobPosting from './components/company/CompanyJobPosting';
 import ViewCandidateResume from './components/ResumeViewCompany'
-import StudentSlotSelection from './components/StudentSlotSelection'
-import StudentSchedule from './components/StudentSchedule'
-import StudentScheduled from './components/StudentScheduled'
 import InterviewCompany from './components/InteviewCompany'
+import AdminCompany from './components/admin/AdminCompany'
+import CompanyInterview from './components/company/CompanyInterview'
+
+import StudentLogIn from './components/login/StudentLogIn';
+import StudentRegister from './components/register/StudentRegister';
+import StudentProfile from './components/student/StudentProfile';
+import EditStudentProfile from './components/EditStudentProfile';
+import StudentHiringView from './components/student/StudentHiringView';
+import LOSA from './components/ListOfStudentApplied'
+import Createresume from './components/student/resume/createResume';
+import StudentSlotSelection from './components/student/StudentSlotSelection'
+import StudentSchedule from './components/student/StudentSchedule'
+import StudentScheduled from './components/student/StudentScheduled'
+import StudentHome from './components/student/StudentHome'
+import StudentAnalyticsandRepo from './components/student/StudentAnalyticsandRepo';
+import StudentsAcademics from './components/student/StudentsAcademics';
+import StudentCoverLetter from './components/student/StudentCoverLetter';
+import StudentResume from './components/PdfViewer';
+
+import AdminPlacedStudent from './components/admin/AdminPlacedStudent'
+import AdminStudentView from './components/admin/AdminStudentView'
+import AdminCompanyView from './components/admin/AdminCompanyView';
+import AdminStudentApplied from './components/admin/AdminStudentsApplied'
+import AdminStudent from './components/admin/AdminStudent'
+import AdminLogin from './components/login/AdminLogIn';
+import AdminRegister from './components/register/AdminRegister';
+import AdminHome from './components/admin/AdminHome';
+import AdminJobPosting from './components/admin/AdminJobPosting';
+import AdminJobDetails from './components/admin/AdminJobDetails';
+
+import ChatPage from './components/chat';
+import HiringCompanies from './components/HiringCompanies';
+import AllJobPosted from './components/AllJobPosted';
+import InterviewForm from './components/InterviewForm';
+// import UploadResume from './components/uploadResume';
 import CareerCounselling from './components/CareerCounselling'
-import StudentHome from './components/StudentHome'
 import SystemEngineering from './components/SystemEngineer'
 import ElecticalEngineering from './components/ElectricalEngineer'
 import ChemicalEngineering from './components/ChemicalEngineer'
@@ -37,24 +55,10 @@ import SoftwareDeveloper from './components/SoftwareDeveloper'
 import Uiux from './components/UiUxDesigner'
 import CHEngineer from './components/ComputerHardwareEngineer'
 import StructuralEngineer from './components/StructuralEngineer'
-import StudentAnalyticsandRepo from './components/StudentAnalyticsandRepo';
-import StudentsAcademics from './components/StudentsAcademics';
-import AdminHome from './components/AdminHome';
-import AdminCompany from './components/AdminCompany'
-import AdminJobPosting from './components/AdminJobPosting'
-import AdminPlacedStudent from './components/AdminPlacedStudent'
-import AdminStudentView from './components/AdminStudentView'
-import AdminStudentApplied from './components/AdminStudentsApplied'
-import AdminStudent from './components/AdminStudent'
-import AdminJobDetails from './components/AdminJobDetails'
-import Resume from './components/Resume'
+import Resume from './components/student/resume/Resume'
 import ResumeDetail from'./components/ResumeDetail'
-import StudentCoverLetter from './components/StudentCoverLetter';
 import CoverLetter from './components/CoverLetter';
-import CompanyInterview from './components/CompanyInterview'
-import StudentResume from './components/PdfViewer';
 import FeedbackTable from './components/Feedback';
-import AdminCompanyView from './components/AdminCompanyView';
 import AboutUs from './components/home/about/AboutUs';
 import Courses from './components/home/course/Courses';
 import Team from './components/home/team/Team';
@@ -82,7 +86,7 @@ function App() {
           <Route path='/admin/studentapplied' element={<AdminStudentApplied />} />
           <Route path='/admin/placedStudent' element={<AdminPlacedStudent />} />
           <Route path='/admin/jobDetails' element={<AdminJobDetails  />} />
-          <Route path='/CareerCounseling' element={<CareerCounselling />} />
+          <Route path='/CareerCounselling' element={<CareerCounselling />} />
           <Route path='/Home' element={<Home />} />
           <Route path='/admin/home' element={<AdminHome />} />
           <Route path='/StudentHome' element={<StudentHome />} />

@@ -170,7 +170,8 @@ export const buttonsData = [
         text: 'Discover job openings. Explore descriptions, company profiles, and reviews. Apply to exciting roles.',
         bgColor: 'bg-[#FFB293] bg-opacity-40 border-2 border-orange-300 hover:shadow-[#FFB293]',
         textColor: 'text-[#FF4800]',
-        titleColor: 'text-[#AC3100]'
+        titleColor: 'text-[#AC3100]',
+        link: '/ALLJobRole'
     },
     {
         imgSrc: schedule,
@@ -178,7 +179,8 @@ export const buttonsData = [
         text: 'Effortlessly manage appointments and deadlines. Organize tasks and set reminders for productivity.',
         bgColor: 'bg-[#BFEFFF] bg-opacity-50  border-2 border-blue-300 hover:shadow-[#BFEFFF]',
         textColor: 'text-[#00A8E0]',
-        titleColor: 'text-[#256E86]'
+        titleColor: 'text-[#256E86]',
+        link: '/StudentSchedule'
     },
     {
         imgSrc: analysis,
@@ -186,7 +188,8 @@ export const buttonsData = [
         text: 'Gain insights into performance. Track metrics and visualize data for informed decisions.',
         bgColor: 'bg-[#AFFFAF] bg-opacity-30 border-2 border-green-400 hover:shadow-[#AFFFAF]',
         textColor: 'text-[#00C42C]',
-        titleColor: 'text-[#00731A]'
+        titleColor: 'text-[#00731A]',
+        link: '/analytics-reporting'
     },
     {
         imgSrc: resume,
@@ -194,7 +197,8 @@ export const buttonsData = [
         text: 'Our resume-building tool guides you to create professional documents that stand out to employers.',
         bgColor: 'bg-[#FFF09D] bg-opacity-50 border-2 border-yellow-400 hover:shadow-[#FFF09D]',
         textColor: 'text-[#E09200]',
-        titleColor: 'text-[#8C5C01]'
+        titleColor: 'text-[#776F1C]',
+        link: '/createResume'
     },
     {
         imgSrc: coverLetter,
@@ -202,7 +206,8 @@ export const buttonsData = [
         text: 'Write persuasive cover letters. Showcase passion, qualifications, and alignment with company values.',
         bgColor: 'bg-[#FFACD5] bg-opacity-30 border-2 border-pink-300 hover:shadow-[#FFACD5]',
         textColor: 'text-[#FA3B9B]',
-        titleColor: 'text-[#A30050]'
+        titleColor: 'text-[#A30050]',
+        link: '/StudentCoverLetter'
     },
     {
         imgSrc: counselling,
@@ -210,7 +215,8 @@ export const buttonsData = [
         text: 'Receive personalized guidance. Explore career paths, seek job search advice, and plan next steps.',
         bgColor: 'bg-[#EC9DFF] bg-opacity-30 border-2 border-violet-300 hover:shadow-[#EC9DFF]', 
         textColor: 'text-[#BA55D3]',
-        titleColor: 'text-[#9500BA]'
+        titleColor: 'text-[#9500BA]',
+        link: '/CareerCounselling'
     },
     {
         imgSrc: chat,
@@ -218,7 +224,8 @@ export const buttonsData = [
         text: 'Connect with peers, mentors, and experts. Exchange ideas, ask questions, and build relationships.',
         bgColor: 'bg-[#A3FFF6] bg-opacity-30 border-2 border-cyan-400 hover:shadow-[#A3FFF6]', 
         textColor: 'text-[#10C0AE]',
-        titleColor: 'text-[#007569]'
+        titleColor: 'text-[#007569]',
+        link: '/chat'
     },
     {
         imgSrc: academics,
@@ -226,7 +233,8 @@ export const buttonsData = [
         text: 'Access study materials and support. Excel in studies with educational resources and tuto services.',
         bgColor: 'bg-[#FFAFA0] bg-opacity-30 border-2 border-pink-300 hover:shadow-[#FFAFA0]', 
         textColor: 'text-[#FF6347]',
-        titleColor: 'text-[#B6341B]'
+        titleColor: 'text-[#B6341B]',
+        link: '/student-academics'
     },
     {
         imgSrc: profile,
@@ -234,7 +242,8 @@ export const buttonsData = [
         text: 'Create a comprehensive profile. Highlight skills, experiences, and accomplishments for opportunities.',
         bgColor: 'bg-[#9F90FF] bg-opacity-30 border-2 border-indigo-300 hover:shadow-[#9F90FF]',
         textColor: 'text-[#6A5ACD]',
-        titleColor: 'text-[#241396]'
+        titleColor: 'text-[#241396]',
+        link: '/StudentProfile'
     },
     {
         imgSrc: feedback,
@@ -242,7 +251,8 @@ export const buttonsData = [
         text: 'Share thoughts and suggestions. Help improve our platform and enhance user experience.',
         bgColor: 'bg-[#D9FFB1] bg-opacity-30 border-2 border-green-300 hover:shadow-[#D9FFB1]',
         textColor: 'text-[#55BE16]',
-        titleColor: 'text-[#00731A]'
+        titleColor: 'text-[#00731A]',
+        link: '/Feedback'
     }
 ];
 

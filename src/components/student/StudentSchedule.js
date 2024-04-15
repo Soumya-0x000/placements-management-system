@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -8,172 +7,54 @@ import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import dayjs from 'dayjs';
-import gamingPc from '../images/gamingPc.jpg';
+import { useNavigate } from 'react-router-dom';
+import BgColorAnimation from '../../animations/BgColorAnimation';
 
-const StudentHiringView = () => {
-	const navigate = useNavigate();
-	const location = useLocation();
-	const { postingData } = location.state;
-	const usn = localStorage.getItem('token');
-	const jobid = postingData._id;
-	const [applicationStatus, setApplicationStatus] = useState('');
-	const [dates, setDates] = useState({
-		drvFrom: '',
-		drvTo: '',
-		lstDt: ''
-	});
-
-	const [applied, setApplied] = useState(false);
-
-	useEffect(() => {
-		const checkApplicationStatus = async () => {
-			try {
-				const response = await fetch('http://localhost:1337/api/checkApplicationStatus', {
-					method: 'POST',
-					headers: {
-						'Content-type': 'application/json',
-					},
-					body: JSON.stringify({
-						usn,
-						jobid,
-					}),
-				});
-				const data = await response.json();
-				setApplied(data.applied);
-				setApplicationStatus(data.status);
-			} catch (error) {
-				console.error('Error checking application status:', error);
-			}
-		};
-
-		checkApplicationStatus();
-	}, [usn, jobid]);
-
-	useEffect(() => {
-		const drvFrom = dayjs(postingData?.DriveFrom).format('MMMM DD, YYYY');
-		const drvTo = dayjs(postingData?.DriveTO).format('MMMM DD, YYYY');
-		const lstDt = dayjs(postingData?.LastDate).format('MMMM DD, YYYY');
-
-		setDates({ drvFrom, drvTo, lstDt });
-	}, []);
-
-
-	const handleApply = async (e) => {
-		e.preventDefault();
-
-		const response = await fetch('http://localhost:1337/api/newJobApplied', {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify({
-				usn,
-				jobid,
-			}),
-		});
-
-		const data = await response.json();
-		console.log(data);
-		if (data.status === 'ok') {
-			alert('Job Applied Successfully');
-			setApplied(true);
-			navigate('/StudentHome', { replace: true });
-		}
-	};
-
-	return (
-		<div className='h-screen overflow-y-auto bg-gradient-to-br from-indigo-300 via-green-200 to-violet-300'>
-			<NavBar/>
-			
-			<div className="relative flex flex-col items-center px-3 ">
-				<div className="z-10 flex items-center justify-center pt-2 mb-6 text-4xl font-bold tracking-wider text-transparent font-lato bg-gradient-to-r from-blue-600 via-violet-600 to-cyan-600 bg-clip-text">
-					{postingData?.Name}
-				</div>
-				
-				<div className="text-justify z-10 max-w-[70rem] mb-4">
-					<div className='flex flex-col mb-4 overflow-hidden rounded-lg Lmd:flex-row gap-x-7 Lmd:p-1'>
-						<img 
-							alt="Job Image"
-							className="w-[33rem] h-[23rem] Lmd:w-[30rem] Lmd:h-[40rem] Lmd:rounded-lg Lmd:overflow-hidden object-cover sm:object-center" 
-							src={gamingPc} 
-						/>
-						
-						<div className='relative px-3 py-2 overflow-y-auto bg-slate-20 Lmd:rounded-lg bg-slate-300 Lmd:bg-transparent'>
-							<img 
-								className="w-full h-full absolute top-0 left-0 -z-10 blur-[80px] object-cover hidden Lmd:block" 
-								src={gamingPc} 
-								alt="Job Image" 
-							/>
-
-							<div className='font-robotoMono font-bold text-[1.4rem] tracking-wide text-indigo-300 bg-indigo-800 py-1.5 px-2 text-center rounded-md overflow-hidden '>
-								{postingData?.jobRole}
-							</div>
-							
-							<div className='mt-4 font-lato'>
-								<div className=' bg-slate-900 tracking-wider text-indigo-300 rounded-md py-1.5 text-[1.1rem] px-3 mb-3'>
-									Package: {postingData?.Package}
-								</div>
-							
-								<div className='flex items-center mb-3 gap-x-3 '>
-                                    <div className=' bg-green-950 text-green-300 ring-[1px] ring-green-200 rounded-full px-3 py-[.3rem] text-[1.1rem]'>
-										{postingData?.Qualification}
-									</div>
-                                    <div className=' bg-green-950 text-green-300 ring-[1px] ring-green-200 rounded-full px-3 py-[.3rem] text-[1.1rem]'>
-										{postingData?.Specialization}
-									</div>
+const StudentSchedule = () => {
+    return (
+        <BgColorAnimation
+            child={
+                <div className='h-screen overflow-y-auto '>
+                    <div className='absolute top-0 w-full '>
+                        <NavBar/>
+                    </div>
+                    
+                    <div className=" h-full grid place-items-center grid-cols-1 Lmd:grid-cols-2 gap-16 Lmd:gap-0 my-[10rem] Lmd:my-0">
+                        <AnimatedGradientBorderTW>
+                            <a href='/StudentSlotSelection' className=' no-underline bg-[#7730fc58] rounded-lg '>
+                                <div className="rounded-lg w-[20rem] overflow-hidden shadow-lg">
+                                    <img className="w-full" src="https://files.jotform.com/jotformapps/a0b5d7e5e5cce2962a6c722e8a0d4e78.png" alt="Slot Selection" />
+                                    <div className="">
+                                        <div className="px-3 py-4 text-xl font-bold font-montserrat text-violet-400">
+                                            Slot Selection
+                                        </div>
+                                    </div>
                                 </div>
+                            </a>
+                        </AnimatedGradientBorderTW>
 
-								<div className=' bg-green-950 text-green-300 ring-[1px] ring-green-200 rounded-full px-3 py-2 mb-3'>
-									{postingData?.Experience} of experience
-								</div>
+                        <AnimatedGradientBorderTW>
+                            <a href='/StudentScheduled' className=' no-underline bg-[#7730fc58] rounded-lg '>
+                                <div className="rounded-lg w-[20rem] overflow-hidden shadow-lg">
+                                    <img className="w-full" src="https://thumbs.dreamstime.com/b/remainder-icon-alarm-259563488.jpg" alt="Scheduled Slot" />
+                                    <div className="">
+                                        <div className="px-3 py-4 text-xl font-bold font-montserrat text-violet-400">
+                                            Scheduled slot
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </AnimatedGradientBorderTW>
+                    </div>
+                </div>
+            }
+        />
+    );
+}
 
-								<div className='bg-blue-950 tracking-wider text-blue-300 rounded-md py-2 text-[1.1rem] px-3 mb-3 space-y-2'>
-									<div>
-										Eligibility: {postingData?.Eligibility} marks in graduation
-									</div>
+export default StudentSchedule;
 
-									<div>
-										Location: {postingData?.JobLocation}
-									</div>
-								
-									<div>
-										Drive Date: {dates.drvFrom} to {dates.drvTo}
-									</div>
 
-									<div>
-										Last Date: {dates.lstDt}
-									</div>
-								</div>
-
-								<div className='bg-violet-950 tracking-wider text-violet-300 rounded-md py-1.5 text-[1.1rem] px-3 mb-2'>
-									Job Description: {postingData?.JobDescription}
-								</div>
-							</div>
-						</div>
-					</div>
-
-					{applied ? (
-						<div className='bg-green-800 uppercase text-green-300 font-bold px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_#F44336,-0.5rem_-0.5rem_#00BCD4] transition font-lato tracking-wider flex items-center justify-center gap-x-5 Lsm: w-[10rem]'>
-							{applicationStatus}
-							<div class="flex-col gap-4 w-full flex items-center justify-center">
-								<div class="w-6 h-6 border-2 animate-spin border-green-800  border-t-green-300 border-b-green-300 rounded-full"/>
-							</div>
-						</div>
-					) : (
-						<button 
-						className='bg-green-800 uppercase text-green-300 font-bold px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_#F44336,-0.5rem_-0.5rem_#00BCD4] transition font-lato tracking-wider'
-						onClick={handleApply}>
-							Apply
-						</button>
-					)}
-				</div>
-			</div>
-		</div>
-	);
-};
-
-export default StudentHiringView;
 
 
 const tabs = [
@@ -183,12 +64,11 @@ const tabs = [
 ];
 
 const NavBar = () => {
-    const [selected, setSelected] = useState(tabs[0].text);
+    const [selected, setSelected] = useState(tabs[1].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSearchBarHanging, setIsSearchBarHanging] = useState(false);
-    const navigate = useNavigate();
 
     const loginOptions = [
         { href: '/', text: 'LogOut', icon: <CiLogout/> },
@@ -451,6 +331,39 @@ const userActions = ({selectedArray}) => {
                     </span>
                 </a>
             ))}
+        </div>
+    );
+};
+
+
+
+const AnimatedGradientBorderTW = ({ children }) => {
+    const boxRef = useRef(null);
+  
+    useEffect(() => {
+        const boxElement = boxRef.current;
+    
+        if (!boxElement) return;
+    
+        const updateAnimation = () => {
+            const angle = (parseFloat(boxElement.style.getPropertyValue("--angle")) + 0.5) % 360;
+            boxElement.style.setProperty("--angle", `${angle}deg`);
+            requestAnimationFrame(updateAnimation);
+        };
+    
+        requestAnimationFrame(updateAnimation);
+    }, []);
+  
+    return (
+        <div
+        style={{
+            "--angle": "0deg",
+            "--border-color": "linear-gradient(var(--angle), #070707, #687aff)",
+            "--bg-color": "linear-gradient(#131219, #131219)",
+        }}
+        className="flex items-center justify-center rounded-lg border-2 border-[#0000] p-3 [background:padding-box_var(--bg-color),border-box_var(--border-color)]"
+        ref={boxRef}>
+            {children}
         </div>
     );
 };

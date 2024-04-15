@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Row, Col } from 'react-bootstrap'
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from 'react-icons/md';
 import { RxCross2 } from "react-icons/rx";
-import BgColorAnimation from '../animations/BgColorAnimation';
+import BgColorAnimation from '../../animations/BgColorAnimation';
 
 const CompanyRegister = () => {
     const [companyName, setCompanyName] = useState('');
