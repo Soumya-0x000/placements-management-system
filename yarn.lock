@@ -1783,7 +1783,7 @@
   resolved "https://registry.yarnpkg.com/@mapbox/point-geometry/-/point-geometry-0.1.0.tgz#8a83f9335c7860effa2eeeca254332aa0aeed8f2"
   integrity sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==
 
-"@mui/base@5.0.0-beta.40":
+"@mui/base@5.0.0-beta.40", "@mui/base@^5.0.0-beta.40":
   version "5.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@mui/base/-/base-5.0.0-beta.40.tgz#1f8a782f1fbf3f84a961e954c8176b187de3dae2"
   integrity sha512-I/lGHztkCzvwlXpjD2+SNmvNQvB4227xBXhISPjEaJUXGImOQ9f3D2Yj/T3KasSI/h0MLWy74X0J6clhPmsRbQ==
@@ -1878,6 +1878,43 @@
     clsx "^2.1.0"
     prop-types "^15.8.1"
     reselect "^4.1.8"
+
+"@mui/x-date-pickers-pro@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers-pro/-/x-date-pickers-pro-7.2.0.tgz#61bc3243f818b6c5c15ac6a0a6ef49a6eb64c6e9"
+  integrity sha512-fPzgMBFxTnb+ypbmWQKuiFil/EDzDM4dFMQW8KZFEiMQIIxoAnwj3L6SwKPkjJAKIwVoil7/cHqOXUaKX9z8PQ==
+  dependencies:
+    "@babel/runtime" "^7.24.0"
+    "@mui/base" "^5.0.0-beta.40"
+    "@mui/system" "^5.15.14"
+    "@mui/utils" "^5.15.14"
+    "@mui/x-date-pickers" "7.2.0"
+    "@mui/x-license" "7.2.0"
+    clsx "^2.1.0"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
+"@mui/x-date-pickers@7.2.0", "@mui/x-date-pickers@^7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-date-pickers/-/x-date-pickers-7.2.0.tgz#d25275cef2e7b0a9946ce7f9a86b701c222a8209"
+  integrity sha512-hsXugZ+n1ZnHRYzf7+PFrjZ44T+FyGZmTreBmH0M2RUaAblgK+A1V3KNLT+r4Y9gJLH+92LwePxQ9xyfR+E51A==
+  dependencies:
+    "@babel/runtime" "^7.24.0"
+    "@mui/base" "^5.0.0-beta.40"
+    "@mui/system" "^5.15.14"
+    "@mui/utils" "^5.15.14"
+    "@types/react-transition-group" "^4.4.10"
+    clsx "^2.1.0"
+    prop-types "^15.8.1"
+    react-transition-group "^4.4.5"
+
+"@mui/x-license@7.2.0":
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/@mui/x-license/-/x-license-7.2.0.tgz#55c2618cacd9282b0bdb4512b26ca7cf7a0abaff"
+  integrity sha512-z9mqsfNPVFqjfxcPgz15o29Vb3FupSImwpMd5CFjZqNasJu3ptLpKxbIUnTtJMUicRdhsVfm3d93Z5XQkq1JuQ==
+  dependencies:
+    "@babel/runtime" "^7.24.0"
+    "@mui/utils" "^5.15.14"
 
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"

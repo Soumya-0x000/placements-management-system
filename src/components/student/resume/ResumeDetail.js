@@ -8,8 +8,14 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../animations/BgColorAnimation';
+import BgColorAnimation from '../../../animations/BgColorAnimation';
 import { Form, Row, Col } from 'react-bootstrap'
+import { styled } from '@mui/material/styles';
+import Tooltip from '@mui/material/Tooltip';
+import Stack from '@mui/material/Stack';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
 function ResumeForm() {
     const navigate = useNavigate();
@@ -20,6 +26,12 @@ function ResumeForm() {
     const [techStack, setTechStack] = useState('');
     const [projects, setProjects] = useState([{ name: '', technology: '', details: '' }]);
     const [hobbies, setHobbies] = useState('');
+    const [experience, setExperience] = useState({
+        details: '',
+        companyName: '',
+        duration: '',
+        position: ''
+    });
 
     const handleProjectChange = (index, field, value) => {
         const updatedProjects = [...projects];
@@ -79,6 +91,10 @@ function ResumeForm() {
         setTechStack('');
         setProjects([{ name: '', technology: '', details: '' }]);
         setHobbies('');
+    };
+
+    const handleExperienceValue = (e) => {
+        
     };
 
     return (
@@ -208,13 +224,51 @@ function ResumeForm() {
                             </div>
                             
                             {/* tech stack */}
-                            <div className="mb-3">
+                            <div className="mb-5">
                                 <textarea
                                     value={techStack}
                                     className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${hobbies ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
                                     onChange={(e) => setTechStack(e.target.value)}
                                     placeholder='Tech Stack'
                                 />
+                            </div>
+                            
+                            {/* experience */}
+                            <div className="mb-3">
+                                <Row className="mb-[.9rem] md:mb-4 space-y-[.9rem] md:space-y-0">
+                                    {/* company name */}
+                                    <Form.Group as={Col} xs={12} md={6}>
+                                        <input
+                                            type="text"
+                                            className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.companyName ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                            value={experience.companyName}
+                                            onChange={handleExperienceValue}
+                                            placeholder='Company name'
+                                        />
+                                    </Form.Group>
+                                    
+                                    {/* job role*/}
+                                    <Form.Group as={Col} xs={12} md={6}>
+                                        <input
+                                            type="text"
+                                            className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.position ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                            value={experience.position}
+                                            onChange={handleExperienceValue}
+                                            placeholder='Job role'
+                                            {...experience.companyName ? {required: 'required'} : {}}
+                                        />
+                                    </Form.Group>
+                                </Row>
+
+                                <textarea
+                                    value={experience.details}
+                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.details ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                    onChange={handleExperienceValue}
+                                    placeholder='Experience details'
+                                    {...experience.details ? {required: 'required'} : {}}
+                                />
+
+                                
                             </div>
 
                             <div className='flex items-center justify-between gap-x-5'>

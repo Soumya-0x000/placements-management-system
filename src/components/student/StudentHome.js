@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { MdOutlineAccountCircle } from "react-icons/md";
 import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { buttonsData } from '../common/DummyData';
+import studentHome from '../../images/banner/studentHome.jpg'
 
 const ButtonWithCard = ({ imgSrc, alt, text, bgColor, textColor, titleColor, link }) => {
     const navigate = useNavigate();
@@ -23,11 +24,11 @@ const ButtonWithCard = ({ imgSrc, alt, text, bgColor, textColor, titleColor, lin
         onClick={handleRedirect}>
             <div className='flex flex-col items-start justify-between transition duration-200 gap-y-6 group-hover/bento:translate-x-2'>
                 <div className='space-y-2 '>
-                    <div className=' w-16 h-16 rounded-lg p-[.3rem] overflow-hidden bg-slate-'>
+                    <div className=' w-16 h-16 rounded-lg p-[.3rem] overflow-hidden'>
                         <img 
                             src={imgSrc} 
-                            alt={alt} 
                             className={` w-full h-full`}
+                            alt={alt} 
                         />
                     </div>
                     <p className={`${titleColor} text-lg font-robotoMono font-bold`}>{alt}</p>
@@ -40,16 +41,37 @@ const ButtonWithCard = ({ imgSrc, alt, text, bgColor, textColor, titleColor, lin
 };
 
 const StudentHome = () => {
+    const usn = localStorage.getItem('token');
+    const [data, setData] = useState({
+        orgName: '',
+        greeting: '',
+    });
+
+    useEffect(() => {
+        fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
+            .then((response) => response.json())
+            .then((data) => {
+                let fullName = `${data?.firstName} ${data?.lastName}`
+                let greeting = `Welcome Back! ${fullName}`;
+                setData({orgName: fullName, greeting});
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <div>
-            <NavBar/>
+            <NavBar name={data.orgName}/>
 
-            <div className=' max-h-[50rem] object-contain overflow-hidden'>
-                <img 
-                    src="https://wallpaperaccess.com/full/6810534.jpg" 
-                    className='w-full h-full '
-                    alt="welcome image" 
-                />
+            <div
+            className={` h-[50vh] lg:h-[80vh] flex flex-col items-start justify-center pl-4 pr-4 sm:pl-12 md:pl-32 bg-fixed bg-cover`}
+            style={{
+                backgroundImage: `url('${studentHome}')`,
+            }}>
+                <div className='mt-3 font-bold text-[2.3rem] md:text-[3rem] xl:text-[4.2rem] leading-[50px] xl:leading-[70px] font-jaldi text-white text-wrap flex flex-wrap'>
+                    {data.greeting}
+                </div>
             </div>
 
             <div className="w-full px-3 pb-5 mt-5">
@@ -84,13 +106,12 @@ const tabs = [
     {text: 'Resume', icon: <MdOutlineAccountCircle/>, path: '/createResume'},
 ];
 
-const NavBar = () => {
+const NavBar = ({ name }) => {
     const [selected, setSelected] = useState(tabs[0].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSearchBarHanging, setIsSearchBarHanging] = useState(false);
-    const navigate = useNavigate();
 
     const loginOptions = [
         { href: '/', text: 'LogOut', icon: <CiLogout/> },
@@ -154,7 +175,7 @@ const NavBar = () => {
                 </div>
 
                 {isSearchBarHanging && (
-                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white'
+                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white z-40'
                     initial={{x: -300, opacity: 0}}
                     animate={{x: 0, opacity: 1}}>
                         <form className="flex w-full h-full overflow-hidden rounded-full">
@@ -166,6 +187,7 @@ const NavBar = () => {
                                 onChange={handleInputText}
                                 value={typedText}
                             />
+                            
                             <button 
                             type='submit'
                             className='bg-slate-700 border-l border-slate-500 text-slate-200 pl-1 pr-2.5 lg:px-3 flex items-center justify-center'>
@@ -180,9 +202,9 @@ const NavBar = () => {
             <div className='flex items-center gap-x-8 sm:gap-x-5 lg:gap-x-5 xl:gap-x-10'>
                 <div className="flex justify-center cursor-pointer lg:text-lg">
                     <FlyoutLink FlyoutContent={userActions} array={loginOptions}>
-                        <div className='flex items-center gap-x-2'>
+                        <div className='flex items-center justify-center gap-x-2'>
                             <FaRegUser/>
-                            User
+                            {name.split(' ')[0]}
                         </div>
                     </FlyoutLink>
                 </div>

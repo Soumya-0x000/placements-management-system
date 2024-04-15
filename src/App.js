@@ -56,7 +56,7 @@ import Uiux from './components/UiUxDesigner'
 import CHEngineer from './components/ComputerHardwareEngineer'
 import StructuralEngineer from './components/StructuralEngineer'
 import Resume from './components/student/resume/Resume'
-import ResumeDetail from'./components/ResumeDetail'
+import ResumeDetail from './components/student/resume/ResumeDetail'
 import CoverLetter from './components/CoverLetter';
 import FeedbackTable from './components/Feedback';
 import AboutUs from './components/home/about/AboutUs';
@@ -90,8 +90,8 @@ function App() {
           <Route path='/Home' element={<Home />} />
           <Route path='/admin/home' element={<AdminHome />} />
           <Route path='/StudentHome' element={<StudentHome />} />
-          <Route path='/StudentLogIn' element={<StudentLogIn />} />
           <Route path='/CompanyLogIn' element={<CompanyLogin />} />
+          <Route path='/StudentLogin' element={<StudentLogIn />} />
           <Route path='/StudentRegister' element={<StudentRegister />} />
           <Route path='/CompanyRegister' element={<CompanyRegister />} />
           <Route path='/AdminLogIn' element={<AdminLogin />} />

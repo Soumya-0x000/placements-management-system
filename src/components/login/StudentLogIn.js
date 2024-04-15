@@ -24,14 +24,14 @@ const StudentLogIn = () => {
             const response = await fetch('http://localhost:1337/api/studentLogin', {
                 method: 'POST',
                 headers: {
-                'Content-type': 'application/json'
+                    'Content-type': 'application/json'
                 },
                 body: JSON.stringify({ usn, password })
             });
             const responseData = await response.json();
             if (responseData.status === 'ok') {
                 localStorage.setItem('token', responseData.token);
-                navigate('/StudentHome', { replace: true });
+                navigate(`/StudentHome`, { replace: true });
             } else {
                 alert(responseData.error);
             }
