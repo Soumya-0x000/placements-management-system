@@ -11,7 +11,6 @@
     "@hookform/resolvers": "^3.1.0",
     "@mui/material": "^5.15.15",
     "@mui/x-data-grid": "^7.1.1",
-    "@mui/x-date-pickers": "^7.2.0",
     "@mui/x-date-pickers-pro": "^7.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

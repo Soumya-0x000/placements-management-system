@@ -1,19 +1,35 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { TbWorld } from "react-icons/tb";
+import { MdOutlineEmail } from "react-icons/md";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiPhone } from "react-icons/fi";
+import profImg from '../../../images/resume/profileImg.jfif';
+import avatar from '../../../images/resume/avatar.png';
 
 const Resume = () => {
     const location = useLocation();
     const { resumedata } = location.state;
-    const [otherData, setOtherData] = useState(null);
+    const [personDetails, setPersonDetails] = useState('');
     const usn = localStorage.getItem('token');
-    const resumeRef = useRef(null);
+    const iconContainer = [
+        {link: personDetails.email, icon: <MdOutlineEmail/>, type: 'mail'},
+        {link: resumedata.linkedinId, icon: <FaLinkedinIn/>, type: 'link'},
+        {link: resumedata.githubId, icon: <FaGithub/>, type: 'link'},
+        {link: '#', icon: <FaXTwitter/>, type: 'link'},
+        {link: personDetails.contactNumber, icon: <FiPhone/>, type: 'tel'},
+    ];
 
+    console.log(personDetails)
+    
     useEffect(() => {
         fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
             .then((response) => response.json())
             .then((data) => {
-                setOtherData(data);
+                setPersonDetails(data);
             })
             .catch((error) => {
                 console.log(error);
@@ -29,101 +45,241 @@ const Resume = () => {
         window.print();
     };
 
+    const ProjectCard = ({ title, detail, tech }) => {
+        return (
+            <div className='p-2 bg-gray-50 ring-[1px] ring-gray-500 rounded-md flex flex-col items-start justify-between'>
+                <div className=' space-y-3'>
+                    <div className=' text-[1rem] font-lato font-bold'>
+                        {title}
+                    </div>
+
+                    <div className=' font-robotoMono text-[.75rem] flex flex-wrap mt-2'>
+                        {detail}
+                    </div>
+                </div>
+
+                <div className=' flex items-center flex-wrap gap-1.5 mt-5'>
+                    {tech.split(',').map((val, indx) => (
+                        <div 
+                        className=' p-1 bg-gray-200 text-black font-bold font-robotoMono text-[.65rem] ring-[1px] ring-slate-400 rounded-[3px]'
+                        key={indx}>
+                            {val}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    };
+
+    const ExperienceCard = ({ companyName, details, startingDt, endingDt, role, mode }) => {
+        return(
+            <div className=' w-full'>
+                <div className='w-full flex items-center justify-between'>
+                    <div className=' space-x-2 flex'>
+                        <div className=' font-lato font-bold text-[1rem]'>
+                            {companyName}
+                        </div>
+                        <div className=' bg-gray-100 text-black rounded-md font-robotoMono text-[.78rem] py-1 px-2 font-bold'>
+                            {mode.trim()}
+                        </div>
+                    </div>
+
+                    <div className=' font-lato'>
+                        {new Date(startingDt).getFullYear()} - {new Date(endingDt).getFullYear()}
+                    </div>
+                </div>
+
+                <div className='text-black rounded-md font-robotoMono text-[.9rem]'>
+                    {role}
+                </div>
+
+                <div className='text-black rounded-md font-robotoMono text-[.77rem] mt-2'>
+                    {details}
+                </div>
+            </div>
+        )
+    };
+    
     return (
-        <div>
-            <div className="container text-center" ref={resumeRef}>
-                {/* Resume content */}
-                <h1 className="container text-center">{otherData?.firstName} {otherData?.lastName}</h1>
-                {otherData && (
-                    <h6 className="container text-center">
-                        <ul>{otherData.email}</ul>
-                        <ul>{resumedata.linkedinId}</ul>
-                        <ul>{otherData.contactNumber}</ul>
-                    </h6>
-                )}
-                {/* Rest of the resume */}
-                <hr />
-                <p align="justify">
-                    {otherData?.careerPreferences}
-                </p>
+        <div className='flex justify-center h-screen overflow-y-auto py-10 px-4'>
+            <div className="min-w-[30rem] max-w-[40rem]">
+                {/* personal details */}
+                <div className=' flex items-start justify-between gap-x-6'>
+                    {/* details */}
+                    <div className=''>
+                        <div className="text-4xl font-bold font-lato">
+                            {personDetails?.firstName} {personDetails?.lastName}
+                        </div>
+
+                        <div className=' font-robotoMono text-gray-800 mt-2 text-[.9rem] font-semibold'>
+                            {personDetails.careerPreferences}
+                        </div>
+
+                        <div className='mt-.5 flex items-center gap-x-1 text-gray-800 font-semibold'>
+                            <TbWorld className=' text-[.9rem]'/>
+                            <div className=' capitalize font-robotoMono text-[.8rem] space-x-1'>
+                                <span>{personDetails.country},</span>
+                                <span>{personDetails.state},</span>
+                                <span>{personDetails.city}</span>
+                            </div>
+                        </div>
+
+                        <div className='mt-2.5 flex items-center justify-start gap-x-2'>
+                            {iconContainer.map((icon, index) => (
+                                <a 
+                                key={index}
+                                className=' no-underline text-slate-800'
+                                href={icon.type === 'mail' ? `mailto:${icon.link}` : icon.type === 'tel' ? `tel:${icon.link}` : icon.link}>
+                                    <div className=' bg-gray-200 text-gray-700 text-[1rem] p-[4px] rounded-sm ring-[1px] ring-gray-500'>
+                                        {icon.icon}
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* profile img */}
+                    <div 
+                    className='w-[6rem] h-[7rem] rounded-md overflow-hidden bg-cover bg-center' 
+                    style={{
+                        backgroundImage: `url(${profImg || avatar})`
+                    }}/>
+                </div>
                 
-                <h3 className="container text-center">Skills</h3>
-                <hr />
-                <p align="justify"> {otherData?.keySkills}</p>
+                {/* about */}
+                <div className='mt-10'>
+                    <div className='font-lato text-2xl font-bold'>
+                        About
+                    </div>
+
+                    <div className=' font-robotoMono text-[.82rem] text-black text-justify mt-3'>
+                        {resumedata?.about}
+                    </div>
+                </div>
+
+                {/* work experience */}
+                <div className='mt-7'>
+                    <div className='font-lato text-2xl font-bold capitalize'>
+                        work experience
+                    </div>
+
+                    <div className=' font-robotoMono text-[.82rem] text-black text-justify mt-3 flex flex-col items-start gap-y-5 flex-wrap w-full'>
+                        {resumedata.experience.map((experience, index) => (
+                            <ExperienceCard
+                                key={index}
+                                companyName={experience.companyName}
+                                details={experience.details}
+                                startingDt={experience.duration.startingDt}
+                                endingDt={experience.duration.endingDt}
+                                role={experience.position}
+                                mode={experience.mode}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* skills */}
+                <div className='mt-7'>
+                    <div className='font-lato text-2xl font-bold'>
+                        Skills
+                    </div>
+
+                    <div className=' font-robotoMono text-[.82rem] text-black text-justify mt-3 flex items-start gap-x-2 gap-y-1 flex-wrap'>
+                        {resumedata?.techStack.split(',').map((techStack, index) => (
+                            <span 
+                            className=' bg-gray-800 text-white px-2 py-1 rounded-md'
+                            key={index}>
+                                {techStack}
+                            </span>
+                        ))}
+                    </div>
+                </div>
                 
-                <h3 className="container text-center">Education</h3>
-                <hr />
+                {/* education */}
+                <div className='mt-8'>
+                    <div className='font-lato text-2xl font-bold'>
+                        Education
+                    </div>
+
+                    <div className='mt-3'>
+                        <div>
+                            <div className=' font-montserrat font-bold text-[1.1rem]'>
+                                {personDetails?.collegeName}
+                            </div>
+                            <div className=' font-robotoMono'>
+                                {personDetails?.course3}
+                            </div>
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+
                 <p align="justify">
                     <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Course</th>
-                                <th>School Name</th>
-                                <th>Address</th>
-                                <th>Marks</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
-                                <td>{otherData?.course3} {otherData?.specialization}</td>
-                                <td>{otherData?.collegeName}</td>
-                                <td>{otherData?.address3}</td>
-                                <td>{otherData?.score3}</td>
+                                <td>{personDetails?.course3} {personDetails?.specialization}</td>
+                                <td>{personDetails?.collegeName}</td>
+                                <td>{personDetails?.address3}</td>
+                                <td>{personDetails?.score3}</td>
                             </tr>
                             <tr>
-                                <td>{otherData?.course2}</td>
-                                <td>{otherData?.schoolName2}</td>
-                                <td>{otherData?.address2}</td>
-                                <td>{otherData?.score2}</td>
+                                <td>{personDetails?.course2}</td>
+                                <td>{personDetails?.schoolName2}</td>
+                                <td>{personDetails?.address2}</td>
+                                <td>{personDetails?.score2}</td>
                             </tr>
                             <tr>
-                                <td>{otherData?.course1}</td>
-                                <td>{otherData?.schoolName1}</td>
-                                <td>{otherData?.address1}</td>
-                                <td>{otherData?.score1}</td>
+                                <td>{personDetails?.course1}</td>
+                                <td>{personDetails?.schoolName1}</td>
+                                <td>{personDetails?.address1}</td>
+                                <td>{personDetails?.score1}</td>
                             </tr>
                         </tbody>
                     </table>
                     
                 </p>
                 
-                <h3 className="container text-center">Projects</h3>
-                <hr />
-                <p align="justify">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Technology</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {resumedata.projects?.map((posting) => (
-                                <tr key={posting.name}>
-                                    <td>{posting.name}</td>
-                                    <td>{posting.technology}</td>
-                                    <td>{posting.details}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </p>
+                {/* projects */}
+                <div className='mt-7'>
+                    <div className='font-lato text-2xl font-bold'>
+                        Projects
+                    </div>
+                    
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-3'>
+                        {resumedata?.projects?.map((project, indx) => (
+                            <ProjectCard
+                                key={indx}
+                                title={project.name}
+                                detail={project.details}
+                                tech={project.technology}
+                            />
+                        ))}
+                    </div>
+                </div>
                 
-                <h3 className="container text-center">Hobbies & Interests</h3>
-                <hr />
-                <p align="justify">
-                    {resumedata.hobbies}
-                </p>
-                <br />
-                <br />
-                <br />
-                <Button id="createButton" variant="dark" onClick={createResume}>
-                    Create
-                </Button>
-                <br />
-                <br />
-                <br />
+                {/* hobbies */}
+                <div className='mt-7'>
+                    <div className='font-lato text-2xl font-bold'>
+                        Hobbies
+                    </div>
+
+                    <div className=' font-robotoMono text-[.82rem] text-black text-justify mt-3 flex items-start gap-x-2 gap-y-1 flex-wrap'>
+                        {resumedata?.hobbies?.split(',').map((hobby, index) => (
+                            <span 
+                            className=' bg-gray-800 text-gray-200 px-2 py-1 rounded-md'
+                            key={index}>
+                                {hobby}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+                
+                <div className=' w-full py-8 flex items-center justify-center'>
+                    <button onClick={createResume} className=' px-6 py-2 text-xl bg-[#1e5379] text-cyan-300 rounded-md'>
+                        Create
+                    </button>
+                </div>
             </div>
         </div>
     );

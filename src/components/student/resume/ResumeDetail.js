@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -10,28 +10,27 @@ import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import BgColorAnimation from '../../../animations/BgColorAnimation';
 import { Form, Row, Col } from 'react-bootstrap'
-import { styled } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
-import Stack from '@mui/material/Stack';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import './datePick.css'
 
 function ResumeForm() {
     const navigate = useNavigate();
     const usn=localStorage.getItem('token')
     const [linkedinId, setLinkedinId] = useState('');
     const [githubId, setGithubId] = useState('');
-    const [goal, setGoal] = useState('');
+    const [about, setAbout] = useState('');
     const [techStack, setTechStack] = useState('');
     const [projects, setProjects] = useState([{ name: '', technology: '', details: '' }]);
     const [hobbies, setHobbies] = useState('');
-    const [experience, setExperience] = useState({
+    const [experience, setExperience] = useState([{
         details: '',
         companyName: '',
-        duration: '',
-        position: ''
-    });
+        duration: {
+            startingDt: new Date(),
+            endingDt: new Date(),
+        },
+        position: '',
+        mode: '',
+    }]);
 
     const handleProjectChange = (index, field, value) => {
         const updatedProjects = [...projects];
@@ -58,7 +57,18 @@ function ResumeForm() {
             hobbies,
         };
 
-        navigate('/Resume', { state: { resumedata: data } })
+        const data1 = {
+            usn,
+            linkedinId,
+            githubId,
+            about,
+            projects,
+            hobbies,
+            techStack,
+            experience,
+        };
+
+        navigate('/Resume', { state: { resumedata: data1 } })
 
         try {
             const response = await fetch(`http://localhost:1337/api/createresume/${usn}`, {
@@ -89,12 +99,62 @@ function ResumeForm() {
         setLinkedinId('');
         setGithubId('');
         setTechStack('');
-        setProjects([{ name: '', technology: '', details: '' }]);
+        setProjects([{ 
+            name: '', 
+            technology: '', 
+            details: '' 
+        }]);
         setHobbies('');
+        setExperience([{
+            details: '',
+            companyName: '',
+            duration: {
+                startingDt: new Date(),
+                endingDt: new Date(),
+            },
+            position: '',
+            mode: '',
+        }])
     };
 
-    const handleExperienceValue = (e) => {
-        
+    const handleExperienceValue = (index, field, value) => {
+        const updatedExperience = [...experience];
+
+        if (field === 'startingDt' || field === 'endingDt') {
+            updatedExperience[index].duration[field] = value;
+
+            const startingDate = new Date(updatedExperience[index].duration.startingDt);
+            const endingDate = new Date(updatedExperience[index].duration.endingDt);
+
+            if (startingDate > endingDate || endingDate < startingDate) {
+                window.alert("Starting date must be before ending date");
+                return;
+            }
+        } else {
+            updatedExperience[index][field] = value;
+        }
+
+        setExperience(updatedExperience);
+    };
+
+    const addExperience = () => {
+        setExperience([
+            ...experience, {
+                details: '',
+                companyName: '',
+                duration: {
+                    startingDt: new Date(),
+                    endingDt: new Date(),
+                },
+                position: ''
+            }
+        ])
+    };
+
+    const removeExperienceField = (index) => {
+        const updatedExp = [...experience];
+        updatedExp.splice(index, 1);
+        setExperience(updatedExp);
     };
 
     return (
@@ -109,10 +169,10 @@ function ResumeForm() {
                         Create Resume
                     </div>
 
-                    <div className={`bg-[#ffffff30] shadow-md rounded h-[79vh] md:h-auto overflow-y-auto px-2 md:px-4 py-3 md:w-[80%] lg:w-[70%] 2xl:w-[66%]`}>
+                    <div className={`bg-[#ffffff30] shadow-md rounded h-[79vh] md:h-auto overflow-y-auto px-2 md:px-4 py-3 md:w-[85%] lg:w-[70%] 2xl:w-[66%]`}>
                         <Form onSubmit={handleSubmit} className=''>
-                            {/* linkedin ID */}
 							<Row className="mb-[.9rem] md:mb-4 space-y-[.9rem] md:space-y-0">
+                                {/* linkedin ID */}
 								<Form.Group as={Col} xs={12} md={6}>
 									<input
 										type="text"
@@ -138,14 +198,13 @@ function ResumeForm() {
 								</Form.Group>
 							</Row>
                             
-                            {/* goal */}
+                            {/* about */}
                             <div className="mb-4">
-                                <input
-                                    type="text"
+                                <textarea
+                                    value={about}
                                     className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${githubId ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
-                                    value={goal}
-                                    onChange={(e) => setGoal(e.target.value)}
-                                    placeholder="What's your goal?"
+                                    onChange={(e) => setAbout(e.target.value)}
+                                    placeholder="About"
                                     required
                                 />
                             </div>
@@ -235,42 +294,119 @@ function ResumeForm() {
                             
                             {/* experience */}
                             <div className="mb-3">
-                                <Row className="mb-[.9rem] md:mb-4 space-y-[.9rem] md:space-y-0">
-                                    {/* company name */}
-                                    <Form.Group as={Col} xs={12} md={6}>
-                                        <input
-                                            type="text"
-                                            className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.companyName ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
-                                            value={experience.companyName}
-                                            onChange={handleExperienceValue}
-                                            placeholder='Company name'
-                                        />
-                                    </Form.Group>
-                                    
-                                    {/* job role*/}
-                                    <Form.Group as={Col} xs={12} md={6}>
-                                        <input
-                                            type="text"
-                                            className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.position ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
-                                            value={experience.position}
-                                            onChange={handleExperienceValue}
-                                            placeholder='Job role'
-                                            {...experience.companyName ? {required: 'required'} : {}}
-                                        />
-                                    </Form.Group>
-                                </Row>
+                                {experience.map((exp, index) => (
+                                    <div key={index}>
+                                        <div className="mb-3 text-2xl font-bold text-violet-300 font-mavenPro">
+                                            Experience {index + 1}
+                                        </div>
+                                        
+                                        <Row className="mb-[.9rem] md:mb-4 space-y-[.9rem] md:space-y-0">
+                                            {/* company name */}
+                                            <Form.Group as={Col} xs={12} md={4}>
+                                                <input
+                                                    type="text"
+                                                    name="companyName"
+                                                    value={exp.companyName}
+                                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${exp.companyName ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                                    onChange={(e) => handleExperienceValue(index, 'companyName', e.target.value)}
+                                                    placeholder='Company name'
+                                                />
+                                            </Form.Group>
+                                            
+                                            {/* job role */}
+                                            <Form.Group as={Col} xs={12} md={4}>
+                                                <input
+                                                    type="text"
+                                                    name="position"
+                                                    value={exp.position}
+                                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${exp.position ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                                    onChange={(e) => handleExperienceValue(index, 'position', e.target.value)}
+                                                    placeholder='Job role'
+                                                    {...exp.companyName ? { required: 'required' } : {}}
+                                                />
+                                            </Form.Group>
 
-                                <textarea
-                                    value={experience.details}
-                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${experience.details ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
-                                    onChange={handleExperienceValue}
-                                    placeholder='Experience details'
-                                    {...experience.details ? {required: 'required'} : {}}
-                                />
+                                            {/* mode */}
+                                            <Form.Group as={Col} xs={12} md={4}>
+                                                <select
+                                                name="mode"
+                                                value={exp.mode}
+                                                className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full text-blue-300 font-robotoMono ${exp.mode ? 'border-indigo-400 text-green-300' : ''} focus:border-indigo-400 w-full`}
+                                                onChange={(e) => handleExperienceValue(index, 'mode', e.target.value)}
+                                                {...exp.companyName ? { required: 'required' } : {}}>
+                                                    <option className='text-gray-300' value='' disabled>Mode</option>
+                                                    <option value="remote">Remote</option>
+                                                    <option value="hybrid">Hybrid</option>
+                                                    <option value="on-site">On-site</option>
+                                                </select>
+                                            </Form.Group>
+                                        </Row>
 
+                                        <textarea
+                                            name="details"
+                                            value={exp.details}
+                                            className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${exp.details ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full mb-[.9rem] md:mb-4`}
+                                            onChange={(e) => handleExperienceValue(index, 'details', e.target.value)}
+                                            placeholder='Experience details'
+                                            {...exp.details ? { required: 'required' } : {}}
+                                        />
+
+                                        <Row className="mb-[.9rem] md:mb-4 space-y-[.9rem] md:space-y-0">
+                                            <Form.Group as={Col} md={6} className='relative'>
+                                                <input
+                                                    type="date"
+                                                    name="startingDt"
+                                                    value={exp.duration.startingDt}
+                                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${exp.duration.startingDt ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                                    placeholder='Starting date'
+                                                    onChange={(e) => handleExperienceValue(index, 'startingDt', e.target.value)}
+                                                    {...exp.details ? { required: 'required' } : {}}
+                                                />
+
+                                                <div className=' absolute text-cyan-300 right-14 top-1/2 -translate-y-1/2 font-lato'>
+                                                    Starting date
+                                                </div>
+                                            </Form.Group>
+                                            
+                                            <Form.Group as={Col} md={6} className=' relative'> 
+                                                <input 
+                                                    type="date"
+                                                    name="endingDt"
+                                                    value={exp.duration.endingDt}
+                                                    className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${exp.duration.endingDt ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                                    placeholder='Ending date'
+                                                    onChange={(e) => handleExperienceValue(index, 'endingDt', e.target.value)}
+                                                    {...exp.details ? { required: 'required' } : {}}
+                                                />
+
+                                                <div className=' absolute text-cyan-300 right-14 top-1/2 -translate-y-1/2 font-lato'>
+                                                    Ending date
+                                                </div>
+                                            </Form.Group>
+                                        </Row>
+
+                                        {index !== 0 && (
+                                            <div className='flex items-center justify-center mb-3 md:justify-end'>
+                                                <button
+                                                type="button"
+                                                className="w-full px-3 py-2 font-bold text-blue-400 transition-all rounded-full text-md bg-slate-800 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 sm:w-fit active:ring-green-300 active:text-green-300"
+                                                onClick={() => removeExperienceField(index)}>
+                                                    Remove Experience {index+1}
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                                 
+                                <button 
+                                type="button" 
+                                className=" text-md font-bold bg-slate-800 text-blue-400 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full sm:w-fit px-3 py-1.5 rounded-full active:ring-green-300 active:text-green-300 transition-all" 
+                                onClick={addExperience}>
+                                    Add Experience
+                                </button>
                             </div>
 
+                            {/* submit */}
                             <div className='flex items-center justify-between gap-x-5'>
                                 <button 
                                 className=" text-md font-bold bg-slate-800 text-blue-400 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full sm:w-fit px-4 py-1.5 rounded-md active:ring-green-300 active:text-green-300 transition-all" 
