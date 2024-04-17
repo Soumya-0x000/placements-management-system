@@ -1,89 +1,201 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Nav, Form, Button,Dropdown } from 'react-bootstrap'
+const workingStyle = [
+    {
+        title: 'Design electrical systems:',
+        details: 'This involves creating plans and specifications for electrical systems in various settings.'
+    },
+    {
+        title: 'Install and maintain electrical equipment:',
+        details: 'Electrical engineers oversee the installation and maintenance of electrical components and systems.'
+    },
+    {
+        title: 'Troubleshoot electrical issues:',
+        details: 'They diagnose and solve problems with electrical systems, ensuring they operate safely and efficiently.'
+    },
+    {
+        title: 'Research and develop new technologies:',
+        details: 'Electrical engineers often work on cutting-edge technologies, improving existing systems or developing new ones.'
+    }
+];
 
-const ElectricalEngineer = () => {
+const examples = [
+    "General Electric",
+    "Siemens",
+    "ABB Group",
+    "AT&T",
+    "Verizon",
+    "Huawei",
+    "Apple",
+    "Samsung",
+    "Sony",
+    "Tesla",
+    "Vestas",
+    "SolarEdge"
+];
+
+const careerBenefits = [
+    {
+        title: "High demand",
+        details: "With the continuous need for electricity in various industries, electrical engineers are in constant demand."
+    },
+    {
+        title: "Lucrative career",
+        details: "The average salary for electrical engineers is competitive, with ample opportunities for growth."
+    },
+    {
+        title: "Innovation opportunities",
+        details: "Electrical engineers often get to work on innovative projects, pushing the boundaries of technology."
+    },
+    {
+        title: "Diverse industries",
+        details: "From power generation to telecommunications, electrical engineers can work in a variety of sectors."
+    },
+    {
+        title: "Global impact",
+        details: "Electrical engineers contribute to projects worldwide, impacting communities and industries globally."
+    },
+    {
+        title: "Career advancement",
+        details: "There are numerous opportunities for career advancement in electrical engineering, including leadership roles and specialization."
+    }
+];
+
+const industryCompanies = [
+    {
+        title: "Power industry",
+        details: "Companies like General Electric, Siemens, and ABB Group are prominent in this sector."
+    },
+    {
+        title: "Telecommunications industry",
+        details: "Companies like AT&T, Verizon, and Huawei operate in this industry."
+    },
+    {
+        title: "Consumer electronics industry",
+        details: "Companies like Apple, Samsung, and Sony are key players in this field."
+    },
+    {
+        title: "Renewable energy industry",
+        details: "Companies like Tesla, Vestas, and SolarEdge focus on renewable energy technologies."
+    }
+];
+
+const ElectricalEngineer = ({ setShowDialog }) => {
     return (
-        <div>
-            <Navbar bg="dark" variant='dark' expand="lg">
-                <Container fluid>
-                    <img src="https://www.igauge.in/admin/uploaded/rating/logo/CambridgeInstituteLatestLogo2_1623754797.png" height="40" width="110" />
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-1 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="StudentHome">Home</Nav.Link>
-                            <Nav.Link href="StudentSchedule">Schedule</Nav.Link>
-                            <Nav.Link href="createResume">Resume</Nav.Link>
-                        </Nav>
+        <div className=' h-screen overflow-y-auto flex justify-center pt-[1rem]'>
+            <div className=" max-w-[60rem]">
+                <div className="mt-2 mb-4 font-bold text-transparent font-lato bg-gradient-to-br from-indigo-600 via-blue-500 to-violet-500 bg-clip-text text-3xl md:text-4xl md:mb-5 pl-0 px-3 md:px-0 md:pl-6">
+                    Electrical Engineer
+                </div>
 
+                <div className=' px-3'>
+                    <div className=' font-robotoMono font-bold text-justify text-blue-950 text-[.9rem] md:text-[1rem]'>
+                        Electrical engineers play a crucial role in designing, developing, and maintaining electrical systems across various industries. They are responsible for ensuring the safe and efficient operation of electrical equipment, from power generation to distribution and consumption.
+                    </div>
 
-                        <div className="col-md-6 mx-auto" >
-                            <Form className="d-flex ">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
+                    {/* what they do */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            What they do?
                         </div>
-                        <Dropdown className="me-auto my-1 my-lg-0">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-Login">
-                            <img className="me-auto my-1 my-lg-0" src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-22.jpg" height="30" width="30" />
+                    
+                        {workingStyle.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* companies */}
+                    <>
+                        <div className=' mt-5 mb-2 font-bold text-2xl font-jaldi'>
+                            Companies
+                        </div>
 
-                            </Dropdown.Toggle>
+                        <div className='flex items-center flex-wrap gap-2'>
+                            {examples.map((val, indx) => (
+                                <div className=' px-3 py-1 bg-gray-700 text-gray-200 text-[.8rem] md:text-[.9rem] font-robotoMono rounded-md shadow-lg ' key={indx}>
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                                
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    {/* why to become system engineer */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            Why become an electrical engineer?
+                        </div>
+                    
+                        {careerBenefits.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}:
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* other industries */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Other industries:
+                        </div>
 
+                        <div className='mt-2 pl-6'>
+                            {industryCompanies.map((val, indx) => (
+                                <div className='mt-2 space-x-2' key={indx}>
+                                    <span className='w-fit font-lato font-bold text-[1rem]'>
+                                        {indx + 1}) {val.title}:
+                                    </span>
+                                    <span className='text-black font-robotoMono text-[.9rem]'>
+                                        {val.details}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                    
+                    {/* future */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Future stability :
+                        </div>
 
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] text-justify'>
+                            The future for electrical engineers looks promising, with advancements in renewable energy, automation, and smart technologies driving demand. As the world transitions towards sustainable energy solutions, electrical engineers will play a vital role in designing and implementing renewable energy systems. Additionally, the growing emphasis on automation and smart technologies in various industries will create opportunities for electrical engineers to innovate and contribute to the development of efficient and interconnected systems.
+                        </div>
+                    </>
 
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <div class="container text-center">
-                <br></br>
-                <br></br>
-                <h1 class="container text-center">Electrical Engineer</h1>
+                    {/* example */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Example Scenario
+                        </div>
 
-                <br></br>
-                <h5 class="container text-justify" align="justify">
-                    Electrical Engineering is a subject that deals with the study of the application of electricity,
-                    electronics and electromagnetism. A student has to learn transmission and generation of electric power,
-                    electric circuit design, electronics and instrumentation and control systems. Professional electrical engineers
-                    design various electric circuits and equipment to work on large power plants, hardware companies which include
-                    designing, manufacturing and operating of various power plants, industrial machinery, electrical motors, computer
-                    chips and ignition systems for automobiles, aircraft, space crafts and all kinds of engines. Electrical Engineering
-                    is spread across a range of specialities such as acoustics, speech, signal processing to electromagnetic compatibility,
-                    automobiles to vehicular technology, geoscience and remote sensing, laser and electro-optics, robotics, ultra-sonic,
-                    ferroelectrics and frequency control.
-                    <br></br>
-                    <br></br>
-                    The job prospects in the power industry/construction are in high demand. One ought to have sound theoretical knowledge of
-                    electricity. This job calls for analyzing procedural functions of engineering to do the software encoding.
-                    <br></br>
-                    <br></br>
-                    Some of the common designations offered to Electrical Engineers are Power Engineers, Telecommunication Engineer, Nuclear Engineer, Design Engineer, Consultants and as a System Analyst. The job profile includes designing, manufacturing and maintaining engine's flow of power with specialized skills in microelectronics design. Various power plants, motors, the ignition system of automobiles, spacecraft and engines are researched in various ways to compute the cost of manufacture with its related specifications. They prepare, analyze and review reports based on data prepared and provide necessary technical support as and when required. Data needs to be interpreted prepared based on the given documentation. The job of an
-                    Electrical Engineer is always hectic, his outdoor activities include a visit to the site if required when on a call.
-                    <br></br>
-                    <br></br>
-                    The job involves meeting with new clients and local authorities about new designs and circuits that are manufactured and when and where it can be implemented in various sectors. The project sometimes includes coordinating with other engineers, scientists, lawyers and technicians, as needed. Sometimes work hours are stretched to meet the project deadline. Often, he/she needs to travel to another city on official work. Staying away from family sometimes is a part of the job, especially
-                    when he/she has to go on official trips nationationally and internationally to represent his/her company's project work.
-                </h5>
-                <br></br>
-                <br></br>
-                <br></br>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] pb-[4rem] text-justify'>
+                            Consider a renewable energy project aiming to harness solar power. An electrical engineer would be responsible for designing the solar panel array, specifying the electrical components for power conversion and storage, and ensuring the integration of the system with the electrical grid. They would collaborate with stakeholders to optimize the performance and reliability of the solar power system, contributing to the project's success and sustainability.
+                        </div>
+                    </>
+                </div>
+
+                <div className='px-3 w-full'>
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mb-[3rem]" 
+                    onClick={() => setShowDialog(false)}>
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
-
     );
-}
+}; 
+
 
 export default ElectricalEngineer;

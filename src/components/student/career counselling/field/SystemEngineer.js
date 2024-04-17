@@ -1,101 +1,205 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Nav, Form, Button ,Dropdown} from 'react-bootstrap'
+const workingStyle = [
+    {
+        title: 'Design complex IT infrastructure:', 
+        details: 'This could be computer networks, software applications, or large-scale hardware configurations.'
+    },
+    {
+        title: 'Oversee entire system lifecycles:',
+        details: 'From conception to implementation, troubleshooting, and maintenance, the systems engineer ensures everything runs smoothly.'
+    },
+    {
+        title: 'Act as problem-solving superheroes:',
+        details: 'They identify, diagnose, and resolve issues within intricate systems.'
+    },
+    {
+        title: 'Bridge communication gaps:',
+        details: 'They liaise between different teams involved in system development and use.'
+    }
+];
 
-const SystemEngineer = () => {
+const examples = [
+    "Tata Consultancy Services (TCS)",
+    "IBM",
+    "Cognizant",
+    "Tech Mahindra",
+    "NVIDIA",
+    "Salesforce",
+    "EPAM",
+    "Accenture",
+    "Qualcomm",
+    "Persistent Systems",
+    "FactSet",
+    "Verizon",
+    "Infosys",
+    'Wipro',
+    "Walmart",
+    "Samsung",
+    "Microsoft"
+];
+
+const careerBenefits = [
+    {
+        title: "High demand",
+        details: "With our growing dependence on technology, skilled systems engineers are always sought after."
+    },
+    {
+        title: "Lucrative career",
+        details: "The average salary in the US is a healthy $106,930 (as of March 2024). [Source: Coursera]"
+    },
+    {
+        title: "Intellectual challenges",
+        details: "The role requires constant learning, problem-solving, and innovation."
+    },
+    {
+        title: "Varied work environment",
+        details: "You can work in various industries, from healthcare to finance to IT."
+    },
+    {
+        title: "Global opportunities",
+        details: "Systems engineering skills are in demand worldwide, offering opportunities for international work and collaboration."
+    },
+    {
+        title: "Career growth potential",
+        details: "Systems engineers often have pathways for career advancement into leadership and specialized technical roles."
+    }
+];
+
+const industryCompanies = [
+    {
+        title: "Defense industry",
+        details: "Companies like ESSI Security and Defence, and Mistral Solutions fall in this category."
+    },
+    {
+        title: "Aerospace industry",
+        details: "Companies like York Space Systems, Syncroness, and Boeing fall in this category."
+    },
+    {
+        title: "Electronics industry",
+        details: "Companies like Qualcomm, PiServe, and Tesla fall in this category."
+    },
+    {
+        title: "Automotive industry",
+        details: "Companies like Ford, Toyota, and General Motors fall in this category."
+    }
+];
+
+const SystemEngineer = ({ setShowDialog }) => {
     return (
-        <div>
-            <Navbar bg="dark" variant='dark' expand="lg">
-                <Container fluid>
-                    <img src="https://www.igauge.in/admin/uploaded/rating/logo/CambridgeInstituteLatestLogo2_1623754797.png" height="40" width="110" />
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-1 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="StudentHome">Home</Nav.Link>
-                            <Nav.Link href="StudentSchedule">Schedule</Nav.Link>
-                            <Nav.Link href="createResume">Resume</Nav.Link>
-                        </Nav>
+        <div className=' h-screen overflow-y-auto flex justify-center pt-[1rem]'>
+            <div className=" max-w-[60rem]">
+                <div className="mt-2 mb-4 font-bold text-transparent font-lato bg-gradient-to-br from-indigo-600 via-blue-500 to-violet-500 bg-clip-text text-3xl md:text-4xl md:mb-5 pl-0 px-3 md:px-0 md:pl-6">
+                    System Engineer
+                </div>
 
+                <div className=' px-3'>
+                    <div className=' font-robotoMono font-bold text-justify text-blue-950 text-[.9rem] md:text-[1rem]'>
+                        A systems engineer is the tech maestro behind the complex systems that run our world. They orchestrate a symphony of technologies, from designing and implementing cutting-edge networks and software applications to troubleshooting and managing their entire lifecycles. Systems engineers are the glue that holds these intricate systems together, ensuring their seamless operation and efficient performance.
+                    </div>
 
-                        <div className="col-md-6 mx-auto" >
-                            <Form className="d-flex ">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
+                    {/* what they fo */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            What they do?
                         </div>
-                        <Dropdown className="me-auto my-1 my-lg-0">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-Login">
-                            <img className="me-auto my-1 my-lg-0" src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-22.jpg" height="30" width="30" />
+                    
+                        {workingStyle.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* companies */}
+                    <>
+                        <div className=' mt-5 mb-2 font-bold text-2xl font-jaldi'>
+                            Companies
+                        </div>
 
-                            </Dropdown.Toggle>
+                        <div className='flex items-center flex-wrap gap-2'>
+                            {examples.map((val, indx) => (
+                                <div className=' px-3 py-1 bg-gray-700 text-gray-200 text-[.8rem] md:text-[.9rem] font-robotoMono rounded-md shadow-lg ' key={indx}>
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                                
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    {/* why to become system engineer */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            Why become a systems engineer?
+                        </div>
+                    
+                        {careerBenefits.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}:
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* other industries */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Other industries:
+                        </div>
 
+                        <div className='mt-2 pl-6'>
+                            {industryCompanies.map((val, indx) => (
+                                <div className='mt-2 space-x-2' key={indx}>
+                                    <span className='w-fit font-lato font-bold text-[1rem]'>
+                                        {indx + 1}) {val.title}:
+                                    </span>
+                                    <span className='text-black font-robotoMono text-[.9rem]'>
+                                        {val.details}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                    
+                    {/* future */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Future stability :
+                        </div>
 
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] text-justify'>
+                            The future for systems engineers is bright. As technology continues to evolve at an exponential rate, the demand for individuals who can design, manage, and secure complex systems will only increase.  The rise of artificial intelligence, big data, and the Internet of Things (IoT) will create a surge in interconnected devices and systems, all requiring the expertise of skilled systems engineers to ensure their smooth operation and integration.  Furthermore, the ever-present threat of cyberattacks necessitates a strong cybersecurity posture, and systems engineers play a critical role in safeguarding systems and data from malicious actors.  In short, the future landscape demands professionals with the well-rounded technical knowledge and problem-solving skills that systems engineers possess.
+                        </div>
+                    </>
 
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <div class="container text-center">
+                    {/* example */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Example :
+                        </div>
 
-                <br></br>
-                <h1 class="container text-center">System Engineer</h1>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] pb-[4rem] text-justify'>
+                            Imagine a company developing a new e-commerce platform. The systems engineer would be involved in designing the network infrastructure, selecting the appropriate hardware and software, ensuring secure transactions, and troubleshooting any glitches that arise. They would collaborate with developers, security specialists, and the client to ensure the platform runs seamlessly.
+                        </div>
+                    </>
+                </div>
 
-                <br></br>
-                <h5 class="container text-justify" align="justify">The system engineer is a highly demanded profession in industries as well as in government. They are an essential resource for the technical development and maintenance of complex systems. Some of the top recruiters who actively hire System Engineers are as follows:
-                    <br></br>
-                    <br></br>
-
-                    <ul>
-                        <li>Tata Consultancy Services (TCS)</li>
-                        <li>IBM</li>
-                        <li>Cognizant Technology Solutions</li>
-                        <li>Tech Mahindra</li>
-                        <li>NVIDIA</li>
-                        <li>Salesforce</li>
-                        <li>EPAM</li>
-                        <li>Accenture</li>
-                        <li>Qualcomm</li>
-                        <li>Persistent Systems</li>
-                        <li>FactSet</li>
-                        <li>Verizon</li>
-                    </ul>
-                    In addition to the IT industry, there are a number of other industries that need system engineers. Some of these industries include:
-                    <br></br>
-                    <br></br>
-                    <ul>
-                        <li><b>Defense industry:</b> Companies like ESSI Security and Defence, and Mistral Solutions fall in this category.</li>
-                        <li><b>Aerospace industry:</b> Companies like York Space Systems, Syncroness, and Boeing fall in this category.</li>
-                        <li><b>Electronics industry:</b> Companies like Qualcomm, PiServe, and Tesla fall in this category.</li>
-                    </ul>
-                    The reason for the high demand for system engineers is because they combine all the engineering department input into a system to maximize
-                    production. They figure out how to make things better by avoiding waste of time, manpower, money, material, and other resources.
-
-                    <br></br>
-                    <br></br>
-                    The demand for system engineers is there in national as well as international markets. They are a vital part of most companies. CNN (Cable News Network Inc.) ranks Systems Engineering as one of the top 50 jobs in the U.S (in terms of pay and quality of life), and the Bureau of Labor Statistics predicts a faster-than-average 10-percent growth rate in employment opportunities for Industrial engineers,
-                    including System Engineers, by 2026. So choosing this as your profession can be the best decision based on your interest.
-                </h5>
-
-                <br></br>
-                <br></br>
-                <br></br>
+                <div className='px-3 w-full'>
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mb-[3rem]" 
+                    onClick={() => setShowDialog(false)}>
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
-
     );
-}
+};
 
 export default SystemEngineer;

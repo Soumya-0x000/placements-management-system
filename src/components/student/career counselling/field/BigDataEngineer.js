@@ -1,93 +1,203 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Nav, Form, Button,Dropdown } from 'react-bootstrap'
+const workingStyle = [
+    {
+        title: 'Design data processing systems:',
+        details: 'Big Data Engineers design and implement large-scale data processing systems to collect, store, and analyze vast amounts of data.'
+    },
+    {
+        title: 'Develop data pipelines:',
+        details: 'They build efficient data pipelines to extract, transform, and load (ETL) data from various sources into data warehouses or data lakes.'
+    },
+    {
+        title: 'Optimize data storage and retrieval:',
+        details: 'Big Data Engineers optimize data storage and retrieval mechanisms to ensure fast and reliable access to data for analytics and reporting.'
+    },
+    {
+        title: 'Implement data security measures:',
+        details: 'They implement data security measures to protect sensitive information and ensure compliance with data privacy regulations.'
+    }
+];
 
-const BigDataEngineer = () => {
+const examples = [
+    "Google",
+    "Facebook",
+    "Amazon",
+    "Netflix",
+    "Microsoft",
+    "Apple",
+    "LinkedIn",
+    "Twitter",
+    "Uber",
+    "Airbnb",
+    "PayPal",
+    "Salesforce",
+    "Dropbox",
+    "Square"
+];
+
+const careerBenefits = [
+    {
+        title: "High demand",
+        details: "Big Data Engineers are in high demand as organizations increasingly rely on data-driven insights to make strategic decisions."
+    },
+    {
+        title: "Lucrative salary",
+        details: "Big Data Engineers command lucrative salaries due to their specialized skills in managing and analyzing large volumes of data."
+    },
+    {
+        title: "Continuous learning",
+        details: "The field of big data is constantly evolving, offering opportunities for Big Data Engineers to learn new technologies and techniques."
+    },
+    {
+        title: "Diverse career paths",
+        details: "Big Data Engineers can pursue diverse career paths, including data engineering, data science, and big data architecture."
+    },
+    {
+        title: "Impactful work",
+        details: "Big Data Engineers have the opportunity to work on projects that have a significant impact on business operations and decision-making."
+    },
+    {
+        title: "Flexibility",
+        details: "Many organizations offer flexible work arrangements and remote work options for Big Data Engineers."
+    }
+];
+
+const industryCompanies = [
+    {
+        title: "Technology giants",
+        details: "Companies like Google, Facebook, Amazon, and Microsoft lead the way in big data analytics and cloud computing."
+    },
+    {
+        title: "E-commerce platforms",
+        details: "Companies like eBay, Alibaba, and Shopify leverage big data analytics to optimize customer experiences and drive sales."
+    },
+    {
+        title: "Finance and banking",
+        details: "Financial institutions such as JPMorgan Chase, Goldman Sachs, and Citibank use big data analytics for risk management and fraud detection."
+    },
+    {
+        title: "Healthcare organizations",
+        details: "Healthcare providers and pharmaceutical companies employ big data analytics to improve patient outcomes and drug discovery."
+    }
+];
+
+const BigDataEngineer = ({ setShowDialog }) => {
     return (
-        <div>
-            <Navbar bg="dark" variant='dark' expand="lg">
-                <Container fluid>
-                    <img src="https://www.igauge.in/admin/uploaded/rating/logo/CambridgeInstituteLatestLogo2_1623754797.png" height="40" width="110" />
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-1 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="StudentHome">Home</Nav.Link>
-                            <Nav.Link href="StudentSchedule">Schedule</Nav.Link>
-                            <Nav.Link href="createResume">Resume</Nav.Link>
-                        </Nav>
+        <div className=' h-screen overflow-y-auto flex justify-center pt-[1rem]'>
+            <div className=" max-w-[60rem]">
+                <div className="mt-2 mb-4 font-bold text-transparent font-lato bg-gradient-to-br from-indigo-600 via-blue-500 to-violet-500 bg-clip-text text-3xl md:text-4xl md:mb-5 pl-0 px-3 md:px-0 md:pl-6">
+                    Big Data Engineer
+                </div>
 
+                <div className=' px-3'>
+                    <div className=' font-robotoMono font-bold text-justify text-blue-950 text-[.9rem] md:text-[1rem]'>
+                        Big Data Engineers play a crucial role in managing and analyzing large volumes of data to extract valuable insights and drive business decisions. They design and implement data processing systems, develop data pipelines, and optimize data storage and retrieval mechanisms.
+                    </div>
 
-                        <div className="col-md-6 mx-auto" >
-                            <Form className="d-flex ">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
+                    {/* what they do */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            What they do?
                         </div>
-                        <Dropdown className="me-auto my-1 my-lg-0">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-Login">
-                            <img className="me-auto my-1 my-lg-0" src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-22.jpg" height="30" width="30" />
+                    
+                        {workingStyle.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* companies */}
+                    <>
+                        <div className=' mt-5 mb-2 font-bold text-2xl font-jaldi'>
+                            Companies
+                        </div>
 
-                            </Dropdown.Toggle>
+                        <div className='flex items-center flex-wrap gap-2'>
+                            {examples.map((val, indx) => (
+                                <div className=' px-3 py-1 bg-gray-700 text-gray-200 text-[.8rem] md:text-[.9rem] font-robotoMono rounded-md shadow-lg ' key={indx}>
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                                
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    {/* why to become big data engineer */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            Why become a Big Data Engineer?
+                        </div>
+                    
+                        {careerBenefits.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}:
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* other industries */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Other industries:
+                        </div>
 
+                        <div className='mt-2 pl-6'>
+                            {industryCompanies.map((val, indx) => (
+                                <div className='mt-2 space-x-2' key={indx}>
+                                    <span className='w-fit font-lato font-bold text-[1rem]'>
+                                        {indx + 1}) {val.title}:
+                                    </span>
+                                    <span className='text-black font-robotoMono text-[.9rem]'>
+                                        {val.details}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
+                    {/* Future scope */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Future Outlook :
+                        </div>
 
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <div class="container text-center">
-                <br></br>
-                <br></br>
-                <h1 class="container text-center">Big Data Engineer</h1>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] text-justify'>
+                            The future for Big Data Engineers looks promising, with the increasing volume, variety, and velocity of data generated by businesses and organizations. As industries continue to leverage big data for insights and decision-making, the demand for skilled professionals who can manage and analyze large datasets will grow. Additionally, emerging technologies like artificial intelligence and machine learning will further drive the need for Big Data Engineers to build robust data infrastructure and develop advanced analytics solutions.
+                        </div>
+                    </>
+                        
+                    {/* Example */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Example :
+                        </div>
 
-                <br></br>
-                <h5 class="container text-justify" align="justify">
-                    The job profile of a Big Data Engineer is one of the most demanding roles nowadays. Their value is so high for any company across all sectors and also they get high salaries for offering their skills and talent.
-                    <br></br>
-                    <br></br>
-                    Big Data is an ever-growing sector. It is gaining popularity with its potential application in many organizations. Thus, a career in the field is one of the perfect choices for one who is looking for a long and stable career with high rewards.
-                    <br></br>
-                    <br></br>
-                    Education and specific skills are a requirement to land a job in this field. Big data positions require a background in programming, fluency, or familiarity in C, Python, Java, and SQL. The best way to acquire these skills is by getting a bachelor’s or master’s degree.
-                    <br></br>
-                    <br></br>
-                    As data continues to grow and expand, cloud space providers like Microsoft Azure Google Cloud, AWS and are going to rule in storing big data. This will increase room for scalability and efficiency for companies. This also means there will be more and more candidate hired to manage these data, which translate to more job opportunities for “Big Data Engineers” to handle the database and huge amount of data of a company.,
-                    <br></br>
-                    <br></br>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] pb-[4rem] text-justify'>
+                            For instance, consider a Big Data Engineer working for a healthcare organization. Their role might involve designing and implementing data pipelines to collect and process patient data from various sources such as electronic health records, medical devices, and wearable sensors. They would use technologies like Hadoop, Spark, and SQL to analyze this data, identify patterns, and develop predictive models for disease diagnosis and treatment optimization. By harnessing the power of big data, the engineer contributes to improving patient outcomes and healthcare delivery.
+                        </div>
+                    </>
+                </div>
 
-                    Looking at stats it can be determined that organizations are adopting this new technology and in the future, Big Data is going to be one of the best technologies.
-                    <br></br>
-                    <br></br>
-                    Because of Big Data, the industry is transforming to the next level. But, data is of no use unless there’s someone to analyze it and unravel the hidden patterns inside it. Businesses want insights from Big Data, and that is why they’re always looking for skilled professionals in this sector – candidates who can unlock the secrets that Big Data analytics holds.
-                    <br></br>
-                    <br></br>
-
-                    Technologies in Big Data analytics like Spark and Hadoop are the buzzwords now. So, be sure to learn how to work with related tools like HBase, MapReduce, SparkSQL, GraphX, Spark RDD, Spark Streaming, SparkR, MLlib, Flume, Sqoop, Oozie, Kafka, Data frames, Hive, and many more.
-                    <br></br>
-                    <br></br>
-
-                    Rest assured, if you learn to gather the correct skills, you will become an important asset to any organization invested in Big Data Analytics. You will grow with the company.
-                </h5>
-                <br></br>
-                <br></br>
-                <br></br>
+                <div className='px-3 w-full'>
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mb-[3rem]" 
+                    onClick={() => setShowDialog(false)}>
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
-
     );
-}
+}; 
+
 
 export default BigDataEngineer;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -9,6 +9,20 @@ import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import BgColorAnimation from '../../../animations/BgColorAnimation';
+import { Dialog, Slide } from '@mui/material';
+import SystemEngineer from './field/SystemEngineer';
+import ElectricalEngineer from './field/ElectricalEngineer';
+import AerospaceEngineer from './field/AerospaceEngineer';
+import BigDataEngineer from './field/BigDataEngineer';
+import ChemicalEngineer from './field/ChemicalEngineer';
+import ComputerHardwareEngineer from './field/ComputerHardwareEngineer';
+import SoftwareDeveloper from './field/SoftwareDeveloper';
+import StructuralEngineer from './field/StructuralEngineer';
+import UiUxDesigner from './field/UiUxDesigner';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const engineeringData = [
     {
@@ -18,7 +32,7 @@ const engineeringData = [
     },
     {
         title: "Electrical Engineer",
-        imgSrc: "https://t4.ftcdn.net/jpg/02/85/82/89/360_F_285828947_7LvtUCUFARVTzcxvPDM2EkTuknA50buy.jpg",
+        imgSrc: "https://img.freepik.com/free-vector/hand-drawn-electrician-cartoon-illustration_23-2151046712.jpg?size=338&ext=jpg&ga=GA1.1.1700460183.1713139200&semt=ais",
         link: "/electrical-engineering"
     },
     {
@@ -33,7 +47,7 @@ const engineeringData = [
     },
     {
         title: "Aerospace Engineer",
-        imgSrc: "https://res.cloudinary.com/teepublic/image/private/s--4eZaaLIK--/c_fit,g_north_west,h_840,w_835/co_000000,e_outline:40/co_000000,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1669781712/production/designs/37016186_0.jpg",
+        imgSrc: "https://cdn.kobo.com/book-images/b018f8bd-bbf7-4158-807a-7f9ebaa20caa/353/569/90/False/introduction-to-aerospace-engineering.jpg",
         link: "/aerospace-engineering"
     },
     {
@@ -48,12 +62,12 @@ const engineeringData = [
     },
     {
         title: "Computer Hardware Engineer",
-        imgSrc: "https://media.istockphoto.com/id/1144570796/photo/engineer-motherboard-computer-technology-repair.jpg?s=612x612&w=0&k=20&c=-WrxlNu8Njre8dVrSnMCNd6QvQusIKnvk7VY4dAr9jc=",
+        imgSrc: "https://leverageedu.com/discover/wp-content/uploads/2023/03/image.png",
         link: "/computer-hardware-engineering"
     },
     {
         title: "Structural Engineer",
-        imgSrc: "https://content.jdmagicbox.com/comp/bharuch/m5/9999p2642.2642.230205032839.j2m5/catalogue/shree-gurukrupa-construction-bharuch-construction-companies-wrab5yhnu7.jpg",
+        imgSrc: "https://lastructuralengineer.com/wp-content/uploads/2022/08/Areas-Photo-1.jpg",
         link: "/structural-engineer"
     }
 ];
@@ -61,6 +75,29 @@ const engineeringData = [
 const CareerCounselling = () => {
     const usn = localStorage.getItem('token');
     const [name, setName] = useState('');
+    const [showDialog, setShowDialog] = useState(false);
+    const [chosenEngineer, setChosenEngineer] = useState(0);
+
+    const engineerPaths = [
+        <SystemEngineer setShowDialog={setShowDialog}/>,
+        <ElectricalEngineer setShowDialog={setShowDialog}/>,
+        <ChemicalEngineer setShowDialog={setShowDialog}/>,
+        <BigDataEngineer setShowDialog={setShowDialog}/>,
+        <AerospaceEngineer setShowDialog={setShowDialog}/>,
+        <SoftwareDeveloper setShowDialog={setShowDialog}/>,
+        <UiUxDesigner setShowDialog={setShowDialog}/>,
+        <ComputerHardwareEngineer setShowDialog={setShowDialog}/>,
+        <StructuralEngineer setShowDialog={setShowDialog}/>,
+    ];
+
+    const handleCardClick = (indx) => {
+        setChosenEngineer(indx);
+        setShowDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setShowDialog(false);
+    };
 
     useEffect(() => {
         fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
@@ -82,10 +119,10 @@ const CareerCounselling = () => {
                         <NavBar name={name}/>
                     </div>
                     
-                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ring">
+                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ">
                         {engineeringData.map((val, indx) => (
                             <AnimatedGradientBorderTW key={indx}>
-                                <a href={val.link} className=' no-underline bg-[#7730fc58] rounded-lg '>
+                                <div className=' cursor-pointer bg-[#7730fc58] rounded-lg ' onClick={() => handleCardClick(indx)}>
                                     <div className="rounded-lg w-[20rem] h-fit overflow-hidden shadow-lg">
                                         <div className=' w-full min-h-[20rem] max-h-[20rem]'>
                                             <img 
@@ -101,10 +138,18 @@ const CareerCounselling = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </div>
                             </AnimatedGradientBorderTW>
                         ))}
                     </div>
+
+                    <Dialog
+                    fullScreen
+                    open={showDialog}
+                    onClose={handleCloseDialog}
+                    TransitionComponent={Transition}>
+                        {engineerPaths[chosenEngineer]}
+                    </Dialog>
                 </div>
             }
         />

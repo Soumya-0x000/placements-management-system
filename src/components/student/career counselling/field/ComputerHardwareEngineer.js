@@ -1,95 +1,203 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Nav, Form, Button ,Dropdown} from 'react-bootstrap'
+const workingStyle = [
+    {
+        title: 'Design computer hardware components:',
+        details: 'Computer Hardware Engineers design and develop computer hardware components such as processors, memory modules, and circuit boards.'
+    },
+    {
+        title: 'Test and debug hardware systems:',
+        details: 'They test and debug hardware systems to ensure they meet performance and reliability requirements.'
+    },
+    {
+        title: 'Collaborate with software engineers:',
+        details: 'Computer Hardware Engineers collaborate with software engineers to ensure hardware compatibility and optimize system performance.'
+    },
+    {
+        title: 'Stay updated with industry trends:',
+        details: 'They stay updated with the latest advancements in computer hardware technology and incorporate them into their designs.'
+    }
+];
 
-const ComputerHardwareEngineer = () => {
+const examples = [
+    "Intel Corporation",
+    "AMD (Advanced Micro Devices)",
+    "NVIDIA Corporation",
+    "Apple Inc.",
+    "Qualcomm Incorporated",
+    "Samsung Electronics",
+    "Texas Instruments",
+    "Broadcom Inc.",
+    "Micron Technology",
+    "Western Digital Corporation",
+    "Seagate Technology",
+    "ARM Holdings",
+    "Huawei Technologies",
+    "IBM Corporation"
+];
+
+const careerBenefits = [
+    {
+        title: "Innovation opportunities",
+        details: "Computer Hardware Engineers have the opportunity to innovate and create cutting-edge hardware solutions that drive technological advancements."
+    },
+    {
+        title: "Competitive salaries",
+        details: "Computer Hardware Engineers command competitive salaries due to their specialized skills in designing and developing computer hardware components."
+    },
+    {
+        title: "Diverse career paths",
+        details: "Computer Hardware Engineers can pursue diverse career paths, including hardware design, firmware development, and system architecture."
+    },
+    {
+        title: "Industry demand",
+        details: "There is a high demand for Computer Hardware Engineers as technology continues to evolve and the need for efficient and powerful computing systems grows."
+    },
+    {
+        title: "Global opportunities",
+        details: "Computer Hardware Engineers have opportunities to work for multinational companies and collaborate with teams from around the world."
+    },
+    {
+        title: "Continuous learning",
+        details: "The field of computer hardware is constantly evolving, offering opportunities for Computer Hardware Engineers to learn new technologies and techniques."
+    }
+];
+
+const industryCompanies = [
+    {
+        title: "Semiconductor industry",
+        details: "Companies like Intel Corporation, AMD, NVIDIA Corporation, and Qualcomm Incorporated are leaders in the semiconductor industry."
+    },
+    {
+        title: "Consumer electronics",
+        details: "Companies like Apple Inc., Samsung Electronics, and Huawei Technologies produce consumer electronics devices that rely on innovative hardware components."
+    },
+    {
+        title: "Data storage",
+        details: "Companies like Western Digital Corporation and Seagate Technology specialize in data storage solutions, including hard disk drives and solid-state drives."
+    },
+    {
+        title: "Networking and telecommunications",
+        details: "Companies like Broadcom Inc. and Huawei Technologies develop networking and telecommunications hardware for communication infrastructure."
+    }
+];
+
+const ComputerHardwareEngineer = ({ setShowDialog }) => {
     return (
-        <div>
-            <Navbar bg="dark" variant='dark' expand="lg">
-                <Container fluid>
-                    <img src="https://www.igauge.in/admin/uploaded/rating/logo/CambridgeInstituteLatestLogo2_1623754797.png" height="40" width="110" />
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-1 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="StudentHome">Home</Nav.Link>
-                            <Nav.Link href="StudentSchedule">Schedule</Nav.Link>
-                            <Nav.Link href="createResume">Resume</Nav.Link>
-                        </Nav>
+        <div className=' h-screen overflow-y-auto flex justify-center pt-[1rem]'>
+            <div className=" max-w-[60rem]">
+                <div className="mt-2 mb-4 font-bold text-transparent font-lato bg-gradient-to-br from-indigo-600 via-blue-500 to-violet-500 bg-clip-text text-3xl md:text-4xl md:mb-5 pl-0 px-3 md:px-0 md:pl-6">
+                    Computer Hardware Engineer
+                </div>
 
+                <div className=' px-3'>
+                    <div className=' font-robotoMono font-bold text-justify text-blue-950 text-[.9rem] md:text-[1rem]'>
+                        Computer Hardware Engineers play a critical role in designing and developing computer hardware components, ensuring compatibility, performance, and reliability.
+                    </div>
 
-                        <div className="col-md-6 mx-auto" >
-                            <Form className="d-flex ">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
+                    {/* what they do */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            What they do?
                         </div>
-                        <Dropdown className="me-auto my-1 my-lg-0">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-Login">
-                            <img className="me-auto my-1 my-lg-0" src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-22.jpg" height="30" width="30" />
+                    
+                        {workingStyle.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* companies */}
+                    <>
+                        <div className=' mt-5 mb-2 font-bold text-2xl font-jaldi'>
+                            Companies
+                        </div>
 
-                            </Dropdown.Toggle>
+                        <div className='flex items-center flex-wrap gap-2'>
+                            {examples.map((val, indx) => (
+                                <div className=' px-3 py-1 bg-gray-700 text-gray-200 text-[.8rem] md:text-[.9rem] font-robotoMono rounded-md shadow-lg ' key={indx}>
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                                
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    {/* why to become computer hardware engineer */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            Why become a Computer Hardware Engineer?
+                        </div>
+                    
+                        {careerBenefits.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}:
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* other industries */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Other industries:
+                        </div>
 
+                        <div className='mt-2 pl-6'>
+                            {industryCompanies.map((val, indx) => (
+                                <div className='mt-2 space-x-2' key={indx}>
+                                    <span className='w-fit font-lato font-bold text-[1rem]'>
+                                        {indx + 1}) {val.title}:
+                                    </span>
+                                    <span className='text-black font-robotoMono text-[.9rem]'>
+                                        {val.details}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
+                    {/* future scope */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Future Scope :
+                        </div>
 
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <div class="container text-center">
-                <br></br>
-                <br></br>
-                <h1 class="container text-center">Computer Hardware Engineer</h1>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] text-justify'>
+                            The future for computer hardware engineers looks promising, with advancements in technologies such as artificial intelligence, machine learning, and Internet of Things (IoT) driving demand for innovative hardware solutions. As the need for faster and more efficient computing systems grows, computer hardware engineers will play a vital role in designing and optimizing hardware components, including processors, memory modules, and networking devices. Additionally, with the rise of edge computing and autonomous systems, computer hardware engineers will have opportunities to contribute to the development of cutting-edge technologies that reshape industries and improve everyday life.
+                        </div>
+                    </>
 
-                <br></br>
-                <h5 class="container text-justify" align="justify">
-                    Computer hardware engineering is undoubtedly a brilliant career choice. With the rise of artificial intelligence systems,
-                    cellular devices and high-tech computers, tablets and laptops, the demand for these professionals is going to multiply over time.
-                    Computer hardware engineers create computer systems and their components, including processors, hard drives, networks and circuit boards. They work on every aspect of hardware creation, including research, design, development, testing and production.
-                    <br></br>
-                    <br></br>
-                    Hardware engineers often spend their days creating blueprints, testing prototypes, updating and improving old equipment and
-                    overseeing the creation of their designs. They typically work within an office setting and often as part of a team. In many cases, computer
-                    hardware engineers work closely with software engineers to ensure their equipment works with the latest software updates.
-                    <br></br>
-                    <br></br>
-                    Computer Hardware Engineers research, design, and build computer systems. They combine their expertise and knowledge in information technology, electronics, and engineering to design and test
-                    the various components of computer structures. They develop computer equipment like routers, processors, and circuit boards.
-                    <br></br>
-                    <br></br>
-                    A Computer Hardware Engineer is responsible for developing parts of a computer system. They may work independently or as part of a team of other technology professionals.
-                    They identify problems and come up with ways to solve them, as well as develop technology improvements.
-                    Some typical job duties include:
-                    <br></br>
-                    <br></br>
-                    <ul>
-                        <li>Designing new computer equipment and hardware</li>
-                        <li>Making models of new hardware and testing those models</li>
-                        <li>Analyzing test results</li>
-                        <li>Upgrading computer equipment to increase compatibility with new software</li>
-                        <li>Working with software engineers</li>
-                        <li>Overseeing the manufacturing process</li>
-                    </ul>
-                </h5>
-                <br></br>
-                <br></br>
-                <br></br>
+                    {/* example */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Example :
+                        </div>
+
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] pb-[4rem] text-justify'>
+                            Consider a computer hardware engineer working for a tech company that specializes in artificial intelligence (AI) applications. Their role might involve designing specialized hardware accelerators optimized for AI algorithms to enhance processing speed and energy efficiency. They would collaborate with software engineers and data scientists to develop custom hardware solutions tailored to the company's AI models, enabling faster inference times and improved performance for AI-powered applications.
+                        </div>
+                    </>
+                </div>
+
+                <div className='px-3 w-full'>
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mb-[3rem]" 
+                    onClick={() => setShowDialog(false)}>
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
-
     );
-}
+}; 
+
 
 export default ComputerHardwareEngineer;

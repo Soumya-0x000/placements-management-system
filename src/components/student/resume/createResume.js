@@ -63,7 +63,6 @@ const StudentResume = () => {
         setShowDialog(false);
     };
 
-
     return (
         <BgColorAnimation
             child={

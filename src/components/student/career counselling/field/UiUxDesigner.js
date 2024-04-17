@@ -1,99 +1,203 @@
-import React, { Component } from 'react';
-import { Navbar, Container, Nav, Form, Button,Dropdown } from 'react-bootstrap'
+const workingStyle = [
+    {
+        title: 'User research and analysis:',
+        details: 'UI/UX Designers conduct user research and analysis to understand user needs, preferences, and behaviors.'
+    },
+    {
+        title: 'Wireframing and prototyping:',
+        details: 'They create wireframes and prototypes to visualize and test the layout, navigation, and functionality of digital products.'
+    },
+    {
+        title: 'Visual design:',
+        details: 'UI/UX Designers design the visual elements of digital interfaces, including layouts, colors, typography, and icons.'
+    },
+    {
+        title: 'Usability testing and iteration:',
+        details: 'They conduct usability testing to gather feedback from users and iterate on designs to improve usability and user experience.'
+    }
+];
 
-const UiUxDesigner = () => {
+const examples = [
+    "Apple",
+    "Google",
+    "Microsoft",
+    "Amazon",
+    "Facebook",
+    "Netflix",
+    "Airbnb",
+    "Adobe",
+    "IBM",
+    "Salesforce",
+    "Twitter",
+    "Uber",
+    "LinkedIn",
+    "Pinterest"
+];
+
+const careerBenefits = [
+    {
+        title: "High demand",
+        details: "UI/UX Designers are in high demand as businesses focus on creating user-friendly digital experiences to stay competitive."
+    },
+    {
+        title: "Creative work",
+        details: "UI/UX Designers have the opportunity to work on creative projects and contribute to the overall look and feel of digital products."
+    },
+    {
+        title: "Problem-solving",
+        details: "They solve complex problems by balancing user needs, business goals, and technical constraints to create intuitive and engaging designs."
+    },
+    {
+        title: "Continuous learning",
+        details: "UI/UX Designers continuously learn new tools, techniques, and trends in design to stay updated and enhance their skills."
+    },
+    {
+        title: "Collaborative environment",
+        details: "They work in a collaborative environment with cross-functional teams, including product managers, developers, and marketers."
+    },
+    {
+        title: "Flexible work options",
+        details: "Many companies offer flexible work options, including remote work and flexible hours, for UI/UX Designers."
+    }
+];
+
+const industryCompanies = [
+    {
+        title: "Tech giants",
+        details: "Tech giants like Apple, Google, Microsoft, and Amazon prioritize user experience and invest in UI/UX design."
+    },
+    {
+        title: "Digital agencies",
+        details: "Digital agencies specialize in UI/UX design services for clients across various industries, from startups to Fortune 500 companies."
+    },
+    {
+        title: "E-commerce companies",
+        details: "E-commerce companies like Amazon, eBay, and Shopify rely on UI/UX Designers to create seamless shopping experiences."
+    },
+    {
+        title: "Media and entertainment",
+        details: "Media and entertainment companies like Netflix, Disney, and Spotify focus on UI/UX design to enhance user engagement and retention."
+    }
+];
+
+const UiUxDesigner = ({ setShowDialog }) => {
     return (
-        <div>
-            <Navbar bg="dark" variant='dark' expand="lg">
-                <Container fluid>
-                    <img src="https://www.igauge.in/admin/uploaded/rating/logo/CambridgeInstituteLatestLogo2_1623754797.png" height="40" width="110" />
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                        <Nav
-                            className="me-auto my-1 my-lg-0"
-                            style={{ maxHeight: '100px' }}
-                            navbarScroll
-                        >
-                            <Nav.Link href="StudentHome">Home</Nav.Link>
-                            <Nav.Link href="StudentSchedule">Schedule</Nav.Link>
-                            <Nav.Link href="createResume">Resume</Nav.Link>
-                        </Nav>
+        <div className=' h-screen overflow-y-auto flex justify-center pt-[1rem]'>
+            <div className=" max-w-[60rem]">
+                <div className="mt-2 mb-4 font-bold text-transparent font-lato bg-gradient-to-br from-indigo-600 via-blue-500 to-violet-500 bg-clip-text text-3xl md:text-4xl md:mb-5 pl-0 px-3 md:px-0 md:pl-6">
+                    UI/UX Designer
+                </div>
 
+                <div className=' px-3'>
+                    <div className=' font-robotoMono font-bold text-justify text-blue-950 text-[.9rem] md:text-[1rem]'>
+                        UI/UX Designers are responsible for creating intuitive and visually appealing digital experiences that meet user needs and business goals.
+                    </div>
 
-                        <div className="col-md-6 mx-auto" >
-                            <Form className="d-flex ">
-                                <Form.Control
-                                    type="search"
-                                    placeholder="Search"
-                                    className="me-2"
-                                    aria-label="Search"
-                                />
-                                <Button variant="outline-light">Search</Button>
-                            </Form>
+                    {/* what they do */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            What they do?
                         </div>
-                        <Dropdown className="me-auto my-1 my-lg-0">
-                            <Dropdown.Toggle variant="outline-secondary" id="dropdown-Login">
-                            <img className="me-auto my-1 my-lg-0" src="https://icon-library.com/images/my-profile-icon-png/my-profile-icon-png-22.jpg" height="30" width="30" />
+                    
+                        {workingStyle.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* companies */}
+                    <>
+                        <div className=' mt-5 mb-2 font-bold text-2xl font-jaldi'>
+                            Companies
+                        </div>
 
-                            </Dropdown.Toggle>
+                        <div className='flex items-center flex-wrap gap-2'>
+                            {examples.map((val, indx) => (
+                                <div className=' px-3 py-1 bg-gray-700 text-gray-200 text-[.8rem] md:text-[.9rem] font-robotoMono rounded-md shadow-lg ' key={indx}>
+                                    {val}
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                            <Dropdown.Menu>
-                                <Dropdown.Item href="/">Log Out</Dropdown.Item>
-                                
-                            </Dropdown.Menu>
-                        </Dropdown>
+                    {/* why to become UI/UX Designer */}
+                    <div className=' mt-5'>
+                        <div className=' font-bold text-2xl font-jaldi'>
+                            Why become a UI/UX Designer?
+                        </div>
+                    
+                        {careerBenefits.map((val, indx) => (
+                            <div className='mt-2 space-x-2' key={indx}>
+                                <span className='w-fit font-lato font-bold text-[1rem]'>
+                                    {indx + 1}) {val.title}:
+                                </span>
+                                <span className='text-black font-robotoMono text-[.9rem]'>
+                                    {val.details}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* other industries */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Other industries:
+                        </div>
 
+                        <div className='mt-2 pl-6'>
+                            {industryCompanies.map((val, indx) => (
+                                <div className='mt-2 space-x-2' key={indx}>
+                                    <span className='w-fit font-lato font-bold text-[1rem]'>
+                                        {indx + 1}) {val.title}:
+                                    </span>
+                                    <span className='text-black font-robotoMono text-[.9rem]'>
+                                        {val.details}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </>
 
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            <div class="container text-center">
-                <br></br>
-                <br></br>
-                <h1 class="container text-center">UI/UX Designer</h1>
+                    {/* future outlook */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Future outlook :
+                        </div>
 
-                <br></br>
-                <h5 class="container text-justify">
-                    If you truly love the work of user experience design, and enjoy each part of the design process from initial
-                    research to creating user flows and mockups, you may choose to align your career path entirely with the UX Designer job description.
-                    <br></br>
-                    <br></br>
-                    When you start looking for your first position as an aspiring UX designer, you might focus on landing a junior or mid-level position.
-                    However, depending on your background and experience, there are many more senior UX designer positions that place an emphasis on leadership and project management.
-                    <br></br>
-                    <br></br>
-                    UX/UI Designers are typically generalists who are involved in all aspects of the design process with a particular focus on usability.
-                    <br></br>
-                    <br></br>
-                    Granted, this depends in a large part on the particular company and team that you end up working for. In a large company, design roles tend to be more siloed, so you may have UX/UI Designers, Visual Designers, UX Researchers, and more. In a small company or startup, the UX/UI Designer may be the sole person responsible for all design decisions across those roles, and therefore be a true generalist.
-                    <br></br>
-                    <br></br>
-                    Associate to mid-level UX/UI Designers will generally be handling execution rather than strategy. Expect to be exposed to the entire design process, but not necessarily asked to shape strategy or present to clients or senior management on a regular basis.
-                    <br></br>
-                    <br></br>
-                    For those less keen on UX manager roles, it is also possible to work your way up to advanced UX roles, such as a lead designer role, as you expand your capabilities and take on more complex work.
-                    <br></br>
-                    <br></br>
-                    However, as UX designers gain experience and more responsibilities, they can also progress to managerial positions in UX including Director level positions.
-                    As well as great technical and strategic level knowledge in the field of UX design, you'd be expected to have plenty of UX experience and solid soft skills including in interpersonal communication, leadership, and management.
-                    <br></br>
-                    <br></br>
-                    Often confused with UX Designers, the role of UI Designer is frequently misunderstood. While there is a bit of overlap that
-                    exists between UX and UI design, a UI Designer tends to be responsible for the interface the point where a user meets with a product or website.
-                    This could be a touchscreen, keyword board, button or audio output, for example. Meanwhile a UX Designer will usually work on the product or website's overall look and feel.
-                    <br></br>
-                    <br></br>
-                    A UI Designer will often be tasked with creating an interface that is easy to use, for example in an app or on a website.
-                    Many who end up as UI designers find their calling through exposure to the discipline, either as part of study or while working in a related UX role.
-                    Often, UI and UX roles are combined, however UI specialist roles do exist and can be an excellent route for some.
-                </h5>
-                <br></br>
-                <br></br>
-                <br></br>
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] text-justify'>
+                            The future for Computer UI/UX Designers is promising, with advancements in technology driving demand for intuitive and user-friendly digital experiences. As artificial intelligence, virtual reality, and augmented reality continue to evolve, UI/UX Designers will need to adapt and innovate to create seamless interactions across various platforms and devices. Additionally, the growing importance of accessibility and inclusivity in design will shape the future landscape, requiring designers to prioritize usability and diversity in their work.
+                        </div>
+                    </>
+
+                    {/* example */}
+                    <>
+                        <div className='mt-5 font-bold text-2xl font-jaldi'>
+                            Example :
+                        </div>
+
+                        <div className='mt-2 font-robotoMono text-md tracking-tight leading-5 text-[.9rem] pb-[4rem] text-justify'>
+                            For example, consider a Computer UI/UX Designer working for a tech startup developing a new mobile application. Their role might involve conducting user research to understand the target audience, creating wireframes and prototypes to visualize the app's layout and functionality, and collaborating with developers to implement design solutions. They would iterate on designs based on user feedback, ensuring a seamless and engaging user experience that aligns with the company's brand and goals.
+                        </div>
+                    </>
+                </div>
+
+                <div className='px-3 w-full'>
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mb-[3rem]" 
+                    onClick={() => setShowDialog(false)}>
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
-
     );
-}
+}; 
+
 
 export default UiUxDesigner;
