@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -31,6 +31,19 @@ function ResumeForm() {
         position: '',
         mode: '',
     }]);
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
+            .then((response) => response.json())
+            .then((data) => {
+                let fullName = `${data?.firstName} ${data?.lastName}`
+                setName(fullName);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const handleProjectChange = (index, field, value) => {
         const updatedProjects = [...projects];
@@ -162,7 +175,7 @@ function ResumeForm() {
             child={
                 <div className='flex flex-col w-screen h-screen overflow-y-auto md:pb-10 md:items-center'>
                     <div className='sticky top-0 left-0 w-full '>
-                        <NavBar/>
+                        <NavBar name={name}/>
                     </div>
 
                     <div className="mt-2 mb-4 text-3xl font-bold text-center text-transparent font-montserrat bg-gradient-to-br from-indigo-600 via-blue-400 to-violet-400 bg-clip-text md:text-4xl md:mb-5">
@@ -440,7 +453,7 @@ const tabs = [
     {text: 'Resume', icon: <MdOutlineAccountCircle/>, path: '/createResume'},
 ];
 
-const NavBar = () => {
+const NavBar = ({ name }) => {
     const [selected, setSelected] = useState(tabs[2].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
@@ -509,7 +522,7 @@ const NavBar = () => {
                 </div>
 
                 {isSearchBarHanging && (
-                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white'
+                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white z-40'
                     initial={{x: -300, opacity: 0}}
                     animate={{x: 0, opacity: 1}}>
                         <form className="flex w-full h-full overflow-hidden rounded-full">
@@ -521,6 +534,7 @@ const NavBar = () => {
                                 onChange={handleInputText}
                                 value={typedText}
                             />
+                            
                             <button 
                             type='submit'
                             className='bg-slate-700 border-l border-slate-500 text-slate-200 pl-1 pr-2.5 lg:px-3 flex items-center justify-center'>
@@ -535,9 +549,9 @@ const NavBar = () => {
             <div className='flex items-center gap-x-8 sm:gap-x-5 lg:gap-x-5 xl:gap-x-10'>
                 <div className="flex justify-center cursor-pointer lg:text-lg">
                     <FlyoutLink FlyoutContent={userActions} array={loginOptions}>
-                        <div className='flex items-center gap-x-2'>
+                        <div className='flex items-center justify-center gap-x-2'>
                             <FaRegUser/>
-                            User
+                            {name.split(' ')[0]}
                         </div>
                     </FlyoutLink>
                 </div>

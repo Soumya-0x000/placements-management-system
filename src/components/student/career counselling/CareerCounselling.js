@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -8,96 +7,111 @@ import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import gamingPc from '../images/gamingPc.jpg';
-import './hiringCompany.css'
+import { useNavigate } from 'react-router-dom';
+import BgColorAnimation from '../../../animations/BgColorAnimation';
 
-const HiringCompanies = () => {
-    const [postingData, setPostingData] = useState()
-    const navigate = useNavigate();
-
-    const handleClick = (e,posting) => {
-        e.preventDefault()
-        navigate('/JobDescription', { state: { postingData: posting } });
+const engineeringData = [
+    {
+        title: "System Engineer",
+        imgSrc: "https://thumbs.dreamstime.com/z/computer-systems-engineer-concept-icon-programming-career-coding-abstract-idea-thin-line-illustration-isolated-outline-drawing-237714227.jpg",
+        link: "/system-engineering"
+    },
+    {
+        title: "Electrical Engineer",
+        imgSrc: "https://t4.ftcdn.net/jpg/02/85/82/89/360_F_285828947_7LvtUCUFARVTzcxvPDM2EkTuknA50buy.jpg",
+        link: "/electrical-engineering"
+    },
+    {
+        title: "Chemical Engineer",
+        imgSrc: "https://img.freepik.com/premium-vector/chemical-lab-research-chemistry-illustration-4_567637-125.jpg",
+        link: "/chemical-engineering"
+    },
+    {
+        title: "Big Data Engineer",
+        imgSrc: "https://datasciencedojo.com/wp-content/uploads/Big-Data-Engineering.jpg",
+        link: "/big-data-engineering"
+    },
+    {
+        title: "Aerospace Engineer",
+        imgSrc: "https://res.cloudinary.com/teepublic/image/private/s--4eZaaLIK--/c_fit,g_north_west,h_840,w_835/co_000000,e_outline:40/co_000000,e_outline:inner_fill:1/co_ffffff,e_outline:40/co_ffffff,e_outline:inner_fill:1/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_auto,h_630,q_90,w_630/v1669781712/production/designs/37016186_0.jpg",
+        link: "/aerospace-engineering"
+    },
+    {
+        title: "Software Developer",
+        imgSrc: "https://static.vecteezy.com/system/resources/thumbnails/000/180/386/small_2x/software_engineers.jpg",
+        link: "/software-engineering"
+    },
+    {
+        title: "UI/UX Designer",
+        imgSrc: "https://maduraimart.in/imgs/ui-ux-design-madurai.jpg",
+        link: "/ui-ux-engineering"
+    },
+    {
+        title: "Computer Hardware Engineer",
+        imgSrc: "https://media.istockphoto.com/id/1144570796/photo/engineer-motherboard-computer-technology-repair.jpg?s=612x612&w=0&k=20&c=-WrxlNu8Njre8dVrSnMCNd6QvQusIKnvk7VY4dAr9jc=",
+        link: "/computer-hardware-engineering"
+    },
+    {
+        title: "Structural Engineer",
+        imgSrc: "https://content.jdmagicbox.com/comp/bharuch/m5/9999p2642.2642.230205032839.j2m5/catalogue/shree-gurukrupa-construction-bharuch-construction-companies-wrab5yhnu7.jpg",
+        link: "/structural-engineer"
     }
+];
+
+const CareerCounselling = () => {
+    const usn = localStorage.getItem('token');
+    const [name, setName] = useState('');
 
     useEffect(() => {
-        console.log(localStorage.getItem('userid'))
-        fetch('http://localhost:1337/api/getposting')
-            .then((response) => {
-                const reader = response.body.getReader();
-                reader.read().then(({ done, value }) => {
-                    if (done) {
-                        console.log('end...')
-                        return;
-                    }
-                    const decoder = new TextDecoder();
-                    const strData = decoder.decode(value)
-                    const data = JSON.parse(strData)
-                    console.log(data)
-                    setPostingData(data)
-                });
+        fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
+            .then((response) => response.json())
+            .then((data) => {
+                let fullName = `${data?.firstName} ${data?.lastName}`
+                setName(fullName);
             })
-    }, [])
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
-        <div>
-            <NavBar/>
-            
-            <div className='flex flex-wrap items-center justify-center '>
-                {postingData?.map((posting, index) => (
-                    <div 
-                    className="lsm:min-w-[30rem] lsm:max-w-[30rem] bg-gradient-to-br from-blue-300 to-green-200 rounded overflow-hidden shadow-lg m-4"
-                    key={index} >
-                        <div className='flex flex-col lsm:flex-row'>
-                            <div className='lsm:max-w-[15rem] lsm:min-w-[15rem] min-h-[16rem] max-h-[16rem] lsm:min-h-[10rem] lsm:max-h-[10rem] mx-2 lsm:ml-2 mt-2 rounded-lg overflow-hidden flex items-center justify-center'>
-                                <img 
-                                    className="w-full h-full" 
-                                    src={gamingPc}
-                                    alt="Job Image" 
-                                />
-                            </div>
-
-                            <div className="px-2 pt-2 ">
-                                <div className="mb-1 text-xl font-extrabold text-blue-800 font-k2d">
-                                    {posting.jobRole}
-                                </div>
-
-                                <div className="mb-3 font-bold text-green-900 font-k2d">
-                                    {posting.Name}
-                                </div>
-
-                                <a href="mailto:besanttech@gmail.com" className='mt-2 '>
-                                    <button className='font-bold text-black font-robotoMono'>
-                                        {posting.companyEmail}
-                                    </button>
-                                </a>
-
-                                <div className='mt-1.5 flex items-center gap-x-3'>
-                                    <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Qualification}</span>
-                                    <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Specialization}</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='pl-3 mt-2 font-bold font-robotoMono text-md text-slate-800'>
-                            {postingData[0]?.JobDescription}
-                        </div>
-
-                        <div className="w-full px-2 mt-3 mb-2">
-                            <button 
-                            className=" w-full lsm:w-fit px-3 text-md font-bold bg-slate-800 text-blue-300 hover:text-indigo-300 font-robotoMono py-[.2rem] rounded-md"
-                            onClick={(e) => handleClick(e, posting)} >
-                                Know More
-                            </button>
-                        </div>
+        <BgColorAnimation
+            child={
+                <div className='h-screen overflow-y-auto'>
+                    <div className='absolute top-0 w-full'>
+                        <NavBar name={name}/>
                     </div>
-                ))}
-            </div>
-        </div>
+                    
+                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ring">
+                        {engineeringData.map((val, indx) => (
+                            <AnimatedGradientBorderTW key={indx}>
+                                <a href={val.link} className=' no-underline bg-[#7730fc58] rounded-lg '>
+                                    <div className="rounded-lg w-[20rem] h-fit overflow-hidden shadow-lg">
+                                        <div className=' w-full min-h-[20rem] max-h-[20rem]'>
+                                            <img 
+                                                src={val.imgSrc} 
+                                                className="w-full h-full min-h-[20rem] max-h-[20rem]" 
+                                                alt={val.title} 
+                                            />
+                                        </div>
+
+                                        <div className="w-full flex items-center justify-center">
+                                            <div className="text-xl font-bold font-montserrat text-violet-400 w-full min-h-[6rem] max-h-[6rem] flex items-center justify-center">
+                                                {val.title}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </AnimatedGradientBorderTW>
+                        ))}
+                    </div>
+                </div>
+            }
+        />
     );
 }
 
-export default HiringCompanies;
+export default CareerCounselling;
 
 
 
@@ -107,13 +121,12 @@ const tabs = [
     {text: 'Resume', icon: <MdOutlineAccountCircle/>, path: '/createResume'},
 ];
 
-const NavBar = () => {
+const NavBar = ({ name }) => {
     const [selected, setSelected] = useState(tabs[0].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSearchBarHanging, setIsSearchBarHanging] = useState(false);
-    const navigate = useNavigate();
 
     const loginOptions = [
         { href: '/', text: 'LogOut', icon: <CiLogout/> },
@@ -177,7 +190,7 @@ const NavBar = () => {
                 </div>
 
                 {isSearchBarHanging && (
-                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white'
+                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white z-40'
                     initial={{x: -300, opacity: 0}}
                     animate={{x: 0, opacity: 1}}>
                         <form className="flex w-full h-full overflow-hidden rounded-full">
@@ -189,6 +202,7 @@ const NavBar = () => {
                                 onChange={handleInputText}
                                 value={typedText}
                             />
+                            
                             <button 
                             type='submit'
                             className='bg-slate-700 border-l border-slate-500 text-slate-200 pl-1 pr-2.5 lg:px-3 flex items-center justify-center'>
@@ -203,9 +217,9 @@ const NavBar = () => {
             <div className='flex items-center gap-x-8 sm:gap-x-5 lg:gap-x-5 xl:gap-x-10'>
                 <div className="flex justify-center cursor-pointer lg:text-lg">
                     <FlyoutLink FlyoutContent={userActions} array={loginOptions}>
-                        <div className='flex items-center gap-x-2'>
+                        <div className='flex items-center justify-center gap-x-2'>
                             <FaRegUser/>
-                            User
+                            {name.split(' ')[0]}
                         </div>
                     </FlyoutLink>
                 </div>
@@ -376,6 +390,39 @@ const userActions = ({selectedArray}) => {
                     </span>
                 </a>
             ))}
+        </div>
+    );
+};
+
+
+
+const AnimatedGradientBorderTW = ({ children }) => {
+    const boxRef = useRef(null);
+  
+    useEffect(() => {
+        const boxElement = boxRef.current;
+    
+        if (!boxElement) return;
+    
+        const updateAnimation = () => {
+            const angle = (parseFloat(boxElement.style.getPropertyValue("--angle")) + 0.5) % 360;
+            boxElement.style.setProperty("--angle", `${angle}deg`);
+            requestAnimationFrame(updateAnimation);
+        };
+    
+        requestAnimationFrame(updateAnimation);
+    }, []);
+  
+    return (
+        <div
+        style={{
+            "--angle": "0deg",
+            "--border-color": "linear-gradient(var(--angle), #070707, #687aff)",
+            "--bg-color": "linear-gradient(#131219, #131219)",
+        }}
+        className="flex items-center justify-center rounded-lg border-2 border-[#0000] p-3 [background:padding-box_var(--bg-color),border-box_var(--border-color)]"
+        ref={boxRef}>
+            {children}
         </div>
     );
 };

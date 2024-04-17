@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -8,42 +8,14 @@ import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import { DataGrid } from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
+import gamingPc from '../../../images/gamingPc.jpg';
+import './hiringCompany.css'
 
-const columns = [
-    { field: 'companyEmail', headerName: 'Company Email', minWidth: 300 },
-    { field: 'date', headerName: 'Date', minWidth: 200 },
-    { field: 'time', headerName: 'Time', minWidth: 100 },
-    {
-        field: 'action',
-        headerName: 'Action',
-		minWidth: 130,
-        renderCell: (params) => (
-            <a href={params.row.meetingLink} target="_blank" rel="noopener noreferrer">
-                <button className="px-4 py-1 text-lg font-bold text-indigo-300 bg-indigo-900 rounded-lg font-robotoMono">
-                    Join
-                </button>
-            </a>
-        ),
-    },
-];
-
-const App = () => {
-    const [interviews, setInterviews] = useState([]);
+const HiringCompanies = () => {
+    const [postingData, setPostingData] = useState()
+    const navigate = useNavigate();
     const usn = localStorage.getItem('token');
     const [name, setName] = useState('');
-    
-    useEffect(() => {
-        fetch(`http://localhost:1337/api/sechdule/${usn}`)
-        .then(response => response.json())
-        .then(data => {			
-            setInterviews(data);
-        })
-        .catch(error => {
-            console.error('Error fetching interview data:', error);
-        });
-    }, []);
 
     useEffect(() => {
         fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
@@ -57,34 +29,89 @@ const App = () => {
             });
     }, []);
 
+    const handleClick = (e,posting) => {
+        e.preventDefault()
+        navigate('/JobDescription', { state: { postingData: posting } });
+    }
+
+    useEffect(() => {
+        console.log(localStorage.getItem('userid'))
+        fetch('http://localhost:1337/api/getposting')
+            .then((response) => {
+                const reader = response.body.getReader();
+                reader.read().then(({ done, value }) => {
+                    if (done) {
+                        console.log('end...')
+                        return;
+                    }
+                    const decoder = new TextDecoder();
+                    const strData = decoder.decode(value)
+                    const data = JSON.parse(strData)
+                    console.log(data)
+                    setPostingData(data)
+                });
+            })
+    }, [])
+
     return (
         <div>
             <NavBar name={name}/>
-        
-            <div className="flex flex-col items-center justify-center py-10">
-                <div className="mb-5 text-4xl font-bold text-center text-transparent font-montserrat bg-gradient-to-br from-indigo-600 via-blue-400 to-violet-400 bg-clip-text">
-                    Interview Schedule
-                </div>
-                
-				<DataGrid
-					rows={interviews}
-					columns={columns}
-					getRowId={(row) => row._id}
-					initialState={{
-						pagination: {
-							paginationModel: { page: 0, pageSize: 5 },
-						},
-					}}
-					checkboxSelection
-					pageSizeOptions={[5, 10]}
-				/>
+            
+            <div className='flex flex-wrap items-center justify-center '>
+                {postingData?.map((posting, index) => (
+                    <div 
+                    className="lsm:min-w-[30rem] lsm:max-w-[30rem] bg-gradient-to-br from-blue-300 to-green-200 rounded overflow-hidden shadow-lg m-4"
+                    key={index} >
+                        <div className='flex flex-col lsm:flex-row'>
+                            <div className='lsm:max-w-[15rem] lsm:min-w-[15rem] min-h-[16rem] max-h-[16rem] lsm:min-h-[10rem] lsm:max-h-[10rem] mx-2 lsm:ml-2 mt-2 rounded-lg overflow-hidden flex items-center justify-center'>
+                                <img 
+                                    className="w-full h-full" 
+                                    src={gamingPc}
+                                    alt="Job Image" 
+                                />
+                            </div>
+
+                            <div className="px-2 pt-2 ">
+                                <div className="mb-1 text-xl font-extrabold text-blue-800 font-k2d">
+                                    {posting.jobRole}
+                                </div>
+
+                                <div className="mb-3 font-bold text-green-900 font-k2d">
+                                    {posting.Name}
+                                </div>
+
+                                <a href="mailto:besanttech@gmail.com" className='mt-2 '>
+                                    <button className='font-bold text-black font-robotoMono'>
+                                        {posting.companyEmail}
+                                    </button>
+                                </a>
+
+                                <div className='mt-1.5 flex items-center gap-x-3'>
+                                    <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Qualification}</span>
+                                    <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Specialization}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='pl-3 mt-2 font-bold font-robotoMono text-md text-slate-800'>
+                            {postingData[0]?.JobDescription}
+                        </div>
+
+                        <div className="w-full px-2 mt-3 mb-2">
+                            <button 
+                            className=" w-full lsm:w-fit px-3 text-md font-bold bg-slate-800 text-blue-300 hover:text-indigo-300 font-robotoMono py-[.2rem] rounded-md"
+                            onClick={(e) => handleClick(e, posting)} >
+                                Know More
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );
-};
+}
 
-export default App;
-
+export default HiringCompanies;
 
 
 

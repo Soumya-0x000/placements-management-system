@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -181,10 +181,24 @@ const EngineeringSkillsTable = () => {
                 ],
         },
     ];
+    const usn = localStorage.getItem('token');
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
+            .then((response) => response.json())
+            .then((data) => {
+                let fullName = `${data?.firstName} ${data?.lastName}`
+                setName(fullName);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <div className='w-screen h-screen '>
-            <NavBar/>
+            <NavBar name={name}/>
 
 			<div className='flex justify-center w-full '>
 				<TableContainer 
@@ -242,13 +256,12 @@ const tabs = [
     {text: 'Resume', icon: <MdOutlineAccountCircle/>, path: '/createResume'},
 ];
 
-const NavBar = () => {
+const NavBar = ({ name }) => {
     const [selected, setSelected] = useState(tabs[0].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSearchBarHanging, setIsSearchBarHanging] = useState(false);
-    const navigate = useNavigate();
 
     const loginOptions = [
         { href: '/', text: 'LogOut', icon: <CiLogout/> },
@@ -312,7 +325,7 @@ const NavBar = () => {
                 </div>
 
                 {isSearchBarHanging && (
-                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white'
+                    <motion.div className='w-[80%] h-[2.6rem] fixed bottom-3 left-3 text-white z-40'
                     initial={{x: -300, opacity: 0}}
                     animate={{x: 0, opacity: 1}}>
                         <form className="flex w-full h-full overflow-hidden rounded-full">
@@ -324,6 +337,7 @@ const NavBar = () => {
                                 onChange={handleInputText}
                                 value={typedText}
                             />
+                            
                             <button 
                             type='submit'
                             className='bg-slate-700 border-l border-slate-500 text-slate-200 pl-1 pr-2.5 lg:px-3 flex items-center justify-center'>
@@ -338,9 +352,9 @@ const NavBar = () => {
             <div className='flex items-center gap-x-8 sm:gap-x-5 lg:gap-x-5 xl:gap-x-10'>
                 <div className="flex justify-center cursor-pointer lg:text-lg">
                     <FlyoutLink FlyoutContent={userActions} array={loginOptions}>
-                        <div className='flex items-center gap-x-2'>
+                        <div className='flex items-center justify-center gap-x-2'>
                             <FaRegUser/>
-                            User
+                            {name.split(' ')[0]}
                         </div>
                     </FlyoutLink>
                 </div>

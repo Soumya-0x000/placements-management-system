@@ -26,10 +26,10 @@ import StudentScheduled from './components/student/StudentScheduled'
 import StudentHome from './components/student/StudentHome'
 import StudentAnalyticsandRepo from './components/student/StudentAnalyticsandRepo';
 import StudentsAcademics from './components/student/StudentsAcademics';
-import StudentCoverLetter from './components/student/StudentCoverLetter';
 import StudentResume from './components/PdfViewer';
 import ResumeDetail from './components/student/resume/ResumeDetail'
-import CoverLetter from './components/student/CoverLetter';
+import StudentCoverLetter from './components/student/coverLetter/StudentCoverLetter';
+import CoverLetter from './components/student/coverLetter/CoverLetter';
 
 import AdminPlacedStudent from './components/admin/AdminPlacedStudent'
 import AdminStudentView from './components/admin/AdminStudentView'
@@ -43,20 +43,22 @@ import AdminJobPosting from './components/admin/AdminJobPosting';
 import AdminJobDetails from './components/admin/AdminJobDetails';
 
 import ChatPage from './components/chat';
-import HiringCompanies from './components/HiringCompanies';
+import HiringCompanies from './components/student/companies/HiringCompanies';
 import AllJobPosted from './components/AllJobPosted';
 import InterviewForm from './components/InterviewForm';
 // import UploadResume from './components/uploadResume';
-import CareerCounselling from './components/CareerCounselling'
-import SystemEngineering from './components/SystemEngineer'
-import ElecticalEngineering from './components/ElectricalEngineer'
-import ChemicalEngineering from './components/ChemicalEngineer'
-import BigDataEngineering from './components/BigDataEngineer'
-import AerospaceEngineering from './components/AerospaceEngineer'
-import SoftwareDeveloper from './components/SoftwareDeveloper'
-import Uiux from './components/UiUxDesigner'
-import CHEngineer from './components/ComputerHardwareEngineer'
-import StructuralEngineer from './components/StructuralEngineer'
+
+import CareerCounselling from './components/student/career counselling/CareerCounselling'
+import SystemEngineering from './components/student/career counselling/field/SystemEngineer'
+import ElecticalEngineering from './components/student/career counselling/field/ElectricalEngineer'
+import ChemicalEngineering from './components/student/career counselling/field/ChemicalEngineer'
+import BigDataEngineering from './components/student/career counselling/field/BigDataEngineer'
+import AerospaceEngineering from './components/student/career counselling/field/AerospaceEngineer'
+import SoftwareDeveloper from './components/student/career counselling/field/SoftwareDeveloper'
+import Uiux from './components/student/career counselling/field/UiUxDesigner'
+import CHEngineer from './components/student/career counselling/field/ComputerHardwareEngineer'
+import StructuralEngineer from './components/student/career counselling/field/StructuralEngineer'
+
 import Resume from './components/student/resume/Resume'
 import FeedbackTable from './components/Feedback';
 import AboutUs from './components/home/about/AboutUs';

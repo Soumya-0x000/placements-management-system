@@ -66,7 +66,7 @@ const CoverLetter = () => {
                         </div>
                     </div>
 
-                    <div className='mt-14 text-[.85rem] space-y-1 font-bold font-robotoMono'>
+                    <div className='mt-14 text-[.85rem] space-y-2 font-bold font-robotoMono'>
                         <div className=' capitalize'>
                             {data.toName}
                         </div>
