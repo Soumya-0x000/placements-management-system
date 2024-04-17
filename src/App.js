@@ -28,6 +28,8 @@ import StudentAnalyticsandRepo from './components/student/StudentAnalyticsandRep
 import StudentsAcademics from './components/student/StudentsAcademics';
 import StudentCoverLetter from './components/student/StudentCoverLetter';
 import StudentResume from './components/PdfViewer';
+import ResumeDetail from './components/student/resume/ResumeDetail'
+import CoverLetter from './components/student/CoverLetter';
 
 import AdminPlacedStudent from './components/admin/AdminPlacedStudent'
 import AdminStudentView from './components/admin/AdminStudentView'
@@ -56,8 +58,6 @@ import Uiux from './components/UiUxDesigner'
 import CHEngineer from './components/ComputerHardwareEngineer'
 import StructuralEngineer from './components/StructuralEngineer'
 import Resume from './components/student/resume/Resume'
-import ResumeDetail from './components/student/resume/ResumeDetail'
-import CoverLetter from './components/CoverLetter';
 import FeedbackTable from './components/Feedback';
 import AboutUs from './components/home/about/AboutUs';
 import Courses from './components/home/course/Courses';

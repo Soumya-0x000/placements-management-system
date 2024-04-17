@@ -323,7 +323,6 @@ const StudentRegister = () => {
                             </Row>
                         </div>
 
-
                         {/* educational details 1 */}
                         <div className='w-full mb-4'>
                             <p className='font-k2d text-yellow-200 text-[1.5rem]'>
@@ -398,7 +397,6 @@ const StudentRegister = () => {
                             </Row>
                         </div>
 
-
                         {/* educational details 2 */}
                         <div className='w-full mb-4'>
                             <p className='font-k2d text-yellow-200 text-[1.5rem]'>
@@ -472,7 +470,6 @@ const StudentRegister = () => {
                                 </Form.Group>
                             </Row>
                         </div>
-
 
                         {/* college qualification */}
                         <div className='space-y-3 '>
@@ -586,7 +583,6 @@ const StudentRegister = () => {
                             </Row>
                         </div>
 
-
                         {/* checkbox input field */}
                         <Form.Group className="flex mt-2">
                             <div className="flex items-center h-5">
@@ -608,7 +604,6 @@ const StudentRegister = () => {
                             </label>
                         </Form.Group>
 
-
                         {/* submit button */}
                         <div className="flex flex-col items-center justify-between mt-8 sm:flex-row gap-y-4">
                             <button 
@@ -623,7 +618,6 @@ const StudentRegister = () => {
                                 Cancel
                             </button>
                         </div> 
-
 
                         {/* Login */}
                         <div className='flex items-center mt-2 gap-x-2 '>
