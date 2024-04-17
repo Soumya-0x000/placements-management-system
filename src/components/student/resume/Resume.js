@@ -112,7 +112,7 @@ const Resume = () => {
     
     return (
         <div className='flex justify-center h-screen overflow-y-auto py-10 px-4'>
-            <div className="min-w-[30rem] max-w-[40rem]">
+            <div className="min-w-[40rem] max-w-[40rem]">
                 {/* resume */}
                 <>
                     {/* personal details */}

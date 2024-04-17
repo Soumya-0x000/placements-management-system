@@ -40,189 +40,185 @@ const StudentCoverLetter = () => {
         }));
     };
 
-    // return (
-    //     <div>
-    //     <Form onSubmit={handleSubmit}>
-    //     <br />
-    //     <h1 className="container text-center">Cover Letter</h1>
-    //     <br />
-
-    //     <div className="container">
-    //         <Row className="mb-3">
-    //         <Form.Group as={Col} md="4" controlId="formGridName" className="position-relative">
-    //             <Form.Label>Name</Form.Label>
-    //             <Form.Control type="text" name="name" placeholder="Name" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} md="4" controlId="formGridBranch">
-    //             <Form.Label>Branch</Form.Label>
-    //             <Form.Control type="text" name="branch" placeholder="Branch" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} controlId="formGridPhno">
-    //             <Form.Label>Phone Number</Form.Label>
-    //             <Form.Control type="text" name="phno" placeholder="Phno" required onChange={handleChange} />
-    //         </Form.Group>
-    //         </Row>
-    //         <br />
-
-    //         <Row className="mb-3">
-    //         <Form.Group as={Col} controlId="formGridLinkedIn">
-    //             <Form.Label>LinkedIn</Form.Label>
-    //             <Form.Control type="text" name="linkedIn" placeholder="LinkedIn" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} controlId="formGridEmail">
-    //             <Form.Label>Email</Form.Label>
-    //             <Form.Control type="email" name="email" placeholder="Enter email" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} controlId="formGridAddress">
-    //             <Form.Label>Address</Form.Label>
-    //             <Form.Control type="text" name="address" placeholder="Address" required onChange={handleChange} />
-    //         </Form.Group>
-    //         </Row>
-    //         <br />
-
-    //         <Row className="mb-3">
-    //         <Form.Group as={Col} controlId="formGridToName">
-    //             <Form.Label>Letter is To</Form.Label>
-    //             <Form.Control type="text" name="toName" placeholder="Name" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} controlId="formGridDesignation">
-    //             <Form.Label>Designation</Form.Label>
-    //             <Form.Control type="text" name="designation" placeholder="Designation" required onChange={handleChange} />
-    //         </Form.Group>
-
-    //         <Form.Group as={Col} controlId="formGridCompanyName">
-    //             <Form.Label>Company Name</Form.Label>
-    //             <Form.Control type="text" name="companyName" placeholder="Company Name" required onChange={handleChange} />
-    //         </Form.Group>
-    //         </Row>
-
-    //         <br />
-
-    //         <Row className="mb-3">
-    //         <Form.Group as={Col} controlId="formGridCompanyAddress">
-    //             <Form.Label>Company Address</Form.Label>
-    //             <Form.Control type="text" name="companyAddress" placeholder="Company Address" required onChange={handleChange} />
-    //         </Form.Group>
-    //         </Row>
-
-    //         <br />
-
-    //         <Row className="mb-3">
-    //         <Form.Group controlId="exampleForm.ControlTextarea1">
-    //             <Form.Label>Letter Content</Form.Label>
-    //             <Form.Control as="textarea" name="letterContent" required rows={10} onChange={handleChange} />
-    //         </Form.Group>
-    //         </Row>
-
-    //         <br />
-
-    //         <br />
-    //         <Button variant="dark" type="submit">
-    //         Submit
-    //         </Button>{' '}
-    //         <Button variant="dark" type="reset">
-    //         Cancel
-    //         </Button>
-    //         <br />
-    //         <br />
-    //         <br />
-    //     </div>
-    //     </Form>
-    //     </div>
-    // );
+    const handleReset = () => {
+        setFormData({
+            name: '',
+            branch: '',
+            phno: '',
+            linkedIn: '',
+            email: '',
+            address: '',
+            toName: '',
+            designation: '',
+            companyName: '',
+            companyAddress: '',
+            letterContent: '',
+        })
+    };
 
     return (
         <BgColorAnimation
             child={
-                <div className='h-screen overflow-y-auto '>
-                    <div className='sticky top-0 w-full '>
+                <div className='flex flex-col w-screen h-screen overflow-y-auto md:pb-10 md:items-center'>
+                    <div className='sticky top-0 left-0 w-full '>
                         <NavBar/>
                     </div>
 
-                    <Form onSubmit={handleSubmit} className='flex items-center justify-center h-screen px-2 overflow-auto '>
-                        <div className={`container bg-[#b7b7b748] shadow-md rounded h-[96vh] overflow-y-auto py-3`}>
-                            <p className=" text-[1.7rem] md:text-4xl font-mooli tracking-wider text-violet-300 font-bold mb-6 text-center">Cover Letter</p>
-                        </div>
+                    <div className="mt-2 mb-4 text-3xl font-bold text-center text-transparent font-montserrat bg-gradient-to-br from-indigo-600 via-blue-400 to-violet-400 bg-clip-text md:text-4xl md:mb-5">
+                        Create Cover Letter
+                    </div>
 
-                        <div>
-         <div className="container">
-             <Row className="mb-3">
-             <Form.Group as={Col} md="4" controlId="formGridName" className="position-relative">
-                 <Form.Label>Name</Form.Label>
-                 <Form.Control type="text" name="name" placeholder="Name" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} md="4" controlId="formGridBranch">
-                 <Form.Label>Branch</Form.Label>
-                 <Form.Control type="text" name="branch" placeholder="Branch" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} controlId="formGridPhno">
-                 <Form.Label>Phone Number</Form.Label>
-                 <Form.Control type="text" name="phno" placeholder="Phno" required onChange={handleChange} />
-             </Form.Group>
-             </Row>
-             <br />
-             <Row className="mb-3">
-             <Form.Group as={Col} controlId="formGridLinkedIn">
-                 <Form.Label>LinkedIn</Form.Label>
-                 <Form.Control type="text" name="linkedIn" placeholder="LinkedIn" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} controlId="formGridEmail">
-                 <Form.Label>Email</Form.Label>
-                 <Form.Control type="email" name="email" placeholder="Enter email" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} controlId="formGridAddress">
-                 <Form.Label>Address</Form.Label>
-                 <Form.Control type="text" name="address" placeholder="Address" required onChange={handleChange} />
-             </Form.Group>
-             </Row>
-             <br />
-             <Row className="mb-3">
-             <Form.Group as={Col} controlId="formGridToName">
-                 <Form.Label>Letter is To</Form.Label>
-                 <Form.Control type="text" name="toName" placeholder="Name" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} controlId="formGridDesignation">
-                 <Form.Label>Designation</Form.Label>
-                 <Form.Control type="text" name="designation" placeholder="Designation" required onChange={handleChange} />
-             </Form.Group>
-             <Form.Group as={Col} controlId="formGridCompanyName">
-                 <Form.Label>Company Name</Form.Label>
-                 <Form.Control type="text" name="companyName" placeholder="Company Name" required onChange={handleChange} />
-             </Form.Group>
-             </Row>
-             <br />
-             <Row className="mb-3">
-             <Form.Group as={Col} controlId="formGridCompanyAddress">
-                 <Form.Label>Company Address</Form.Label>
-                 <Form.Control type="text" name="companyAddress" placeholder="Company Address" required onChange={handleChange} />
-             </Form.Group>
-             </Row>
-             <br />
-             <Row className="mb-3">
-             <Form.Group controlId="exampleForm.ControlTextarea1">
-                 <Form.Label>Letter Content</Form.Label>
-                 <Form.Control as="textarea" name="letterContent" required rows={10} onChange={handleChange} />
-             </Form.Group>
-             </Row>
-             <br />
-             <br />
-             <Button variant="dark" type="submit">
-             Submit
-             </Button>{' '}
-             <Button variant="dark" type="reset">
-             Cancel
-             </Button>
-             <br />
-             <br />
-             <br />
-         </div>
-                        </div>
-                    </Form> 
+                    <div className={`bg-[#ffffff30] shadow-md rounded h-[79vh] md:h-auto overflow-y-auto px-2 md:px-4 pb-3 md:w-[85%] lg:w-[90%] 2xl:w-[80%]`}>
+                        <Form onSubmit={handleSubmit}>
+                            <Row className="mb-3 ">
+                                <Form.Group as={Col} xs={12} md={6} lg={4} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-ful font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.name ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Name"
+                                        onChange={handleChange}
+                                        autoFocus
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} md={6} lg={4} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="branch"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.branch ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Branch"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} lg={4} className='mt-3'>
+                                    <input
+                                        type="number"
+                                        name="phno"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.phno ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Contact number"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Row>
+                        
+                            <Row className="mb-3">
+                                <Form.Group as={Col} xs={12} md={6} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="linkedIn"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.linkedIn ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="LinkedIn"
+                                        onChange={handleChange}
+                                        
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} md={6} className='mt-3'>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.email ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Enter email"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} className='mt-3'>
+                                    <textarea
+                                        name="address"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.address ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        rows={4}
+                                        placeholder="Address"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Row>
+
+                            <Row className="mb-3">
+                                <Form.Group as={Col} xs={12} md={4} lg={4} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="toName"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.toName ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Letter is To"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} md={4} lg={4} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="designation"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.designation ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Designation"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+
+                                <Form.Group as={Col} xs={12} md={4} lg={4} className='mt-3'>
+                                    <input
+                                        type="text"
+                                        name="companyName"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.companyName ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        placeholder="Company Name"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Row>
+
+                            <Row className="mb-3">
+                                <Form.Group as={Col} xs={12}>
+                                    <textarea
+                                        name="companyAddress"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.companyAddress ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        rows={5}
+                                        placeholder="Company Address"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Row>
+
+                            <Row className="mb-3">
+                                <Form.Group as={Col} xs={12}>
+                                    <textarea
+                                        name="letterContent"
+                                        required
+                                        className={`border-y-2 pt-2.5 pb-2 px-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${formData.letterContent ? 'border-indigo-400' : ''} focus:border-indigo-400 w-full`}
+                                        rows={5}
+                                        placeholder="Letter Content"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Row>
+                            
+                            {/* submit button */}
+                            <div className="flex flex-col items-center justify-between mt-8 sm:flex-row gap-y-4">
+                                <button 
+                                className=" text-md font-bold bg-slate-800 text-blue-400 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full sm:w-[7rem] h-9 rounded-full active:ring-green-300 active:text-green-300 transition-all" 
+                                type="submit">
+                                    Send
+                                </button>
+                                
+                                <button 
+                                className=" text-md font-bold bg-slate-800 text-blue-400 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full sm:w-[7rem] h-9 rounded-full active:ring-green-300 active:text-green-300 transition-all" 
+                                onClick={handleReset}>
+                                    Reset
+                                </button>
+                            </div>
+                        </Form> 
+                    </div>
                 </div>
             }
         />
