@@ -43,8 +43,13 @@ const StudentProfileEdit = () => {
         keySkills: '',
         careerPreferences: '',
     });
-    const orgVal = Object.entries(formData).map(([key, value]) => ({ key, value }));
     const [showPswd, setShowPswd] = useState(false);
+    const [mainVal, setMainVal] = useState({});
+    
+    useEffect(() => {
+        const orgVal = Object.entries(formData).map(([key, value]) => ({ key, value }));
+        setMainVal(orgVal);
+    }, []);
 
     const handlePasswordVisibility = () => {
         setShowPswd(!showPswd);
@@ -99,14 +104,15 @@ const StudentProfileEdit = () => {
         }
     };
 
-    const handleReset = () => {        
-        const previousData = orgVal.reduce((acc, { key, value }) => {
+    const handleReset = (e) => {
+        const previousData = mainVal.reduce((acc, { key, value }) => {
             acc[key] = value;
             return acc;
         }, {});
-    
+        
         setFormData(previousData);
         setShowPswd(false);
+        e.preventDefault();
     };    
 
     return (
@@ -493,7 +499,7 @@ const StudentProfileEdit = () => {
                                         />
                                     </Form.Group>
 
-                                    <Form.Group as={Col} controlId="formGridSpecialization">
+                                    <Form.Group as={Col} xs={12} lg={6} controlId="formGridSpecialization">
                                         <input
                                             type="text"
                                             name="specialization"
@@ -504,7 +510,7 @@ const StudentProfileEdit = () => {
                                         />
                                     </Form.Group>
 
-                                    <Form.Group as={Col} md={2} lg={3} controlId="formGridScore3">
+                                    <Form.Group as={Col} xs={12} lg={6} controlId="formGridScore3">
                                         <input
                                             type="number"
                                             name="score3"

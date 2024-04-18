@@ -619,6 +619,7 @@ const StudentRegister = () => {
                         {/* Login */}
                         <div className='flex items-center mt-2 gap-x-2 '>
                             <span className='font-mooli text-cyan-200'>Already have an account?</span>
+                            
                             <button 
                             className=" text-cyan-200 bg-slate-800 rounded-md font-robotoMono px-2.5 py-.5 underline hover:text-blue-800 hover:font-bold hover:bg-blue-300 hover:rounded-md hover:px-2 transition-all flex flex-wrap" 
                             onClick={handleNavigateLogin}>

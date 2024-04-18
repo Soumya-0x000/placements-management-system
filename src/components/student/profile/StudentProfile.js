@@ -8,6 +8,7 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import profileImg from '../../../images/resume/profileImg.jfif'
 
 const StudentProfile = () => {
     const [studentData, setStudentData] = useState({});
@@ -24,133 +25,148 @@ const StudentProfile = () => {
         });
     }, []);
 
+    const personalDetails = [
+        { label: 'NAME', value: `${studentData?.firstName} ${studentData?.lastName}` },
+        { label: 'USN', value: studentData?.usn },
+        { label: 'SEMESTER', value: studentData?.currentSemester },
+        { label: 'EMAIL', value: studentData?.email },
+        { label: 'DATE OF BIRTH', value: studentData?.dateOfBirth },
+    ];
+
+    const address = [
+        { label: 'COUNTRY', value: studentData?.country },
+        { label: 'STATE', value: studentData?.state },
+        { label: 'CITY', value: studentData?.city },
+        { label: 'ZIP', value: studentData?.zip },
+        { label: 'CONTACT NUMBER', value: studentData?.contactNumber },
+    ];
+
+    const educationDetails = [
+        {
+            label: 'Education 1',
+            data: [
+                { label: 'SCHOOL NAME:', value: studentData?.schoolName1 },
+                { label: 'EDUCATION:', value: studentData?.education1 },
+                { label: 'COURSE:', value: studentData?.course1 },
+                { label: 'ADDRESS:', value: studentData?.address1 },
+                { label: 'SCORE:', value: studentData?.score1 },
+                { label: 'YEAR OF COMPLETION:', value: studentData?.yearOfCompletion1 },
+            ],
+        },
+        {
+            label: 'Education 2',
+            data: [
+                { label: 'COLLEGE NAME:', value: studentData?.schoolName2 },
+                { label: 'EDUCATION:', value: studentData?.education2 },
+                { label: 'COURSE:', value: studentData?.course2 },
+                { label: 'ADDRESS:', value: studentData?.address2 },
+                { label: 'SCORE:', value: studentData?.score2 },
+                { label: 'YEAR OF COMPLETION:', value: studentData?.yearOfCompletion2 },
+            ],
+        },
+        {
+            label: 'Education 3',
+            data: [
+                { label: 'COLLEGE NAME:', value: studentData?.collegeName },
+                { label: 'COURSE:', value: studentData?.education3 },
+                { label: 'SPECIFICATION:', value: studentData?.course3 },
+                { label: 'ADDRESS:', value: studentData?.address3 },
+                { label: 'SCORE:', value: studentData?.score3 },
+                { label: 'YEAR OF COMPLETION:', value: studentData?.courseDuration },
+            ],
+        },
+    ];
+
     return (
-        <div>
-            <NavBar name={`${studentData?.firstName}`}/>
+        <div className=' flex justify-center pt-[6rem] overflow-y-auto'>
+            <div className='absolute top-0 w-full '>
+                <NavBar name={`${studentData?.firstName}`}/>
+            </div>
+            
+            <div className=' flex flex-col px-3 gap-y-3 max-w-[61rem]'>
+                <div className=' flex flex-col-reverse md:flex-row items-start justify-between gap-x-5 gap-y-3'>
+                    <div className=' space-y-4'>
+                        <div className=' flex flex-col lg:flex-row gap-x-5 gap-y-3'>
+                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-[23rem] py-3 flex flex-col gap-y-1'>
+                                {personalDetails.map((item, index) => (
+                                    <div key={index} className="flex justify-start gap-x-4">
+                                        <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
+                                        <span className=' font-robotoMono text-slate-100'>{item.value}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-[23rem] py-3 flex flex-col gap-y-1'>
+                                {address.map((item, index) => (
+                                    <div key={index} className="flex justify-start gap-x-4">
+                                        <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
+                                        <span className=' font-robotoMono text-slate-100'>{item.value}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
 
-            <div className="container text-center">
-                <br />
-                <br />
-                <h1 className="container text-center">My Profile</h1>
-                <br />
-                <h5 className="container text-justify" align="Justify">
-                <img
-                    align="right"
-                    src="https://img.freepik.com/free-icon/user-profile-icon_318-33925.jpg?w=2000"
-                    height="180"
-                    width="171"
-                />
+                        <div className='bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden px-4 py-3 w-full'>
+                            <span className=' font-bold font-mavenPro text-slate-200 normal-case'>ADDRESS :</span>
+                            <span className=' font-robotoMono text-slate-100'>{studentData?.address}</span>
+                        </div>
+                    </div>
 
-                <b>NAME:</b> {studentData.firstName} {studentData.lastName}
-                <br />
-                <br />
-                <b>USN:</b> {studentData.usn}
-                <br />
-                <br />
-                <b>SEMESTER:</b> {studentData.currentSemester}
-                <br />
-                <br />
-                <b>EMAIL:</b> {studentData.email}
-                <br />
-                <br />
-                <b>DATE OF BIRTH:</b> {studentData.dateOfBirth}
-                <br />
-                <br />
-                <b>COUNTRY:</b> {studentData.country}
-                <br />
-                <br />
-                <b>STATE:</b> {studentData.state}
-                <br />
-                <br />
-                <b>CITY:</b> {studentData.city}
-                <br />
-                <br />
-                <b>ZIP:</b> {studentData.zip}
-                <br />
-                <br />
-                <b>CONTACT NUMBER:</b> {studentData.contactNumber}
-                <br />
-                <br />
-                <b>ADDRESS:</b> {studentData.address}
-                <br />
-                <br />
-                <b>CAREER OBJECTIVE:</b> {studentData.careerObjective}
-                <br />
-                <br />
-                <br />
-                <b>SCHOOL NAME:</b> {studentData.schoolName1}
-                <br />
-                <br />
-                <b>EDUCATION:</b> {studentData.education1}
-                <br />
-                <br />
-                <b>COURSE:</b> {studentData.course1}
-                <br />
-                <br />
-                <b>ADDRESS:</b> {studentData.address1}
-                <br />
-                <br />
-                <b>SCORE:</b> {studentData.score1}
-                <br />
-                <br />
-                <b>YEAR OF COMPLETION:</b> {studentData.yearOfCompletion1}
-                <br />
-                <br />
-                <br />
-                <b>COLLEGE NAME:</b> {studentData.schoolName2}
-                <br />
-                <br />
-                <b>EDUCATION:</b> {studentData.education2}
-                <br />
-                <br />
-                <b>COURSE:</b> {studentData.course2}
-                <br />
-                <br />
-                <b>ADDRESS:</b> {studentData.address2}
-                <br />
-                <br />
-                <b>SCORE:</b> {studentData.score2}
-                <br />
-                <br />
-                <b>YEAR OF COMPLETION:</b> {studentData.yearOfCompletion2}
-                <br />
-                <br />
-                <br />
-                <b>COLLEGE NAME:</b> {studentData.collegeName}
-                <br />
-                <br />
-                <b>COURSE:</b> {studentData.education3}
-                <br />
-                <br />
-                <b>SPECIFICATION:</b> {studentData.course3}
-                <br />
-                <br />
-                <b>ADDRESS:</b> {studentData.address3}
-                <br />
-                <br />
-                <b>SCORE:</b> {studentData.score3}
-                <br />
-                <br />
-                <b>YEAR OF COMPLETION:</b> {studentData.courseDuration}
-                <br />
-                <br />
-                <br />
-                <b>KEY SKILLS:</b> {studentData.keySkills}
-                <br />
-                <br />
-                <b>CAREER PREFERENCES:</b> {studentData.careerPreferences}
-                <br />
-                <br />
-                <br />
+                    <div className=' min-w-[10rem] md:min-w-[16rem] lg:min-w-[10rem] max-w-[10rem] md:max-w-[16rem] lg:max-w-[10rem] h-full rounded-md overflow-hidden'>
+                        <img 
+                            src={profileImg}
+                            className=' w-full h-full'
+                            alt='profile image' 
+                        />
+                    </div>
+                </div>
+
+                <div className='grid grid-cols-1 gap-3'>
+                    {educationDetails.map((val, indx) => (
+                        <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex flex-col gap-y-1'
+                        key={indx}>
+                            <span className=' text-slate-200 font-bold font-lato text-xl tracking-wide mb-4'>
+                                {val.label}
+                            </span>
+
+                            {val.data.map((item, index) => (
+                                <div key={index} className="flex justify-start gap-x-4">
+                                    <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
+                                    <span className=' font-robotoMono text-slate-100'>{item.value}</span>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+
+                <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex gap-x-4 items-center'>
+                    <span className=' font-bold font-xl font-lato text-slate-200'>
+                        Key skills :
+                    </span>
+
+                    {studentData?.keySkills?.split(',').map((item, index) => (
+                        <div key={index} className="flex justify-start gap-x-4 text-slate-200 font-robotoMono px-3 py-1 bg-slate-800 rounded-md overflow-hidden">
+                            {item}
+                        </div>
+                    ))}
+                </div>
+
+                <div className='bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden px-4 w-full py-3 flex gap-x-2 gap-y-3 items-start flex-wrap'>
+                    <span className=' font-bold font-xl font-lato text-slate-200'>
+                        Career preferences :
+                    </span>
+
+                    <div className="flex justify-start gap-x-4 font-robotoMono text-slate-100 text-justify">
+                        {studentData?.careerPreferences}
+                    </div>
+                </div>
+
                 <a href="/EditStudentProfile">
-                    <button variant="dark" type="submit">
-                    Edit Profile
+                    <button 
+                    className=" text-md font-bold bg-slate-800 text-blue-300 text-lg hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full h-10 rounded-md active:ring-green-300 active:text-green-300 transition-all mt-[1rem] mb-[2rem]" >
+                        Edit Profile
                     </button>
                 </a>
-                </h5>
-                <br />
-                <br />
-                <br />
             </div>
         </div>
     );
