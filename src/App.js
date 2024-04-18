@@ -25,7 +25,7 @@ import StudentSchedule from './components/student/StudentSchedule'
 import StudentScheduled from './components/student/StudentScheduled'
 import StudentHome from './components/student/StudentHome'
 import StudentAnalyticsandRepo from './components/student/StudentAnalyticsandRepo';
-import StudentsAcademics from './components/student/StudentsAcademics';
+import StudentsAcademics from './components/student/academics/StudentsAcademics';
 import StudentResume from './components/PdfViewer';
 import ResumeDetail from './components/student/resume/ResumeDetail'
 import StudentCoverLetter from './components/student/coverLetter/StudentCoverLetter';

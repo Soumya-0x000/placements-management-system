@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -8,179 +7,10 @@ import { GoSearch } from "react-icons/go";
 import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
-import { 
-    IconButton, 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow, 
-    Paper, 
-    Collapse, 
-    Box, 
-    Typography 
-} from '@mui/material';
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import EngineeringCourseTable from './CourseTable';
 
-
-const Row = ({ row }) => {
-    const [open, setOpen] = useState(false);
-    const averageSalary = row.skills.reduce((total, skill) => total + parseFloat(skill.averagePackage), 0) / row.skills.length;
-
-    return (
-        <React.Fragment>
-            <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell
-				sx={{
-					color: '#216C34',
-					fontSize: '16px',
-				}}>
-                    <IconButton
-                    aria-label="expand row"
-                    size="small"
-                    onClick={() => setOpen(!open)}>
-                        {open ? <IoIosArrowUp /> : <IoIosArrowDown />}
-                    </IconButton>
-                </TableCell>
-
-                <TableCell component="th" scope="row" 
-				sx={{
-					color: '#216C34',
-					fontSize: '16px',
-				}}>
-                    {row.department}
-                </TableCell>
-
-                <TableCell align="right"
-				sx={{
-					color: '#216C34',
-					fontSize: '16px',
-				}}>{averageSalary.toFixed(2)} LPA</TableCell>
-            </TableRow>
-
-            {open && (
-                <TableRow>
-                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={3}>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <Box sx={{ margin: 1 }}>
-                                <Typography variant="h6" gutterBottom component="div">
-                                    Skills
-                                </Typography>
-
-								<TableContainer 
-								component={Paper} 
-								sx={{
-									margin: '10px',
-									borderBottom: '.5px solid black',
-									backgroundColor: '#FFFCF4',
-								}}>
-									<Table size="small" aria-label="skills">
-										<TableHead>
-											<TableRow>
-												<TableCell sx={{
-													fontSize: '16px',
-													fontWeight: 'bold',
-													color: '#008C37',
-													border: `2px solid #3E8C5F`
-												}}>Job Position</TableCell>
-
-												<TableCell sx={{
-													fontSize: '16px',
-													fontWeight: 'bold',
-													color: '#008C37',
-													border: `2px solid #3E8C5F`
-												}}>Required Skills</TableCell>
-
-												<TableCell sx={{
-													fontSize: '16px',
-													fontWeight: 'bold',
-													color: '#008C37',
-													border: `2px solid #3E8C5F`
-												}} align="right">Average Package (LPA)</TableCell>
-											</TableRow>
-										</TableHead>
-
-										<TableBody >
-											{row.skills.map((skill) => (
-												<TableRow key={skill.jobPosition}>
-													<TableCell sx={{
-														fontSize: '15px',
-													}}>{skill.jobPosition}</TableCell>
-													<TableCell sx={{
-														fontSize: '15px',
-													}}>{skill.requiredSkills}</TableCell>
-													<TableCell sx={{
-														fontSize: '15px',
-													}} align="right">{skill.averagePackage}</TableCell>
-												</TableRow>
-											))}
-										</TableBody>
-									</Table>
-								</TableContainer>
-                            </Box>
-                        </Collapse>
-                    </TableCell>
-                </TableRow>
-            )}
-        </React.Fragment>
-    );
-};
-  
-const EngineeringSkillsTable = () => {
-    const engineeringSkillsData = [
-        {
-            department: 'Mechanical Engineering',
-            skills: [
-                { jobPosition: 'Mechanical Engineer', requiredSkills: 'CAD, SolidWorks, Thermodynamics', averagePackage: '6 LPA' },
-                { jobPosition: 'Design Engineer', requiredSkills: 'AutoCAD, Machine Design, FEA', averagePackage: '7 LPA' },
-                { jobPosition: 'Manufacturing Engineer', requiredSkills: 'Lean Manufacturing, CNC Machining', averagePackage: '5.5 LPA' },
-                { jobPosition: 'HVAC Engineer', requiredSkills: 'Refrigeration, Air Conditioning, HVAC Design', averagePackage: '6.5 LPA' },
-                { jobPosition: 'Robotics Engineer', requiredSkills: 'Robot Programming, Controls, Automation', averagePackage: '8 LPA' },
-            ],
-        },
-        {
-            department: 'Electrical Engineering',
-            skills: [
-                { jobPosition: 'Electrical Engineer', requiredSkills: 'Circuit Design, Power Systems, PLC Programming', averagePackage: '5.8 LPA' },
-                { jobPosition: 'Power Electronics Engineer', requiredSkills: 'Power Electronics, Motor Drives, PCB Design', averagePackage: '6.2 LPA' },
-                { jobPosition: 'Control Systems Engineer', requiredSkills: 'Control Systems, PLC Programming, Instrumentation', averagePackage: '6.5 LPA' },
-                { jobPosition: 'Renewable Energy Engineer', requiredSkills: 'Solar Power Systems, Wind Energy, Energy Management', averagePackage: '7 LPA' },
-                { jobPosition: 'Automation Engineer', requiredSkills: 'PLC Programming, Robotics, SCADA', averagePackage: '6.8 LPA' },
-            ],
-        },
-        {
-            department: 'Civil Engineering',
-            skills: [
-                { jobPosition: 'Structural Engineer', requiredSkills: 'Structural Analysis, AutoCAD, Construction Management', averagePackage: '5.5 LPA' },
-                { jobPosition: 'Transportation Engineer', requiredSkills: 'Traffic Engineering, Highway Design, GIS', averagePackage: '6 LPA' },
-                { jobPosition: 'Environmental Engineer', requiredSkills: 'Water Treatment, Environmental Impact Assessment', averagePackage: '5.8 LPA' },
-                { jobPosition: 'Geotechnical Engineer', requiredSkills: 'Soil Mechanics, Foundation Design, Slope Stability', averagePackage: '6.2 LPA' },
-                { jobPosition: 'Project Manager', requiredSkills: 'Construction Planning, Risk Management, Contract Administration', averagePackage: '7 LPA' },
-            ],
-        },
-        {
-            department: 'Electronics Engineering',
-            skills: [
-                { jobPosition: 'Electronics Engineer', requiredSkills: 'Analog Electronics, Digital Electronics, PCB Design', averagePackage: '5.6 LPA' },
-                { jobPosition: 'Embedded Systems Engineer', requiredSkills: 'Microcontrollers, Firmware Development, RTOS', averagePackage: '6 LPA' },
-                { jobPosition: 'Telecommunication Engineer', requiredSkills: 'Wireless Communication, Network Protocols, RF Engineering', averagePackage: '6.5 LPA' },
-                { jobPosition: 'VLSI Design Engineer', requiredSkills: 'ASIC Design, Verilog, FPGA Programming', averagePackage: '7.2 LPA' },
-                { jobPosition: 'Signal Processing Engineer', requiredSkills: 'Digital Signal Processing, Image Processing, MATLAB', averagePackage: '6.8 LPA' },
-            ],
-        },
-        {
-                department: 'Computer Science',
-                skills: [
-                { jobPosition: 'Software Developer', requiredSkills: 'JavaScript, React, Node.js', averagePackage: '8 LPA' },
-                { jobPosition: 'Data Scientist', requiredSkills: 'Python, Machine Learning, Data Visualization', averagePackage: '9 LPA' },
-                { jobPosition: 'Cybersecurity Analyst', requiredSkills: 'Network Security, Ethical Hacking, Incident Response', averagePackage: '9.5 LPA' },
-                { jobPosition: 'Cloud Engineer', requiredSkills: 'AWS, Azure, DevOps', averagePackage: '10 LPA' },
-                { jobPosition: 'Artificial Intelligence Engineer', requiredSkills: 'Deep Learning, Natural Language Processing, Neural Networks', averagePackage: '12 LPA' },
-                ],
-        },
-    ];
+const CourseTable = () => {
     const usn = localStorage.getItem('token');
     const [name, setName] = useState('');
 
@@ -197,49 +27,17 @@ const EngineeringSkillsTable = () => {
     }, []);
 
     return (
-        <div className='w-screen h-screen '>
+        <>
             <NavBar name={name}/>
-
-			<div className='flex justify-center w-full '>
-				<TableContainer 
-				component={Paper} 
-				sx={{
-					margin: '10px',
-					width: '95%',
-					borderBottom: '1px solid black',
-					backgroundColor: '#EFFDF5',
-				}}>
-					<Table aria-label="collapsible table">
-						<TableHead>
-							<TableRow>
-                                {['Dropdown', 'Department', 'Average salary'].map((cell, indx) => (
-                                    <TableCell 
-                                    sx={{
-                                        fontSize: '18px',
-                                        fontWeight: 'bold',
-                                        color: '#008C37',
-                                        border: `2px solid #3E8C5F`
-                                    }}
-                                    key={indx}>
-                                        {cell}
-                                    </TableCell>
-                                ))}
-							</TableRow>
-						</TableHead>
-						
-						<TableBody sx={{color: 'white'}}>
-							{engineeringSkillsData.map((departmentData) => (
-								<Row key={departmentData.department} row={departmentData} />
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			</div>
-        </div>
+            <EngineeringCourseTable />
+        </>
     );
 };
 
-export default EngineeringSkillsTable;
+export default CourseTable;
+
+
+
 
 
 
