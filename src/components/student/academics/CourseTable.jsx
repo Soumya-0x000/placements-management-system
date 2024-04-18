@@ -22,7 +22,10 @@ const EngineeringCourseTable = ({  }) => {
             {engineeringCourseScopes.map((departmentData) => (
                 <Accordion key={departmentData.department}
                 sx={{
-                    backgroundColor: '#F2FEFF'
+                    backgroundColor: '#F2FEFF',
+                    '&:hover': {
+                        backgroundColor: '#E4FAFF',
+                    }
                 }}>
                     <AccordionSummary 
                     expandIcon={
