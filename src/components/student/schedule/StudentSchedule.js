@@ -8,7 +8,7 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../../animations/BgColorAnimation';
+import BgColorAnimation from '../../../animations/BgColorAnimation';
 
 const StudentSchedule = () => {
     const usn = localStorage.getItem('token');

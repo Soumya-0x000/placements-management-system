@@ -175,7 +175,6 @@ const StudentRegister = () => {
                                 </Form.Group>
                             </Row>
 
-
                             <Row className=" gap-y-3">
                                 <Form.Group as={Col} xs={12} md={4} lg={4} controlId="formGridCurrentSem">
                                     <input
@@ -220,7 +219,6 @@ const StudentRegister = () => {
                                     </div>
                                 </Form.Group>
                             </Row>
-
 
                             <Row className="gap-y-3">
                                 <Form.Group as={Col} xs={6} lg={4} controlId="formGridCountry">
@@ -295,7 +293,6 @@ const StudentRegister = () => {
                                     />
                                 </Form.Group>
                             </Row>
-
 
                             <Row className="">
                                 <Form.Group as={Col} controlId="formGridAddress">
@@ -511,7 +508,7 @@ const StudentRegister = () => {
                                     />
                                 </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridSpecialization">
+                                <Form.Group as={Col} xs={12} lg={6} controlId="formGridSpecialization">
                                     <input
                                         type="text"
                                         name="specialization"
@@ -522,7 +519,7 @@ const StudentRegister = () => {
                                     />
                                 </Form.Group>
 
-                                <Form.Group as={Col} md={2} lg={3} controlId="formGridScore3">
+                                <Form.Group as={Col} xs={12} lg={6} controlId="formGridScore3">
                                     <input
                                         type="number"
                                         name="score3"
@@ -615,7 +612,7 @@ const StudentRegister = () => {
                             <button 
                             className=" text-md font-bold bg-slate-800 text-blue-400 hover:text-indigo-400 font-robotoMono ring-2 ring-violet-400 w-full sm:w-[7rem] h-9 sm:h-8 rounded-full active:ring-green-300 active:text-green-300 transition-all" 
                             onClick={handleReset}>
-                                Cancel
+                                Reset
                             </button>
                         </div> 
 

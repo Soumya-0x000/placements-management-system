@@ -18,7 +18,7 @@ const EngineeringCourseTable = ({  }) => {
     const headerRow = ['Semester', 'Course', 'Job Opportunity', 'Difficulty'];
 
     return (
-        <div className=' sm:px-[3rem] lg:px-[5rem] xl:px-[10rem] pt-[2rem] space-y-3'>
+        <div className=' sm:px-[3rem] lg:px-[5rem] xl:px-[10rem] py-[2rem] space-y-3'>
             {engineeringCourseScopes.map((departmentData) => (
                 <Accordion key={departmentData.department}
                 sx={{

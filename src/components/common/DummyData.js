@@ -904,4 +904,211 @@ export const engineeringCourseScopes = [
             },
         ],
     },
+    {
+        department: 'Chemical Engineering',
+        semesters: [
+            {
+                semester: 1,
+                courses: [
+                    { course: 'Introduction to Chemical Engineering', job: 'Chemical Engineer', difficulty: 'medium' },
+                    { course: 'Chemical Process Calculations', job: 'Process Engineer', difficulty: 'high' },
+                    { course: 'Chemical Thermodynamics', job: 'Thermodynamics Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 2,
+                courses: [
+                    { course: 'Fluid Mechanics', job: 'Fluid Engineer', difficulty: 'medium' },
+                    { course: 'Heat Transfer', job: 'Heat Transfer Engineer', difficulty: 'high' },
+                    { course: 'Mass Transfer', job: 'Mass Transfer Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 3,
+                courses: [
+                    { course: 'Chemical Reaction Engineering', job: 'Reaction Engineer', difficulty: 'high' },
+                    { course: 'Process Control', job: 'Process Control Engineer', difficulty: 'medium' },
+                    { course: 'Chemical Engineering Thermodynamics', job: 'Chemical Thermodynamics Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 4,
+                courses: [
+                    { course: 'Unit Operations', job: 'Unit Operations Engineer', difficulty: 'medium' },
+                    { course: 'Separation Processes', job: 'Separation Engineer', difficulty: 'high' },
+                    { course: 'Chemical Engineering Design', job: 'Design Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 5,
+                courses: [
+                    { course: 'Process Simulation', job: 'Simulation Engineer', difficulty: 'high' },
+                    { course: 'Chemical Process Safety', job: 'Process Safety Engineer', difficulty: 'high' },
+                    { course: 'Polymer Engineering', job: 'Polymer Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 6,
+                courses: [
+                    { course: 'Environmental Engineering', job: 'Environmental Engineer', difficulty: 'medium' },
+                    { course: 'Petroleum Refining Engineering', job: 'Petroleum Engineer', difficulty: 'high' },
+                    { course: 'Biochemical Engineering', job: 'Biochemical Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 7,
+                courses: [
+                    { course: 'Process Optimization', job: 'Optimization Engineer', difficulty: 'high' },
+                    { course: 'Nanotechnology in Chemical Engineering', job: 'Nanotechnology Engineer', difficulty: 'medium' },
+                    { course: 'Chemical Plant Design and Economics', job: 'Plant Design Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 8,
+                courses: [
+                    { course: 'Industrial Internship', job: 'Industrial Intern', difficulty: 'medium' },
+                    { course: 'Seminar and Project', job: 'Project Engineer', difficulty: 'high' },
+                    { course: 'Advanced Topics in Chemical Engineering', job: 'Advanced Engineer', difficulty: 'high' },
+                ],
+            },
+        ],
+    },
+    {
+        department: 'Environmental Engineering',
+        semesters: [
+            {
+                semester: 1,
+                courses: [
+                    { course: 'Introduction to Environmental Engineering', job: 'Environmental Engineer', difficulty: 'medium' },
+                    { course: 'Environmental Chemistry', job: 'Environmental Chemist', difficulty: 'high' },
+                    { course: 'Water and Wastewater Treatment', job: 'Water Treatment Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 2,
+                courses: [
+                    { course: 'Air Pollution Control Engineering', job: 'Air Pollution Control Engineer', difficulty: 'high' },
+                    { course: 'Solid Waste Management', job: 'Waste Management Engineer', difficulty: 'medium' },
+                    { course: 'Environmental Microbiology', job: 'Environmental Microbiologist', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 3,
+                courses: [
+                    { course: 'Hydrology and Watershed Management', job: 'Hydrologist', difficulty: 'medium' },
+                    { course: 'Soil and Groundwater Remediation', job: 'Remediation Engineer', difficulty: 'high' },
+                    { course: 'Environmental Impact Assessment', job: 'Environmental Assessor', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 4,
+                courses: [
+                    { course: 'Ecology and Environmental Systems', job: 'Ecologist', difficulty: 'medium' },
+                    { course: 'Environmental Law and Policy', job: 'Environmental Policy Analyst', difficulty: 'high' },
+                    { course: 'Sustainability and Green Design', job: 'Sustainability Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 5,
+                courses: [
+                    { course: 'Renewable Energy Systems', job: 'Renewable Energy Engineer', difficulty: 'high' },
+                    { course: 'Climate Change Adaptation', job: 'Climate Change Specialist', difficulty: 'high' },
+                    { course: 'Industrial Ecology', job: 'Industrial Ecologist', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 6,
+                courses: [
+                    { course: 'Environmental Modeling', job: 'Environmental Modeler', difficulty: 'high' },
+                    { course: 'Risk Assessment and Management', job: 'Risk Assessment Engineer', difficulty: 'high' },
+                    { course: 'Environmental Economics', job: 'Environmental Economist', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 7,
+                courses: [
+                    { course: 'Advanced Water Treatment Technologies', job: 'Advanced Water Treatment Engineer', difficulty: 'high' },
+                    { course: 'Environmental Monitoring and Analysis', job: 'Environmental Analyst', difficulty: 'medium' },
+                    { course: 'Green Building Design', job: 'Green Building Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 8,
+                courses: [
+                    { course: 'Internship in Environmental Engineering', job: 'Environmental Engineering Intern', difficulty: 'medium' },
+                    { course: 'Capstone Project', job: 'Environmental Engineering Project Manager', difficulty: 'high' },
+                    { course: 'Advanced Topics in Environmental Engineering', job: 'Advanced Environmental Engineer', difficulty: 'high' },
+                ],
+            },
+        ],
+    },
+    {
+        department: 'Civil Engineering',
+        semesters: [
+            {
+                semester: 1,
+                courses: [
+                    { course: 'Engineering Mechanics', job: 'Civil Engineer', difficulty: 'medium' },
+                    { course: 'Building Materials and Construction', job: 'Construction Engineer', difficulty: 'high' },
+                    { course: 'Surveying', job: 'Survey Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 2,
+                courses: [
+                    { course: 'Strength of Materials', job: 'Structural Engineer', difficulty: 'high' },
+                    { course: 'Concrete Technology', job: 'Concrete Technologist', difficulty: 'medium' },
+                    { course: 'Geotechnical Engineering', job: 'Geotechnical Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 3,
+                courses: [
+                    { course: 'Fluid Mechanics', job: 'Fluid Engineer', difficulty: 'medium' },
+                    { course: 'Structural Analysis', job: 'Structural Analyst', difficulty: 'high' },
+                    { course: 'Transportation Engineering', job: 'Transportation Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 4,
+                courses: [
+                    { course: 'Design of Concrete Structures', job: 'Concrete Design Engineer', difficulty: 'high' },
+                    { course: 'Environmental Engineering', job: 'Environmental Engineer', difficulty: 'medium' },
+                    { course: 'Surveying-II', job: 'Survey Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 5,
+                courses: [
+                    { course: 'Geotechnical Engineering', job: 'Geotechnical Engineer', difficulty: 'medium' },
+                    { course: 'Design of Steel Structures', job: 'Structural Engineer', difficulty: 'high' },
+                    { course: 'Hydraulic Structures', job: 'Hydraulic Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 6,
+                courses: [
+                    { course: 'Construction Management', job: 'Construction Manager', difficulty: 'medium' },
+                    { course: 'Town Planning', job: 'Town Planner', difficulty: 'medium' },
+                    { course: 'Project Estimation and Costing', job: 'Cost Engineer', difficulty: 'medium' },
+                ],
+            },
+            {
+                semester: 7,
+                courses: [
+                    { course: 'Structural Dynamics', job: 'Structural Dynamics Engineer', difficulty: 'high' },
+                    { course: 'Transportation Planning and Management', job: 'Transportation Planner', difficulty: 'high' },
+                    { course: 'Finite Element Analysis', job: 'FEA Engineer', difficulty: 'high' },
+                ],
+            },
+            {
+                semester: 8,
+                courses: [
+                    { course: 'Construction Technology', job: 'Construction Technologist', difficulty: 'medium' },
+                    { course: 'Project Planning and Control', job: 'Project Planner', difficulty: 'medium' },
+                    { course: 'Project Management', job: 'Project Manager', difficulty: 'medium' },
+                ],
+            },
+        ],
+    },        
 ];

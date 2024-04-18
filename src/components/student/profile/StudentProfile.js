@@ -8,155 +8,155 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
-import BgColorAnimation from '../../../animations/BgColorAnimation';
-import { Dialog, Slide } from '@mui/material';
-import SystemEngineer from './field/SystemEngineer';
-import ElectricalEngineer from './field/ElectricalEngineer';
-import AerospaceEngineer from './field/AerospaceEngineer';
-import BigDataEngineer from './field/BigDataEngineer';
-import ChemicalEngineer from './field/ChemicalEngineer';
-import ComputerHardwareEngineer from './field/ComputerHardwareEngineer';
-import SoftwareDeveloper from './field/SoftwareDeveloper';
-import StructuralEngineer from './field/StructuralEngineer';
-import UiUxDesigner from './field/UiUxDesigner';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const engineeringData = [
-    {
-        title: "System Engineer",
-        imgSrc: "https://thumbs.dreamstime.com/z/computer-systems-engineer-concept-icon-programming-career-coding-abstract-idea-thin-line-illustration-isolated-outline-drawing-237714227.jpg",
-        link: "/system-engineering"
-    },
-    {
-        title: "Electrical Engineer",
-        imgSrc: "https://img.freepik.com/free-vector/hand-drawn-electrician-cartoon-illustration_23-2151046712.jpg?size=338&ext=jpg&ga=GA1.1.1700460183.1713139200&semt=ais",
-        link: "/electrical-engineering"
-    },
-    {
-        title: "Chemical Engineer",
-        imgSrc: "https://img.freepik.com/premium-vector/chemical-lab-research-chemistry-illustration-4_567637-125.jpg",
-        link: "/chemical-engineering"
-    },
-    {
-        title: "Big Data Engineer",
-        imgSrc: "https://datasciencedojo.com/wp-content/uploads/Big-Data-Engineering.jpg",
-        link: "/big-data-engineering"
-    },
-    {
-        title: "Aerospace Engineer",
-        imgSrc: "https://cdn.kobo.com/book-images/b018f8bd-bbf7-4158-807a-7f9ebaa20caa/353/569/90/False/introduction-to-aerospace-engineering.jpg",
-        link: "/aerospace-engineering"
-    },
-    {
-        title: "Software Developer",
-        imgSrc: "https://static.vecteezy.com/system/resources/thumbnails/000/180/386/small_2x/software_engineers.jpg",
-        link: "/software-engineering"
-    },
-    {
-        title: "UI/UX Designer",
-        imgSrc: "https://maduraimart.in/imgs/ui-ux-design-madurai.jpg",
-        link: "/ui-ux-engineering"
-    },
-    {
-        title: "Computer Hardware Engineer",
-        imgSrc: "https://leverageedu.com/discover/wp-content/uploads/2023/03/image.png",
-        link: "/computer-hardware-engineering"
-    },
-    {
-        title: "Structural Engineer",
-        imgSrc: "https://lastructuralengineer.com/wp-content/uploads/2022/08/Areas-Photo-1.jpg",
-        link: "/structural-engineer"
-    }
-];
-
-const CareerCounselling = () => {
+const StudentProfile = () => {
+    const [studentData, setStudentData] = useState({});
     const usn = localStorage.getItem('token');
-    const [name, setName] = useState('');
-    const [showDialog, setShowDialog] = useState(false);
-    const [chosenEngineer, setChosenEngineer] = useState(0);
-
-    const engineerPaths = [
-        <SystemEngineer setShowDialog={setShowDialog}/>,
-        <ElectricalEngineer setShowDialog={setShowDialog}/>,
-        <ChemicalEngineer setShowDialog={setShowDialog}/>,
-        <BigDataEngineer setShowDialog={setShowDialog}/>,
-        <AerospaceEngineer setShowDialog={setShowDialog}/>,
-        <SoftwareDeveloper setShowDialog={setShowDialog}/>,
-        <UiUxDesigner setShowDialog={setShowDialog}/>,
-        <ComputerHardwareEngineer setShowDialog={setShowDialog}/>,
-        <StructuralEngineer setShowDialog={setShowDialog}/>,
-    ];
-
-    const handleCardClick = (indx) => {
-        setChosenEngineer(indx);
-        setShowDialog(true);
-    };
-
-    const handleCloseDialog = () => {
-        setShowDialog(false);
-    };
 
     useEffect(() => {
-        fetch(`http://localhost:1337/api/StudentProfile/${usn}`)
-            .then((response) => response.json())
-            .then((data) => {
-                let fullName = `${data?.firstName} ${data?.lastName}`
-                setName(fullName);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        fetch(`http://localhost:1337/api/studentProfile/${usn}`)
+        .then(response => response.json())
+        .then(data => {
+            setStudentData(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }, []);
 
     return (
-        <BgColorAnimation
-            child={
-                <div className='h-screen overflow-y-auto'>
-                    <div className='absolute top-0 w-full'>
-                        <NavBar name={name}/>
-                    </div>
-                    
-                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ">
-                        {engineeringData.map((val, indx) => (
-                            <AnimatedGradientBorderTW key={indx}>
-                                <div className=' cursor-pointer bg-[#7730fc58] rounded-lg ' onClick={() => handleCardClick(indx)}>
-                                    <div className="rounded-lg w-[20rem] h-fit overflow-hidden shadow-lg">
-                                        <div className=' w-full min-h-[20rem] max-h-[20rem]'>
-                                            <img 
-                                                src={val.imgSrc} 
-                                                className="w-full h-full min-h-[20rem] max-h-[20rem]" 
-                                                alt={val.title} 
-                                            />
-                                        </div>
+        <div>
+            <NavBar name={`${studentData?.firstName}`}/>
 
-                                        <div className="w-full flex items-center justify-center">
-                                            <div className="text-xl font-bold font-montserrat text-violet-400 w-full min-h-[6rem] max-h-[6rem] flex items-center justify-center">
-                                                {val.title}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </AnimatedGradientBorderTW>
-                        ))}
-                    </div>
+            <div className="container text-center">
+                <br />
+                <br />
+                <h1 className="container text-center">My Profile</h1>
+                <br />
+                <h5 className="container text-justify" align="Justify">
+                <img
+                    align="right"
+                    src="https://img.freepik.com/free-icon/user-profile-icon_318-33925.jpg?w=2000"
+                    height="180"
+                    width="171"
+                />
 
-                    <Dialog
-                    fullScreen
-                    open={showDialog}
-                    onClose={handleCloseDialog}
-                    TransitionComponent={Transition}>
-                        {engineerPaths[chosenEngineer]}
-                    </Dialog>
-                </div>
-            }
-        />
+                <b>NAME:</b> {studentData.firstName} {studentData.lastName}
+                <br />
+                <br />
+                <b>USN:</b> {studentData.usn}
+                <br />
+                <br />
+                <b>SEMESTER:</b> {studentData.currentSemester}
+                <br />
+                <br />
+                <b>EMAIL:</b> {studentData.email}
+                <br />
+                <br />
+                <b>DATE OF BIRTH:</b> {studentData.dateOfBirth}
+                <br />
+                <br />
+                <b>COUNTRY:</b> {studentData.country}
+                <br />
+                <br />
+                <b>STATE:</b> {studentData.state}
+                <br />
+                <br />
+                <b>CITY:</b> {studentData.city}
+                <br />
+                <br />
+                <b>ZIP:</b> {studentData.zip}
+                <br />
+                <br />
+                <b>CONTACT NUMBER:</b> {studentData.contactNumber}
+                <br />
+                <br />
+                <b>ADDRESS:</b> {studentData.address}
+                <br />
+                <br />
+                <b>CAREER OBJECTIVE:</b> {studentData.careerObjective}
+                <br />
+                <br />
+                <br />
+                <b>SCHOOL NAME:</b> {studentData.schoolName1}
+                <br />
+                <br />
+                <b>EDUCATION:</b> {studentData.education1}
+                <br />
+                <br />
+                <b>COURSE:</b> {studentData.course1}
+                <br />
+                <br />
+                <b>ADDRESS:</b> {studentData.address1}
+                <br />
+                <br />
+                <b>SCORE:</b> {studentData.score1}
+                <br />
+                <br />
+                <b>YEAR OF COMPLETION:</b> {studentData.yearOfCompletion1}
+                <br />
+                <br />
+                <br />
+                <b>COLLEGE NAME:</b> {studentData.schoolName2}
+                <br />
+                <br />
+                <b>EDUCATION:</b> {studentData.education2}
+                <br />
+                <br />
+                <b>COURSE:</b> {studentData.course2}
+                <br />
+                <br />
+                <b>ADDRESS:</b> {studentData.address2}
+                <br />
+                <br />
+                <b>SCORE:</b> {studentData.score2}
+                <br />
+                <br />
+                <b>YEAR OF COMPLETION:</b> {studentData.yearOfCompletion2}
+                <br />
+                <br />
+                <br />
+                <b>COLLEGE NAME:</b> {studentData.collegeName}
+                <br />
+                <br />
+                <b>COURSE:</b> {studentData.education3}
+                <br />
+                <br />
+                <b>SPECIFICATION:</b> {studentData.course3}
+                <br />
+                <br />
+                <b>ADDRESS:</b> {studentData.address3}
+                <br />
+                <br />
+                <b>SCORE:</b> {studentData.score3}
+                <br />
+                <br />
+                <b>YEAR OF COMPLETION:</b> {studentData.courseDuration}
+                <br />
+                <br />
+                <br />
+                <b>KEY SKILLS:</b> {studentData.keySkills}
+                <br />
+                <br />
+                <b>CAREER PREFERENCES:</b> {studentData.careerPreferences}
+                <br />
+                <br />
+                <br />
+                <a href="/EditStudentProfile">
+                    <button variant="dark" type="submit">
+                    Edit Profile
+                    </button>
+                </a>
+                </h5>
+                <br />
+                <br />
+                <br />
+            </div>
+        </div>
     );
-}
+};
 
-export default CareerCounselling;
+export default StudentProfile;
 
 
 
@@ -435,39 +435,6 @@ const userActions = ({selectedArray}) => {
                     </span>
                 </a>
             ))}
-        </div>
-    );
-};
-
-
-
-const AnimatedGradientBorderTW = ({ children }) => {
-    const boxRef = useRef(null);
-  
-    useEffect(() => {
-        const boxElement = boxRef.current;
-    
-        if (!boxElement) return;
-    
-        const updateAnimation = () => {
-            const angle = (parseFloat(boxElement.style.getPropertyValue("--angle")) + 0.5) % 360;
-            boxElement.style.setProperty("--angle", `${angle}deg`);
-            requestAnimationFrame(updateAnimation);
-        };
-    
-        requestAnimationFrame(updateAnimation);
-    }, []);
-  
-    return (
-        <div
-        style={{
-            "--angle": "0deg",
-            "--border-color": "linear-gradient(var(--angle), #070707, #687aff)",
-            "--bg-color": "linear-gradient(#131219, #131219)",
-        }}
-        className="flex items-center justify-center rounded-lg border-2 border-[#0000] p-3 [background:padding-box_var(--bg-color),border-box_var(--border-color)]"
-        ref={boxRef}>
-            {children}
         </div>
     );
 };

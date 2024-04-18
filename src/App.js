@@ -15,14 +15,14 @@ import CompanyInterview from './components/company/CompanyInterview'
 
 import StudentLogIn from './components/login/StudentLogIn';
 import StudentRegister from './components/register/StudentRegister';
-import StudentProfile from './components/student/StudentProfile';
-import EditStudentProfile from './components/EditStudentProfile';
+import StudentProfile from './components/student/profile/StudentProfile';
+import EditStudentProfile from './components/student/profile/EditStudentProfile';
 import StudentHiringView from './components/student/StudentHiringView';
 import LOSA from './components/ListOfStudentApplied'
 import Createresume from './components/student/resume/createResume';
 import StudentSlotSelection from './components/student/StudentSlotSelection'
-import StudentSchedule from './components/student/StudentSchedule'
-import StudentScheduled from './components/student/StudentScheduled'
+import StudentSchedule from './components/student/schedule/StudentSchedule'
+import StudentScheduled from './components/student/schedule/StudentScheduled'
 import StudentHome from './components/student/StudentHome'
 import StudentAnalyticsandRepo from './components/student/StudentAnalyticsandRepo';
 import StudentsAcademics from './components/student/academics/StudentsAcademics';
