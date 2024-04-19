@@ -21,6 +21,7 @@ import StudentHiringView from './components/student/companies/StudentHiringView'
 import HiringCompanies from './components/student/companies/HiringCompanies';
 import LOSA from './components/ListOfStudentApplied'
 import Createresume from './components/student/resume/createResume';
+import Resume from './components/student/resume/Resume'
 import StudentSlotSelection from './components/student/StudentSlotSelection'
 import StudentSchedule from './components/student/schedule/StudentSchedule'
 import StudentScheduled from './components/student/schedule/StudentScheduled'
@@ -31,6 +32,8 @@ import StudentResume from './components/PdfViewer';
 import ResumeDetail from './components/student/resume/ResumeDetail'
 import StudentCoverLetter from './components/student/coverLetter/StudentCoverLetter';
 import CoverLetter from './components/student/coverLetter/CoverLetter';
+import ChatPage from './components/student/chat';
+import FeedbackTable from './components/student/Feedback';
 
 import AdminPlacedStudent from './components/admin/AdminPlacedStudent'
 import AdminStudentView from './components/admin/AdminStudentView'
@@ -43,10 +46,8 @@ import AdminHome from './components/admin/AdminHome';
 import AdminJobPosting from './components/admin/AdminJobPosting';
 import AdminJobDetails from './components/admin/AdminJobDetails';
 
-import ChatPage from './components/chat';
 import AllJobPosted from './components/AllJobPosted';
 import InterviewForm from './components/InterviewForm';
-// import UploadResume from './components/uploadResume';
 
 import CareerCounselling from './components/student/career counselling/CareerCounselling'
 import SystemEngineering from './components/student/career counselling/field/SystemEngineer'
@@ -59,8 +60,6 @@ import Uiux from './components/student/career counselling/field/UiUxDesigner'
 import CHEngineer from './components/student/career counselling/field/ComputerHardwareEngineer'
 import StructuralEngineer from './components/student/career counselling/field/StructuralEngineer'
 
-import Resume from './components/student/resume/Resume'
-import FeedbackTable from './components/Feedback';
 import AboutUs from './components/home/about/AboutUs';
 import Courses from './components/home/course/Courses';
 import Team from './components/home/team/Team';
