@@ -29,10 +29,10 @@ const HiringCompanies = () => {
             });
     }, []);
 
-    const handleClick = (e,posting) => {
+    const handleClick = (e, posting) => {
         e.preventDefault()
         navigate('/JobDescription', { state: { postingData: posting } });
-    }
+    };
 
     useEffect(() => {
         console.log(localStorage.getItem('userid'))

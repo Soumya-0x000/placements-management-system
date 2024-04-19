@@ -9,7 +9,7 @@ import { TbDatabaseSearch } from "react-icons/tb";
 import { CiLogout } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
 import dayjs from 'dayjs';
-import gamingPc from '../../images/gamingPc.jpg';
+import gamingPc from '../../../images/gamingPc.jpg';
 
 const StudentHiringView = () => {
 	const navigate = useNavigate();

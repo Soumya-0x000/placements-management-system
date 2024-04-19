@@ -17,7 +17,8 @@ import StudentLogIn from './components/login/StudentLogIn';
 import StudentRegister from './components/register/StudentRegister';
 import StudentProfile from './components/student/profile/StudentProfile';
 import EditStudentProfile from './components/student/profile/EditStudentProfile';
-import StudentHiringView from './components/student/StudentHiringView';
+import StudentHiringView from './components/student/companies/StudentHiringView';
+import HiringCompanies from './components/student/companies/HiringCompanies';
 import LOSA from './components/ListOfStudentApplied'
 import Createresume from './components/student/resume/createResume';
 import StudentSlotSelection from './components/student/StudentSlotSelection'
@@ -43,7 +44,6 @@ import AdminJobPosting from './components/admin/AdminJobPosting';
 import AdminJobDetails from './components/admin/AdminJobDetails';
 
 import ChatPage from './components/chat';
-import HiringCompanies from './components/student/companies/HiringCompanies';
 import AllJobPosted from './components/AllJobPosted';
 import InterviewForm from './components/InterviewForm';
 // import UploadResume from './components/uploadResume';

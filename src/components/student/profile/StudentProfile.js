@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { TiHomeOutline } from "react-icons/ti";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -84,10 +84,11 @@ const StudentProfile = () => {
             </div>
             
             <div className=' flex flex-col px-3 gap-y-3 max-w-[61rem]'>
-                <div className=' flex flex-col-reverse md:flex-row items-start justify-between gap-x-5 gap-y-3'>
-                    <div className=' space-y-4'>
-                        <div className=' flex flex-col lg:flex-row gap-x-5 gap-y-3'>
-                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-[23rem] py-3 flex flex-col gap-y-1'>
+                {/* personal details */}
+                <div className=' w-full flex flex-col-reverse md:flex-row items-start justify-between gap-x-5 gap-y-3'>
+                    <div className=' space-y-4 w-full'>
+                        <div className='w-full flex flex-col lg:flex-row gap-x-5 gap-y-3'>
+                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-1/2 py-3 flex flex-col gap-y-1 flex-wrap'>
                                 {personalDetails.map((item, index) => (
                                     <div key={index} className="flex justify-start gap-x-4">
                                         <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
@@ -96,7 +97,7 @@ const StudentProfile = () => {
                                 ))}
                             </div>
                             
-                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-[23rem] py-3 flex flex-col gap-y-1'>
+                            <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full lg:w-1/2 py-3 flex flex-col gap-y-1 flex-wrap'>
                                 {address.map((item, index) => (
                                     <div key={index} className="flex justify-start gap-x-4">
                                         <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
@@ -106,12 +107,13 @@ const StudentProfile = () => {
                             </div>
                         </div>
 
-                        <div className='bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden px-4 py-3 w-full'>
+                        <div className='bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-3 py-3 w-full'>
                             <span className=' font-bold font-mavenPro text-slate-200 normal-case'>ADDRESS :</span>
-                            <span className=' font-robotoMono text-slate-100'>{studentData?.address}</span>
+                            <span className='ml-3 font-robotoMono text-slate-100'>{studentData?.address}</span>
                         </div>
                     </div>
 
+                    {/* image */}
                     <div className=' min-w-[10rem] md:min-w-[16rem] lg:min-w-[10rem] max-w-[10rem] md:max-w-[16rem] lg:max-w-[10rem] h-full rounded-md overflow-hidden'>
                         <img 
                             src={profileImg}
@@ -120,43 +122,50 @@ const StudentProfile = () => {
                         />
                     </div>
                 </div>
-
+                
+                {/* education details */}
                 <div className='grid grid-cols-1 gap-3'>
                     {educationDetails.map((val, indx) => (
-                        <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex flex-col gap-y-1'
+                        <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex flex-col gap-y-1 flex-wrap'
                         key={indx}>
-                            <span className=' text-slate-200 font-bold font-lato text-xl tracking-wide mb-4'>
+                            <span className=' text-slate-200 font-bold font-lato text-lg md:text-xl tracking-wide mb-4 flex flex-wrap'>
                                 {val.label}
                             </span>
 
                             {val.data.map((item, index) => (
-                                <div key={index} className="flex justify-start gap-x-4">
-                                    <span className=' font-bold font-mavenPro text-slate-200 normal-case'>{item.label} :</span>
-                                    <span className=' font-robotoMono text-slate-100'>{item.value}</span>
+                                <div key={index} className="flex justify-start gap-x-2 md:gap-x-4">
+                                    <span className='flex flex-wrap font-bold font-mavenPro text-slate-200 normal-case'>
+                                        {item.label} 
+                                    </span>
+                                    <span className=' font-robotoMono text-slate-100'>
+                                        {item.value}
+                                    </span>
                                 </div>
                             ))}
                         </div>
                     ))}
                 </div>
 
-                <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex gap-x-4 items-center'>
+                {/* skills */}
+                <div className=' bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden pl-4 w-full py-3 flex gap-x-4 items-center flex-wrap gap-y-2'>
                     <span className=' font-bold font-xl font-lato text-slate-200'>
                         Key skills :
                     </span>
 
                     {studentData?.keySkills?.split(',').map((item, index) => (
-                        <div key={index} className="flex justify-start gap-x-4 text-slate-200 font-robotoMono px-3 py-1 bg-slate-800 rounded-md overflow-hidden">
+                        <div key={index} className="flex justify-start flex-wrap gap-x-4 text-slate-200 font-robotoMono px-3 py-1 bg-slate-800 rounded-md overflow-hidden text-sm md:text-md">
                             {item}
                         </div>
                     ))}
                 </div>
 
+                {/* career preference */}
                 <div className='bg-gradient-to-br from-gray-700 to-slate-600 rounded-lg overflow-hidden px-4 w-full py-3 flex gap-x-2 gap-y-3 items-start flex-wrap'>
                     <span className=' font-bold font-xl font-lato text-slate-200'>
                         Career preferences :
                     </span>
 
-                    <div className="flex justify-start gap-x-4 font-robotoMono text-slate-100 text-justify">
+                    <div className="flex justify-start gap-x-4 font-robotoMono text-slate-100 text-sm md:text-md">
                         {studentData?.careerPreferences}
                     </div>
                 </div>
