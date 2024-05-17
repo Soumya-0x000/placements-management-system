@@ -1,19 +1,20 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { PiStudentDuotone } from "react-icons/pi";
 import { CiLogout } from 'react-icons/ci';
-import { GoSearch } from 'react-icons/go';
 import { TbDatabaseSearch } from 'react-icons/tb';
 import { FaRegUser } from 'react-icons/fa';
-import BgColorAnimation from '../../animations/BgColorAnimation';
+import { GoSearch } from "react-icons/go";
+import gamingPc from '../../images/gamingPc.jpg';
+import '../student/companies/hiringCompany.css'
 
 const AdminJobPosting = () => {
     const [postingData, setPostingData] = useState([]);
     const navigate = useNavigate();
-
+    
     const handleClick = (e, posting) => {
         e.preventDefault()
         navigate('/admin/jobDetails', { state: { postingData: posting } });
@@ -21,46 +22,75 @@ const AdminJobPosting = () => {
 
     useEffect(() => {
         fetch('http://localhost:1337/api/getadminposting')
-        .then((response) => {
-            const reader = response.body.getReader();
-            reader.read().then(({ done, value }) => {
-                if (done) {
-                    return;
-                }
-                const decoder = new TextDecoder();
-                const strData = decoder.decode(value)
-                const data = JSON.parse(strData)
-                console.log(data)
-                setPostingData(data)
-            });
-        })
+            .then((response) => {
+                const reader = response.body.getReader();
+                reader.read().then(({ done, value }) => {
+                    if (done) {
+                        return;
+                    }
+                    const decoder = new TextDecoder();
+                    const strData = decoder.decode(value)
+                    const data = JSON.parse(strData)
+                    setPostingData(data)
+                });
+            })
     }, [])
 
     return (
-            <BgColorAnimation child={
-                <div className=' h-screen w-full'>
-                    <NavBar/>
-                    
-                    <div className=" h-full overflow-y-auto flex items-center justify-center flex-wrap gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ">
-                        {postingData?.map((posting, indx) => (
-                            <AnimatedGradientBorderTW key={indx}>
-                                <div className=' cursor-pointer bg-[#7730fc58] rounded-lg no-underline'>
-                                    <div className="flex justify-between">
-                                        <h2 className="text-xl font-bold">{posting.Name}</h2>
-                                        <button variant="dark" onClick={(e) => handleClick(e, posting)}>View</button>
+            <div className=' h-screen w-full'>
+                <NavBar/>
+                
+                <div className='flex flex-wrap items-center justify-center '>
+                    {postingData?.map((posting, index) => (
+                        <div 
+                        className="lsm:min-w-[30rem] lsm:max-w-[30rem] bg-gradient-to-br from-blue-300 to-green-200 rounded overflow-hidden shadow-lg m-4"
+                        key={index} >
+                            <div className='flex flex-col lsm:flex-row'>
+                                <div className='lsm:max-w-[15rem] lsm:min-w-[15rem] min-h-[16rem] max-h-[16rem] lsm:min-h-[10rem] lsm:max-h-[10rem] mx-2 lsm:ml-2 mt-2 rounded-lg overflow-hidden flex items-center justify-center'>
+                                    <img 
+                                        className="w-full h-full" 
+                                        src={gamingPc}
+                                        alt="Job Image" 
+                                    />
+                                </div>
+
+                                <div className="px-2 pt-2">
+                                    <div className="mb-1 text-xl font-extrabold text-blue-800 font-k2d">
+                                        {posting.jobRole}
                                     </div>
-                                    <div className="mt-2">
-                                        <p className="text-sm">Job Role: {posting.jobRole}</p>
-                                        <p className="text-sm">CTC: {posting.Package}</p>
-                                        <p className="text-sm">Specialization: {posting.Specialization}</p>
-                                        <p className="text-sm">Last Date: {posting.LastDate}</p>
+
+                                    <div className="mb-3 font-bold text-green-900 font-k2d">
+                                        {posting.Name}
+                                    </div>
+
+                                    <a href="mailto:besanttech@gmail.com" className='mt-2 no-underline'>
+                                        <button className='font-bold text-black font-robotoMono line-clamp-1'>
+                                            {posting.companyEmail}
+                                        </button>
+                                    </a>
+
+                                    <div className='mt-1.5 flex items-center gap-x-3'>
+                                        <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Qualification}</span>
+                                        <span className=' bg-green-900 text-green-300 rounded-full px-3 py-[.16rem]'>{postingData[0]?.Specialization}</span>
                                     </div>
                                 </div>
-                            </AnimatedGradientBorderTW>
-                        ))}
-                    </div>
-                </div>}
-            />
+                            </div>
+
+                            <div className='pl-3 mt-2 font-bold font-robotoMono text-md text-slate-800'>
+                                {postingData[0]?.JobDescription}
+                            </div>
+
+                            <div className="w-full px-2 mt-3 mb-2">
+                                <button 
+                                className=" w-full lsm:w-fit px-3 text-md font-bold bg-slate-800 text-blue-300 hover:text-indigo-300 font-robotoMono py-[.2rem] rounded-md"
+                                onClick={(e) => handleClick(e, posting)} >
+                                    Know More
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
        );
     }
      
@@ -345,38 +375,6 @@ const userActions = ({selectedArray}) => {
                     </span>
                 </a>
             ))}
-        </div>
-    );
-};
-
-
-const AnimatedGradientBorderTW = ({ children }) => {
-    const boxRef = useRef(null);
-  
-    useEffect(() => {
-        const boxElement = boxRef.current;
-    
-        if (!boxElement) return;
-    
-        const updateAnimation = () => {
-            const angle = (parseFloat(boxElement.style.getPropertyValue("--angle")) + 0.5) % 360;
-            boxElement.style.setProperty("--angle", `${angle}deg`);
-            requestAnimationFrame(updateAnimation);
-        };
-    
-        requestAnimationFrame(updateAnimation);
-    }, []);
-  
-    return (
-        <div
-        style={{
-            "--angle": "0deg",
-            "--border-color": "linear-gradient(var(--angle), #070707, #687aff)",
-            "--bg-color": "linear-gradient(#131219, #131219)",
-        }}
-        className="flex items-center justify-center rounded-lg border-2 border-[#0000] p-3 [background:padding-box_var(--bg-color),border-box_var(--border-color)]"
-        ref={boxRef}>
-            {children}
         </div>
     );
 };

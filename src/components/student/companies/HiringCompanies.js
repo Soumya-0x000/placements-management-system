@@ -12,7 +12,7 @@ import gamingPc from '../../../images/gamingPc.jpg';
 import './hiringCompany.css'
 
 const HiringCompanies = () => {
-    const [postingData, setPostingData] = useState()
+    const [postingData, setPostingData] = useState([]);
     const navigate = useNavigate();
     const usn = localStorage.getItem('token');
     const [name, setName] = useState('');

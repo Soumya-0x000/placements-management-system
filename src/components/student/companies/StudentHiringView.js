@@ -71,7 +71,6 @@ const StudentHiringView = () => {
 		setDates({ drvFrom, drvTo, lstDt });
 	}, []);
 
-
 	const handleApply = async (e) => {
 		e.preventDefault();
 
