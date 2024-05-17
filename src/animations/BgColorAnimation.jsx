@@ -14,7 +14,7 @@ const BgColorAnimation = ({ child }) => {
     useEffect(() => {
         animate(color, COLORS_TOP, {
             ease: "easeInOut",
-            duration: 10,
+            duration: 15,
             repeat: Infinity,
             repeatType: "mirror",
         });
