@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
 import { useNavigate } from 'react-router-dom';
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
@@ -39,9 +39,9 @@ const AdminStudent = () => {
         <div className=' h-screen w-full'>
             <NavBar/>
 
-            <h1 class="container text-center">Students Registered</h1>
+            <div className=" font-robotoMono font-bold text-center  text-2xl">Students Registered</div>
           
-            <div class=" flex justify-center">
+            <div className=" flex justify-center mt-5">
                 <TableContainer
                 component={Paper}
                 sx={{
