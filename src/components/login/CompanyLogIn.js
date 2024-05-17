@@ -10,10 +10,6 @@ const CompanyLogIn = () => {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
-
     const handleRedirection = () => {
         navigate(`/CompanyRegister`)
     };
@@ -28,6 +24,7 @@ const CompanyLogIn = () => {
                 },
                 body: JSON.stringify({ email, password })
             });
+            console.log(response)
             const data = await response.json();
             if (data.status === 'ok') {
                 localStorage.setItem('token', data.user);
@@ -57,7 +54,7 @@ const CompanyLogIn = () => {
                                 className={`border-y-2 pt-2.5 pb-2 pl-2 focus:border-b-2 transition-colors focus:outline-none bg-slate-800 w-full h-full font-robotoMono placeholder:text-blue-300 text-green-300 ${email ? 'border-indigo-400' : ''} focus:border-indigo-400`}
                                 id="email"
                                 value={email}
-                                onChange={handleEmailChange}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Email"
                                 autoFocus={true}
                             />
