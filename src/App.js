@@ -32,7 +32,7 @@ import StudentResume from './components/PdfViewer';
 import ResumeDetail from './components/student/resume/ResumeDetail'
 import StudentCoverLetter from './components/student/coverLetter/StudentCoverLetter';
 import CoverLetter from './components/student/coverLetter/CoverLetter';
-import ChatPage from './components/student/chat/Chat';
+import ChatPage from './chat/Chat';
 import FeedbackTable from './components/student/Feedback';
 
 import AdminPlacedStudent from './components/admin/AdminPlacedStudent'

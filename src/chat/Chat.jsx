@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BgColorAnimation from '../../../animations/BgColorAnimation';
+import BgColorAnimation from '../animations/BgColorAnimation';
 
 const ChatPage = () => {
     const [messages, setMessages] = useState([]);

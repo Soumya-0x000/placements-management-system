@@ -29,6 +29,7 @@ const AdminLogIn = () => {
                 body: JSON.stringify({ email, password })
             });
             const data = await response.json();
+            console.log(data)
             if (data.status === 'ok') {
                 const token = 'admin';
                 localStorage.setItem('token', token);
