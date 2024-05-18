@@ -1,145 +1,145 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { CiLogout } from 'react-icons/ci';
 import { GoSearch } from 'react-icons/go';
 import { TbDatabaseSearch } from 'react-icons/tb';
 import { FaRegUser } from 'react-icons/fa';
 import { FaPeopleArrows } from "react-icons/fa6";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
+import {
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+    Paper, Button, ButtonGroup, Dialog, DialogActions, DialogContent,
+    DialogContentText, DialogTitle, TextField,
+    FormControl
+} from '@mui/material';
 
-const data = [
-    {
-        jobId: '2734',
-        jobRole: 'Software Developer',
-        studentName: 'Vinayak V',
-        usn: '1CD19CV078',
-        ctc: '9LPA',
-        phoneNumber: '2734937482',
-        email: 'vinayak.19CV078@cambridge.edu.in',
-        dateOfSelection: '09/04/23',
-        selectedBy: 'Amole'
-    },
-    {
-        jobId: '2735',
-        jobRole: 'Software Developer',
-        studentName: 'Manasa C',
-        usn: '1CD19CS118',
-        ctc: '9LPA',
-        phoneNumber: '2938470682',
-        email: 'manasa.19CS118@cambridge.edu.in',
-        dateOfSelection: '09/04/23',
-        selectedBy: 'Amole'
-    },
-    {
-        jobId: '2289',
-        jobRole: 'Software Developer',
-        studentName: 'Veena Priya',
-        usn: '1CD19CS182',
-        ctc: '9LPA',
-        phoneNumber: '7298394882',
-        email: 'veena.19CS182@cambridge.edu.in',
-        dateOfSelection: '09/04/23',
-        selectedBy: 'Kiran'
-    },
-    {
-        jobId: '2738',
-        jobRole: 'Software Developer',
-        studentName: 'Guru P',
-        usn: '1CD19CS102',
-        ctc: '9LPA',
-        phoneNumber: '9302839882',
-        email: 'guru.19CS102@cambridge.edu.in',
-        dateOfSelection: '10/04/23',
-        selectedBy: 'Bhanu'
-    },
-    {
-        jobId: '8394',
-        jobRole: 'Software Developer',
-        studentName: 'Harish B',
-        usn: '1CD19CS202',
-        ctc: '9LPA',
-        phoneNumber: '9308294882',
-        email: 'harish.19CS202@cambridge.edu.in',
-        dateOfSelection: '10/04/23',
-        selectedBy: 'Bhanu'
-    },
-    {
-        jobId: '8398',
-        jobRole: 'Software Developer',
-        studentName: 'Shivani N',
-        usn: '1CD19CS089',
-        ctc: '9LPA',
-        phoneNumber: '9303948821',
-        email: 'shivani.19CS089@cambridge.edu.in',
-        dateOfSelection: '10/04/23',
-        selectedBy: 'Kiran'
-    }
-];
-
-const CompanyInterview = () => {
-    const [interviews, setInterviews] = useState([]);
-    const cemail = localStorage.getItem('token');
+const ApplicationTable = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { data } = location.state;
+    const [showModal, setShowModal] = useState(false);
+    const [feedbackTitle, setFeedbackTitle] = useState('');
+    const [feedbackText, setFeedbackText] = useState('');
+    const [selectedApplicationId, setSelectedApplicationId] = useState('');
+    const companyName = localStorage.getItem('name');
 
-    useEffect(() => {
-        fetch(`http://localhost:1337/api/companySechdule/${cemail}`)
-            .then(response => response.json())
-            .then(data => {
-                setInterviews(data);
-                console.log(data)
-            })
-            .catch(error => {
-                console.error('Error fetching interview data:', error);
-            });
-    }, []);
-
-    const handleJoinMeeting = (meetingLink) => {
-        window.open(meetingLink, '_blank');
+    const handleViewResume = (usn) => {
+        navigate('/StudentResume',{ state: { usn: usn } })
     };
 
-    const openResume = (usn) => {
-        navigate('/StudentResume',{ state: { usn: usn } })
+    const handleScheduleInterview = (usn) => {
+        navigate('/scheduleInterview',{ state: { usn: usn } })
+    };
+
+    const handleStatusChange = (id, status) => {
+        fetch(`http://localhost:1337/api/updateApplicationStatus/${id}`, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ id, status })
+        })
+        .then((response) => response.json())
+        .catch((error) => {
+            console.error('Status update failed:', error);
+        });
+        window.location.reload()
+    };
+
+    async function handleSendFeedback  (e){
+        e.preventDefault()
+        
+        const feedbackData = {
+            usn: selectedApplicationId,
+            company: companyName,
+            title: feedbackTitle,
+            content: feedbackText,
+        };
+        
+        fetch('http://localhost:1337/api/sendFeedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(feedbackData),
+        })
+        .then(response => response.json())
+        .catch(error => {
+            console.log(error);
+        });
+
+        setFeedbackTitle('');
+        setFeedbackText('');
+        setShowModal(false);
     };
 
     return (
         <div>
             <NavBar/>
 
-            <div className=" text-center mt-3 font-robotoMono text-2xl font-bold text-slate-800">Interview Schedule</div>
-
-            <div className="flex justify-center mt-5">
+            <div className=" flex justify-center mt-5">
                 <TableContainer component={Paper} sx={{ margin: '10px', width: '95%', borderBottom: '1px solid black', backgroundColor: '#EFFDF5' }}>
-                    <Table>
+                    <Table sx={{ minWidth: 650 }} aria-label="application table">
                         <TableHead>
-                            <TableRow sx={{ backgroundColor: '#216C34', color: '#F2FEFF', fontSize: '16px' }}>
-                                {['Date', 'Time', 'Candidate Name', 'Student Email', 'Company Email', 'Resume'].map((header, index) => (
-                                    <TableCell key={index} sx={{ fontSize: '18px', fontWeight: 'bold', color: '#F2FEFF', border: '2px solid #3E8C5F' }}>
-                                        <span className='text-green-700'>
-                                            {header}
-                                        </span>
-                                    </TableCell>
-                                ))}
+                            <TableRow sx={{ backgroundColor: '#216C34', color: '#F2FEFF'}}>
+                                {['Applied Candidate Name', 'View Resume', 'Schedule Interview', 'Status', 'Send Feedback'].map((header, index) => (
+                                        <TableCell key={index} sx={{ fontWeight: 'bold', color: '#F2FEFF', border: '2px solid #3E8C5F' }}>
+                                            <span className=' text-green-700 lg:text-lg'>
+                                                {header}
+                                            </span>
+                                        </TableCell>
+                                    ))}
                             </TableRow>
                         </TableHead>
 
                         <TableBody>
-                            {interviews.map((interview, index) => (
-                                <TableRow key={index}>
-                                    <TableCell>{interview.date}</TableCell>
-                                    <TableCell>{interview.time}</TableCell>
-                                    <TableCell>{interview.studentName}</TableCell>
-                                    <TableCell>{interview.studentEmail}</TableCell>
+                            {data?.map((application) => (
+                                <TableRow key={application.id}>
+                                    <TableCell>{application.usn}</TableCell>
+
                                     <TableCell>
-                                        <Button variant="contained" color="primary" onClick={() => handleJoinMeeting(interview.meetingLink)}>
-                                            Join
+                                        <Button variant="contained" color="primary" onClick={() => handleViewResume(application.usn)}>
+                                            View Resume
                                         </Button>
                                     </TableCell>
+
                                     <TableCell>
-                                        <Button variant="contained" color="secondary" onClick={() => openResume(interview.usn)}>
-                                            Resume
+                                        <Button variant="contained" color="success" onClick={() => handleScheduleInterview(application.usn)}>
+                                            Schedule Interview
+                                        </Button>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        <ButtonGroup>
+                                            <Button
+                                            variant={application.status === 'pending' ? 'contained' : 'outlined'}
+                                            color="secondary"
+                                            onClick={() => handleStatusChange(application._id, 'pending')}>
+                                                Pending
+                                            </Button>
+
+                                            <Button
+                                            variant={application.status === 'accepted' ? 'contained' : 'outlined'}
+                                            color="success"
+                                            onClick={() => handleStatusChange(application._id, 'accepted')}>
+                                                Accepted
+                                            </Button>
+
+                                            <Button
+                                            variant={application.status === 'rejected' ? 'contained' : 'outlined'}
+                                            color="error"
+                                            onClick={() => handleStatusChange(application._id, 'rejected')}>
+                                                Rejected
+                                            </Button>
+                                        </ButtonGroup>
+                                    </TableCell>
+
+                                    <TableCell>
+                                        <Button variant="contained" color="info" onClick={() => {
+                                            setSelectedApplicationId(application.usn);
+                                            setShowModal(true);
+                                        }}>
+                                            Send Feedback
                                         </Button>
                                     </TableCell>
                                 </TableRow>
@@ -147,12 +147,54 @@ const CompanyInterview = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-            </div>
+
+                <Dialog open={showModal} onClose={() => setShowModal(false)}>
+                    <DialogTitle>Send Feedback</DialogTitle>
+
+                    <DialogContent>
+                        <DialogContentText>
+                            Provide feedback for the selected application.
+                        </DialogContentText>
+
+                        <FormControl fullWidth margin="normal">
+                            <TextField
+                                id="feedbackTitle"
+                                label="Feedback Title"
+                                value={feedbackTitle}
+                                onChange={(e) => setFeedbackTitle(e.target.value)}
+                                fullWidth
+                                variant="outlined"
+                            />
+                        </FormControl>
+
+                        <FormControl fullWidth margin="normal">
+                            <TextField
+                                id="feedbackText"
+                                label="Feedback Text"
+                                value={feedbackText}
+                                onChange={(e) => setFeedbackText(e.target.value)}
+                                multiline
+                                rows={3}
+                                variant="outlined"
+                            />
+                        </FormControl>
+                    </DialogContent>
+                    
+                    <DialogActions>
+                        <Button onClick={() => setShowModal(false)} color="secondary">
+                            Close
+                        </Button>
+                        <Button onClick={handleSendFeedback} color="primary">
+                            Send
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>    
         </div>
     );
-}
+};
 
-export default CompanyInterview;
+export default ApplicationTable;
 
 
 
@@ -163,7 +205,7 @@ const tabs = [
 ];
 
 export const NavBar = ({name = 'Admin'}) => {
-    const [selected, setSelected] = useState(tabs[2].text);
+    const [selected, setSelected] = useState(tabs[1].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

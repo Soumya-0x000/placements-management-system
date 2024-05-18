@@ -19,7 +19,7 @@ import StudentProfile from './components/student/profile/StudentProfile';
 import EditStudentProfile from './components/student/profile/EditStudentProfile';
 import StudentHiringView from './components/student/companies/StudentHiringView';
 import HiringCompanies from './components/student/companies/HiringCompanies';
-import LOSA from './components/ListOfStudentApplied'
+import LOSA from './components/company/ListOfStudentApplied'
 import Createresume from './components/student/resume/createResume';
 import Resume from './components/student/resume/Resume'
 import StudentSlotSelection from './components/student/StudentSlotSelection'
@@ -36,7 +36,6 @@ import ChatPage from './chat/Chat';
 import FeedbackTable from './components/student/Feedback';
 
 import AdminPlacedStudent from './components/admin/AdminPlacedStudent'
-import AdminStudentView from './components/admin/AdminStudentView'
 import AdminCompanyView from './components/admin/AdminCompanyView';
 import AdminStudentApplied from './components/admin/AdminStudentsApplied'
 import AdminStudent from './components/admin/AdminStudent'
@@ -46,7 +45,7 @@ import AdminHome from './components/admin/AdminHome';
 import AdminJobPosting from './components/admin/AdminJobPosting';
 import AdminJobDetails from './components/admin/AdminJobDetails';
 
-import AllJobPosted from './components/AllJobPosted';
+import AllJobPosted from './components/company/AllJobPosted';
 import InterviewForm from './components/InterviewForm';
 
 import CareerCounselling from './components/student/career counselling/CareerCounselling'

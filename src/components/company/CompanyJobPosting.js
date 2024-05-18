@@ -54,11 +54,9 @@ const CompanyJobPosting = () => {
         })
         const data = await response.json();
     
-        console.log(data)
         if(data.status === 'ok'){
             navigate('/CompanyHome', { replace: true })
-        }
-        else{
+        }else{
             console.log(data)
         }
     }
