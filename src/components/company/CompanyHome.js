@@ -79,7 +79,7 @@ const tabs = [
     {text: 'Interviews', icon: <FaPeopleArrows/>, path: '/CompanyInterview'},
 ];
 
-export const NavBar = ({name = 'Admin'}) => {
+export const NavBar = ({name = 'Company'}) => {
     const [selected, setSelected] = useState(tabs[0].text);
     const [typedText, setTypedText] = useState('');
     const [hamburgerActive, setHamburgerActive] = useState(false);

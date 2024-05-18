@@ -25,7 +25,7 @@ const AdminJobDetails = () => {
 		drvTo: '',
 		lstDt: ''
 	});
-	const [applied, setApplied] = useState(false);
+	const [accepted, setAccepted] = useState(false);
 
 	useEffect(() => {
 		const drvFrom = dayjs(postingData?.DriveFrom).format('MMMM DD, YYYY');
@@ -35,7 +35,7 @@ const AdminJobDetails = () => {
 		setDates({ drvFrom, drvTo, lstDt });
 	}, []);
 
-    const handleApply = async (e) => {
+    const handleAccept = async (e) => {
         e.preventDefault();
         try {
             const response = await fetch('http://localhost:1337/api/changeJobStatus', {
@@ -47,10 +47,10 @@ const AdminJobDetails = () => {
             });
       
             if (response.ok) {
-                alert('Job Applied Successfully');
+                alert('Job accepted Successfully');
                 console.log('Job status changed successfully.');
-                setApplied(true);
-                setApplicationStatus('Applied')
+                setAccepted(true);
+                setApplicationStatus('Accepted')
             } else {
                 console.error('Failed to change job status.');
             }
@@ -130,15 +130,15 @@ const AdminJobDetails = () => {
 						</div>
 					</div>
 
-					{applied ? (
+					{accepted ? (
 						<div className='bg-green-800 uppercase text-green-300 font-bold px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_#F44336,-0.5rem_-0.5rem_#00BCD4] transition font-lato tracking-wider flex items-center justify-center gap-x-5 Lsm: w-[10rem]'>
 							{applicationStatus}
 						</div>
 					) : (
 						<button 
 						className='bg-green-800 uppercase text-green-300 font-bold px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_#F44336,-0.5rem_-0.5rem_#00BCD4] transition font-lato tracking-wider'
-						onClick={handleApply}>
-							Apply
+						onClick={handleAccept}>
+							Accept
 						</button>
 					)}
 				</div>
