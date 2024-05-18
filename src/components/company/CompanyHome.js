@@ -40,7 +40,7 @@ const CompanyHome = () => {
                 <div className=' w-full h-screen overflow-y-auto'>
                     <NavBar/>
 
-                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ">
+                    <div className=" h-full overflow-y-auto grid place-items-center grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 pt-[8rem] pb-[4rem] ">
                         {buttonsData.map((button, index) => (
                             <AnimatedGradientBorderTW key={index}>
                                 <Link className=' cursor-pointer bg-[#7730fc58] rounded-lg no-underline' to={`${button.link}`}>
