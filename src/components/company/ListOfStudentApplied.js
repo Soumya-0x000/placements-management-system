@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TiHomeOutline } from 'react-icons/ti';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
@@ -17,19 +17,32 @@ import {
 
 const ApplicationTable = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const { data } = location.state;
+    const [data, setData] = useState([]);
+    const cemail = localStorage.getItem('token');
     const [showModal, setShowModal] = useState(false);
     const [feedbackTitle, setFeedbackTitle] = useState('');
     const [feedbackText, setFeedbackText] = useState('');
     const [selectedApplicationId, setSelectedApplicationId] = useState('');
     const companyName = localStorage.getItem('name');
+    
+    useEffect(() => {
+        fetch(`http://localhost:1337/api/companySechdule/${cemail}`)
+            .then(response => response.json())
+            .then(data => {
+                setData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching interview data:', error);
+            });
+    }, []);
 
-    const handleViewResume = (usn) => {
+    const handleViewResume = (usn, e) => {
+        e.preventDefault()
         navigate('/StudentResume',{ state: { usn: usn } })
     };
 
-    const handleScheduleInterview = (usn) => {
+    const handleScheduleInterview = (usn, e) => {
+        e.preventDefault()
         navigate('/scheduleInterview',{ state: { usn: usn } })
     };
 
@@ -46,7 +59,7 @@ const ApplicationTable = () => {
         window.location.reload()
     };
 
-    async function handleSendFeedback  (e){
+    async function handleSendFeedback (e){
         e.preventDefault()
         
         const feedbackData = {
@@ -98,13 +111,13 @@ const ApplicationTable = () => {
                                     <TableCell>{application.usn}</TableCell>
 
                                     <TableCell>
-                                        <Button variant="contained" color="primary" onClick={() => handleViewResume(application.usn)}>
+                                        <Button variant="contained" color="primary" onClick={(e) => handleViewResume(application.usn, e)}>
                                             View Resume
                                         </Button>
                                     </TableCell>
 
                                     <TableCell>
-                                        <Button variant="contained" color="success" onClick={() => handleScheduleInterview(application.usn)}>
+                                        <Button variant="contained" color="success" onClick={(e) => handleScheduleInterview(application.usn, e)}>
                                             Schedule Interview
                                         </Button>
                                     </TableCell>

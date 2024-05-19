@@ -102,12 +102,12 @@ const StudentHome = () => {
                 </div>
 
                 <div className='flex flex-col mb-2 sm:flex-row gap-x-4 gap-y-4 sm:items-center'>
-                    <button class="uppercase px-4 py-2 bg-slate-800 text-yellow-300 rounded-sm font-mavenPro flex gap-x-3 items-center justify-center">
+                    <button className="uppercase px-4 py-2 bg-slate-800 text-yellow-300 rounded-sm font-mavenPro flex gap-x-3 items-center justify-center">
                         Get started now
                         <FaArrowRightLong/>
                     </button>
                     
-                    <button class="uppercase px-4 py-2 bg-yellow-400 text-slate-900 ring-[1px] ring-slate-900 rounded-sm font-mavenPro flex gap-x-3 items-center justify-center">
+                    <button className="uppercase px-4 py-2 bg-yellow-400 text-slate-900 ring-[1px] ring-slate-900 rounded-sm font-mavenPro flex gap-x-3 items-center justify-center">
                         view Courses
                         <FaArrowRightLong/>
                     </button>
